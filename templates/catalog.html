@@ -16,131 +16,34 @@
             <div class="container">
                 <!-- Category Filters -->
                 <div class="category-filters">
-                    <button class="filter-btn active" onclick="filterProducts('all')">Все</button>
-                    <button class="filter-btn" onclick="filterProducts('Диваны')">Диваны</button>
-                    <button class="filter-btn" onclick="filterProducts('Столы')">Столы</button>
-                    <button class="filter-btn" onclick="filterProducts('Шкафы')">Шкафы</button>
-                    <button class="filter-btn" onclick="filterProducts('Стулья')">Стулья</button>
-                    <button class="filter-btn" onclick="filterProducts('Кровати')">Кровати</button>
+                    <button class="filter-btn {% if not active_category %}active{% endif %}" onclick="filterProducts('all')">Все</button>
+                    {% for category in categories %}
+                    <button class="filter-btn {% if active_category and active_category.id == category.id %}active{% endif %}" onclick="filterProducts('{{ category.name }}')">{{ category.name }}</button>
+                    {% endfor %}
                 </div>
 
                 <!-- Products Grid -->
                 <div class="products-grid" id="productsGrid">
-                    <a href="product-sofa-elegance.html" class="product-card" data-category="Диваны">
+                    {% for product in products %}
+                    <a href="{% url 'product_detail' product.slug %}" class="product-card" data-category="{{ product.category.name }}">
                         <div class="product-image">
-                            <img src="src/assets/hero-sofa.jpg" alt="Диван Elegance">
+                            {% with img=product.images.first %}
+                            {% if img %}<img src="{{ img.image.url }}" alt="{{ img.alt_text|default:product.name }}">{% endif %}
+                            {% endwith %}
                         </div>
                         <div class="product-info">
-                            <div class="product-category">Диваны</div>
-                            <h3>Диван Elegance</h3>
+                            <div class="product-category">{{ product.category.name }}</div>
+                            <h3>{{ product.name }}</h3>
                             <div class="product-link">
                                 <span>Подробнее</span>
                                 <span class="arrow">→</span>
                             </div>
                         </div>
                     </a>
-
-                    <a href="product-dining-classic.html" class="product-card" data-category="Столы">
-                        <div class="product-image">
-                            <img src="src/assets/dining-set.jpg" alt="Обеденная группа Classic">
-                        </div>
-                        <div class="product-info">
-                            <div class="product-category">Столы</div>
-                            <h3>Обеденная группа Classic</h3>
-                            <div class="product-link">
-                                <span>Подробнее</span>
-                                <span class="arrow">→</span>
-                            </div>
-                        </div>
-                    </a>
-
-                    <a href="product-wardrobe-premium.html" class="product-card" data-category="Шкафы">
-                        <div class="product-image">
-                            <img src="src/assets/wardrobe.jpg" alt="Шкаф Premium">
-                        </div>
-                        <div class="product-info">
-                            <div class="product-category">Шкафы</div>
-                            <h3>Шкаф Premium</h3>
-                            <div class="product-link">
-                                <span>Подробнее</span>
-                                <span class="arrow">→</span>
-                            </div>
-                        </div>
-                    </a>
-
-                    <a href="product-bed-comfort.html" class="product-card" data-category="Кровати">
-                        <div class="product-image">
-                            <img src="src/assets/bed.jpg" alt="Кровать Comfort">
-                        </div>
-                        <div class="product-info">
-                            <div class="product-category">Кровати</div>
-                            <h3>Кровать Comfort</h3>
-                            <div class="product-link">
-                                <span>Подробнее</span>
-                                <span class="arrow">→</span>
-                            </div>
-                        </div>
-                    </a>
-
-                    <!-- Additional products -->
-                    <a href="product-sofa-comfort.html" class="product-card" data-category="Диваны">
-                        <div class="product-image">
-                            <img src="src/assets/hero-sofa.jpg" alt="Диван Comfort">
-                        </div>
-                        <div class="product-info">
-                            <div class="product-category">Диваны</div>
-                            <h3>Диван Comfort</h3>
-                            <div class="product-link">
-                                <span>Подробнее</span>
-                                <span class="arrow">→</span>
-                            </div>
-                        </div>
-                    </a>
-
-                    <a href="product-table-modern.html" class="product-card" data-category="Столы">
-                        <div class="product-image">
-                            <img src="src/assets/dining-set.jpg" alt="Стол Modern">
-                        </div>
-                        <div class="product-info">
-                            <div class="product-category">Столы</div>
-                            <h3>Стол Modern</h3>
-                            <div class="product-link">
-                                <span>Подробнее</span>
-                                <span class="arrow">→</span>
-                            </div>
-                        </div>
-                    </a>
-
-                    <a href="product-chair-elegant.html" class="product-card" data-category="Стулья">
-                        <div class="product-image">
-                            <img src="src/assets/dining-set.jpg" alt="Стул Elegant">
-                        </div>
-                        <div class="product-info">
-                            <div class="product-category">Стулья</div>
-                            <h3>Стул Elegant</h3>
-                            <div class="product-link">
-                                <span>Подробнее</span>
-                                <span class="arrow">→</span>
-                            </div>
-                        </div>
-                    </a>
-
-                    <a href="product-wardrobe-classic.html" class="product-card" data-category="Шкафы">
-                        <div class="product-image">
-                            <img src="src/assets/wardrobe.jpg" alt="Шкаф Classic">
-                        </div>
-                        <div class="product-info">
-                            <div class="product-category">Шкафы</div>
-                            <h3>Шкаф Classic</h3>
-                            <div class="product-link">
-                                <span>Подробнее</span>
-                                <span class="arrow">→</span>
-                            </div>
-                        </div>
-                    </a>
+                    {% endfor %}
                 </div>
 
-                <div class="no-products" id="noProducts" style="display: none;">
+                <div class="no-products" id="noProducts" {% if products %}style="display: none;"{% endif %}>
                     <p>Товары данной категории не найдены.</p>
                 </div>
             </div>

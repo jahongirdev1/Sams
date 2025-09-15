@@ -1,7 +1,7 @@
 from __future__ import annotations
 from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator
-from django.db.models import Count, Q
+from django.db.models import Count, Q, Prefetch
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
 
@@ -110,15 +110,38 @@ class ProductFilter(filters.FilterSet):
 
 def index(request):
     carousel = CarouselItem.objects.filter(is_active=True).order_by("ordering")
-    return render(request, "index.html", {"carousel": carousel,
-                                          'active_page': 'home'})
+    products = (
+        Product.objects.filter(is_active=True)
+        .select_related("category")
+        .prefetch_related(
+            Prefetch(
+                "images",
+                queryset=ProductImage.objects.order_by("-is_primary", "ordering", "id"),
+            )
+        )[:4]
+    )
+    metrics = Metric.objects.filter(is_active=True).order_by("ordering")[:3]
+    company = CompanyInfo.objects.first()
+    context = {
+        "carousel": carousel,
+        "products": products,
+        "metrics": metrics,
+        "company": company,
+        "active_page": "home",
+    }
+    return render(request, "index.html", context)
 
 
 def catalog(request):
     qs = (
         Product.objects.filter(is_active=True)
         .select_related("category")
-        .prefetch_related("images")
+        .prefetch_related(
+            Prefetch(
+                "images",
+                queryset=ProductImage.objects.order_by("-is_primary", "ordering", "id"),
+            )
+        )
     )
     categories = Category.objects.all()
     category_slug = request.GET.get("category")
