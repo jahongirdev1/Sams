@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Samruk Mebel - Качественная мебель в европейском стиле</title>
+    <meta name="description" content="Samruk Mebel - ведущий производитель качественной мебели в европейском стиле. Диваны, столы, шкафы, кровати и стулья для вашего дома. Доставка по Алматы.">
+    <meta name="author" content="Samruk Mebel">
+    
+    <meta property="og:title" content="Samruk Mebel - Качественная мебель в европейском стиле">
+    <meta property="og:description" content="Качественная мебель в европейском стиле от Samruk Mebel. Более 14 лет опыта, индивидуальный подход к каждому клиенту.">
+    <meta property="og:type" content="website">
+    
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="nav-wrapper">
+                <a href="index.html" class="logo">
+                    <span class="logo-main">Samruk</span>
+                    <span class="logo-accent">Mebel</span>
+                </a>
+
+                <nav class="nav-desktop">
+                    <a href="index.html" class="nav-link active">Главная</a>
+                    <a href="catalog.html" class="nav-link">Каталог</a>
+                    <a href="about.html" class="nav-link">О нас</a>
+                    <a href="contacts.html" class="nav-link">Контакты</a>
+                </nav>
+
+                <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                    <span class="hamburger"></span>
+                </button>
+            </div>
+
+            <nav class="nav-mobile" id="mobileMenu">
+                <a href="index.html" class="nav-link-mobile">Главная</a>
+                <a href="catalog.html" class="nav-link-mobile">Каталог</a>
+                <a href="about.html" class="nav-link-mobile">О нас</a>
+                <a href="contacts.html" class="nav-link-mobile">Контакты</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Slider Section -->
+        <section class="hero-section">
+            <div class="hero-slider" id="heroSlider">
+                <div class="slide active">
+                    <img src="src/assets/hero-sofa.jpg" alt="Качественные диваны">
+                    <div class="slide-content">
+                        <h1>Европейская мебель премиум класса</h1>
+                        <p>Создаем уют и комфорт в вашем доме уже более 14 лет</p>
+                        <a href="catalog.html" class="btn btn-primary">Смотреть каталог</a>
+                    </div>
+                </div>
+                <div class="slide">
+                    <img src="src/assets/dining-set.jpg" alt="Обеденные группы">
+                    <div class="slide-content">
+                        <h1>Обеденные группы для всей семьи</h1>
+                        <p>Качественная мебель для создания особой атмосферы</p>
+                        <a href="catalog.html" class="btn btn-primary">Узнать больше</a>
+                    </div>
+                </div>
+                <div class="slide">
+                    <img src="src/assets/wardrobe.jpg" alt="Шкафы и системы хранения">
+                    <div class="slide-content">
+                        <h1>Системы хранения любой сложности</h1>
+                        <p>Индивидуальные решения для вашего пространства</p>
+                        <a href="catalog.html" class="btn btn-primary">Заказать проект</a>
+                    </div>
+                </div>
+            </div>
+            <div class="slider-controls">
+                <button class="prev-btn" onclick="prevSlide()">‹</button>
+                <button class="next-btn" onclick="nextSlide()">›</button>
+            </div>
+            <div class="slider-dots" id="sliderDots"></div>
+        </section>
+
+        <!-- Main Video Section -->
+        <section class="video-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Samruk Mebel – Качество в каждой детали</h2>
+                    <p>Узнайте больше о нашем производстве и подходе к созданию мебели</p>
+                </div>
+                
+                <div class="video-container">
+                    <div class="video-placeholder">
+                        <div class="play-button">
+                            <div class="play-icon"></div>
+                        </div>
+                        <div class="video-info">
+                            <h3>Видео о нашей компании</h3>
+                            <p>Производство • Качество • Европейский дизайн</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Products -->
+        <section class="products-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Популярная мебель</h2>
+                    <p>Откройте для себя нашу коллекцию качественной мебели в европейском стиле. Каждое изделие создано с вниманием к деталям и комфорту.</p>
+                </div>
+
+                <div class="products-grid">
+                    <a href="product-sofa-elegance.html" class="product-card">
+                        <div class="product-image">
+                            <img src="src/assets/hero-sofa.jpg" alt="Диван Elegance">
+                        </div>
+                        <div class="product-info">
+                            <div class="product-category">Диваны</div>
+                            <h3>Диван Elegance</h3>
+                            <div class="product-link">
+                                <span>Подробнее</span>
+                                <span class="arrow">→</span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="product-dining-classic.html" class="product-card">
+                        <div class="product-image">
+                            <img src="src/assets/dining-set.jpg" alt="Обеденная группа Classic">
+                        </div>
+                        <div class="product-info">
+                            <div class="product-category">Столы</div>
+                            <h3>Обеденная группа Classic</h3>
+                            <div class="product-link">
+                                <span>Подробнее</span>
+                                <span class="arrow">→</span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="product-wardrobe-premium.html" class="product-card">
+                        <div class="product-image">
+                            <img src="src/assets/wardrobe.jpg" alt="Шкаф Premium">
+                        </div>
+                        <div class="product-info">
+                            <div class="product-category">Шкафы</div>
+                            <h3>Шкаф Premium</h3>
+                            <div class="product-link">
+                                <span>Подробнее</span>
+                                <span class="arrow">→</span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="product-bed-comfort.html" class="product-card">
+                        <div class="product-image">
+                            <img src="src/assets/bed.jpg" alt="Кровать Comfort">
+                        </div>
+                        <div class="product-info">
+                            <div class="product-category">Кровати</div>
+                            <h3>Кровать Comfort</h3>
+                            <div class="product-link">
+                                <span>Подробнее</span>
+                                <span class="arrow">→</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="section-footer">
+                    <a href="catalog.html" class="btn btn-primary">Смотреть весь каталог</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Preview -->
+        <section class="about-preview">
+            <div class="container">
+                <div class="about-grid">
+                    <div class="about-content">
+                        <h2>О компании Samruk Mebel</h2>
+                        <p>Более 14 лет мы создаем качественную мебель в европейском стиле. Наша миссия — делать ваш дом уютным и комфортным, используя только лучшие материалы и современные технологии производства.</p>
+                        <p>Мы предлагаем индивидуальный подход к каждому клиенту и гарантируем высокое качество всех наших изделий.</p>
+                        <a href="about.html" class="btn btn-outline">Узнать больше</a>
+                    </div>
+                    <div class="stats-card">
+                        <div class="stat">
+                            <div class="stat-number">14+</div>
+                            <div class="stat-label">лет опыта</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">1000+</div>
+                            <div class="stat-label">довольных клиентов</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">500+</div>
+                            <div class="stat-label">моделей мебели</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="logo">
+                        <span class="logo-main">Samruk</span>
+                        <span class="logo-accent">Mebel</span>
+                    </div>
+                    <p>Качественная мебель в европейском стиле. Создаем уют и комфорт в вашем доме с 2010 года. Индивидуальный подход к каждому клиенту.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link">📷</a>
+                        <a href="#" class="social-link">📘</a>
+                        <a href="#" class="social-link">📺</a>
+                    </div>
+                </div>
+
+                <div class="footer-nav">
+                    <h3>Навигация</h3>
+                    <ul>
+                        <li><a href="index.html">Главная</a></li>
+                        <li><a href="catalog.html">Каталог</a></li>
+                        <li><a href="about.html">О нас</a></li>
+                        <li><a href="contacts.html">Контакты</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-contacts">
+                    <h3>Контакты</h3>
+                    <div class="contact-item">
+                        <span class="icon">📍</span>
+                        <span>г. Алматы, ул. Абая 150</span>
+                    </div>
+                    <div class="contact-item">
+                        <span class="icon">📞</span>
+                        <span>+7 (727) 123-45-67</span>
+                    </div>
+                    <div class="contact-item">
+                        <span class="icon">✉️</span>
+                        <span>info@samrukmebel.kz</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>© 2024 Samruk Mebel. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="scripts/main.js"></script>
+</body>
+</html>

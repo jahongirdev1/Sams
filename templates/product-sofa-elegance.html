@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Диван Elegance - Samruk Mebel</title>
+    <meta name="description" content="Диван Elegance от Samruk Mebel - европейский стиль, качественные материалы, комфорт и элегантность для вашего дома.">
+    
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="nav-wrapper">
+                <a href="index.html" class="logo">
+                    <span class="logo-main">Samruk</span>
+                    <span class="logo-accent">Mebel</span>
+                </a>
+
+                <nav class="nav-desktop">
+                    <a href="index.html" class="nav-link">Главная</a>
+                    <a href="catalog.html" class="nav-link">Каталог</a>
+                    <a href="about.html" class="nav-link">О нас</a>
+                    <a href="contacts.html" class="nav-link">Контакты</a>
+                </nav>
+
+                <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                    <span class="hamburger"></span>
+                </button>
+            </div>
+
+            <nav class="nav-mobile" id="mobileMenu">
+                <a href="index.html" class="nav-link-mobile">Главная</a>
+                <a href="catalog.html" class="nav-link-mobile">Каталог</a>
+                <a href="about.html" class="nav-link-mobile">О нас</a>
+                <a href="contacts.html" class="nav-link-mobile">Контакты</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="product-detail">
+            <div class="container">
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb" style="margin-bottom: 24px;">
+                    <a href="index.html" style="color: hsl(25, 6%, 45%); text-decoration: none;">Главная</a>
+                    <span style="margin: 0 8px; color: hsl(25, 6%, 45%);">→</span>
+                    <a href="catalog.html" style="color: hsl(25, 6%, 45%); text-decoration: none;">Каталог</a>
+                    <span style="margin: 0 8px; color: hsl(25, 6%, 45%);">→</span>
+                    <span style="color: hsl(25, 25%, 35%);">Диван Elegance</span>
+                </nav>
+
+                <div class="product-content">
+                    <!-- Product Gallery -->
+                    <div class="product-gallery">
+                        <img src="src/assets/hero-sofa.jpg" alt="Диван Elegance - основное фото" class="main-image" id="mainImage">
+                        
+                        <div class="thumbnail-grid">
+                            <img src="src/assets/hero-sofa.jpg" alt="Диван Elegance - вид 1" class="thumbnail active" onclick="changeMainImage(this.src)">
+                            <img src="src/assets/hero-sofa.jpg" alt="Диван Elegance - вид 2" class="thumbnail" onclick="changeMainImage(this.src)">
+                            <img src="src/assets/hero-sofa.jpg" alt="Диван Elegance - вид 3" class="thumbnail" onclick="changeMainImage(this.src)">
+                            <img src="src/assets/hero-sofa.jpg" alt="Диван Elegance - вид 4" class="thumbnail" onclick="changeMainImage(this.src)">
+                            <img src="src/assets/hero-sofa.jpg" alt="Диван Elegance - вид 5" class="thumbnail" onclick="changeMainImage(this.src)">
+                        </div>
+                    </div>
+
+                    <!-- Product Info -->
+                    <div class="product-info">
+                        <h1>Диван Elegance</h1>
+                        
+                        <div class="spec-grid">
+                            <div class="spec-item">
+                                <span class="spec-label">Модель:</span>
+                                <span class="spec-value">Elegance Premium</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Размеры (Д×Ш×В):</span>
+                                <span class="spec-value">210×95×85 см</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Цвета:</span>
+                                <span class="spec-value">Серый, Бежевый, Темно-синий, Коричневый</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Каркас:</span>
+                                <span class="spec-value">Массив бука, металлические пружины</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Обивка:</span>
+                                <span class="spec-value">Премиум ткань, экокожа (на выбор)</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Наполнитель:</span>
+                                <span class="spec-value">Пенополиуретан высокой плотности</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Вес:</span>
+                                <span class="spec-value">85 кг</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Гарантия:</span>
+                                <span class="spec-value">24 месяца</span>
+                            </div>
+                        </div>
+
+                        <div class="product-description">
+                            <h3>Описание</h3>
+                            <p>Диван Elegance представляет собой идеальное сочетание комфорта и стиля. Созданный в лучших традициях европейского дизайна, этот диван станет центральным элементом вашей гостиной.</p>
+                            
+                            <p>Прочный каркас из массива бука обеспечивает долговечность, а высококачественный наполнитель гарантирует комфортный отдых. Элегантная обивка из премиальных материалов подчеркнет изысканность вашего интерьера.</p>
+                            
+                            <p>Диван рассчитан на 3 посадочных места и идеально подходит как для семейного отдыха, так и для приема гостей. Классический дизайн позволяет легко вписать его в любой интерьер.</p>
+                        </div>
+
+                        <div class="spec-grid">
+                            <div class="spec-item">
+                                <span class="spec-label">Информация по уходу:</span>
+                                <span class="spec-value">Регулярная чистка пылесосом, профессиональная химчистка раз в год</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Сборка:</span>
+                                <span class="spec-value">Требуется частичная сборка (ножки), инструкция прилагается</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Дополнительные опции:</span>
+                                <span class="spec-value">Декоративные подушки, плед в комплекте, защитный чехол</span>
+                            </div>
+                        </div>
+
+                        <div style="margin-top: 32px;">
+                            <a href="contacts.html" class="btn btn-primary" style="margin-right: 16px;">Заказать консультацию</a>
+                            <a href="catalog.html" class="btn btn-outline">Вернуться в каталог</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Additional Gallery -->
+                <div class="additional-gallery">
+                    <h3>Дополнительные фотографии</h3>
+                    <div class="gallery-grid">
+                        <div class="gallery-item">Фото детали 1</div>
+                        <div class="gallery-item">Фото детали 2</div>
+                        <div class="gallery-item">Фото детали 3</div>
+                        <div class="gallery-item">Фото в интерьере</div>
+                        <div class="gallery-item">Варианты цветов</div>
+                        <div class="gallery-item">Фото комплектации</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="logo">
+                        <span class="logo-main">Samruk</span>
+                        <span class="logo-accent">Mebel</span>
+                    </div>
+                    <p>Качественная мебель в европейском стиле. Создаем уют и комфорт в вашем доме с 2010 года. Индивидуальный подход к каждому клиенту.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link">📷</a>
+                        <a href="#" class="social-link">📘</a>
+                        <a href="#" class="social-link">📺</a>
+                    </div>
+                </div>
+
+                <div class="footer-nav">
+                    <h3>Навигация</h3>
+                    <ul>
+                        <li><a href="index.html">Главная</a></li>
+                        <li><a href="catalog.html">Каталог</a></li>
+                        <li><a href="about.html">О нас</a></li>
+                        <li><a href="contacts.html">Контакты</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-contacts">
+                    <h3>Контакты</h3>
+                    <div class="contact-item">
+                        <span class="icon">📍</span>
+                        <span>г. Алматы, ул. Абая 150</span>
+                    </div>
+                    <div class="contact-item">
+                        <span class="icon">📞</span>
+                        <span>+7 (727) 123-45-67</span>
+                    </div>
+                    <div class="contact-item">
+                        <span class="icon">✉️</span>
+                        <span>info@samrukmebel.kz</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>© 2024 Samruk Mebel. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="scripts/main.js"></script>
+</body>
+</html>

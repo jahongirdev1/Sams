@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Контакты - Samruk Mebel</title>
+    <meta name="description" content="Контактная информация Samruk Mebel - адрес, телефон, email. Свяжитесь с нами для заказа качественной мебели.">
+    
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="nav-wrapper">
+                <a href="index.html" class="logo">
+                    <span class="logo-main">Samruk</span>
+                    <span class="logo-accent">Mebel</span>
+                </a>
+
+                <nav class="nav-desktop">
+                    <a href="index.html" class="nav-link">Главная</a>
+                    <a href="catalog.html" class="nav-link">Каталог</a>
+                    <a href="about.html" class="nav-link">О нас</a>
+                    <a href="contacts.html" class="nav-link active">Контакты</a>
+                </nav>
+
+                <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                    <span class="hamburger"></span>
+                </button>
+            </div>
+
+            <nav class="nav-mobile" id="mobileMenu">
+                <a href="index.html" class="nav-link-mobile">Главная</a>
+                <a href="catalog.html" class="nav-link-mobile">Каталог</a>
+                <a href="about.html" class="nav-link-mobile">О нас</a>
+                <a href="contacts.html" class="nav-link-mobile">Контакты</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="page-hero">
+            <div class="container">
+                <h1>Контакты</h1>
+                <p>Свяжитесь с нами для консультации и заказа мебели</p>
+            </div>
+        </section>
+
+        <!-- Contacts Content -->
+        <section class="contacts-section">
+            <div class="container">
+                <div class="contacts-grid">
+                    <div class="contact-info">
+                        <h2>Наши контакты</h2>
+                        
+                        <div class="contact-details">
+                            <div class="contact-item">
+                                <div class="contact-icon">📍</div>
+                                <div class="contact-text">
+                                    <h3>Адрес</h3>
+                                    <p>Республика Казахстан<br>г. Алматы, ул. Абая 150<br>БЦ "Алатау", офис 304</p>
+                                </div>
+                            </div>
+
+                            <div class="contact-item">
+                                <div class="contact-icon">📞</div>
+                                <div class="contact-text">
+                                    <h3>Телефон</h3>
+                                    <p><a href="tel:+77271234567">+7 (727) 123-45-67</a><br>
+                                    <a href="tel:+77051234567">+7 (705) 123-45-67</a></p>
+                                </div>
+                            </div>
+
+                            <div class="contact-item">
+                                <div class="contact-icon">✉️</div>
+                                <div class="contact-text">
+                                    <h3>Email</h3>
+                                    <p><a href="mailto:info@samrukmebel.kz">info@samrukmebel.kz</a><br>
+                                    <a href="mailto:orders@samrukmebel.kz">orders@samrukmebel.kz</a></p>
+                                </div>
+                            </div>
+
+                            <div class="contact-item">
+                                <div class="contact-icon">🕒</div>
+                                <div class="contact-text">
+                                    <h3>Время работы</h3>
+                                    <p>Понедельник - Пятница: 9:00 - 18:00<br>
+                                    Суббота: 10:00 - 16:00<br>
+                                    Воскресенье: выходной</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="social-section">
+                            <h3>Мы в социальных сетях</h3>
+                            <div class="social-links">
+                                <a href="#" class="social-link">
+                                    <span class="social-icon">📷</span>
+                                    <span>Instagram</span>
+                                </a>
+                                <a href="#" class="social-link">
+                                    <span class="social-icon">📘</span>
+                                    <span>Facebook</span>
+                                </a>
+                                <a href="#" class="social-link">
+                                    <span class="social-icon">📺</span>
+                                    <span>YouTube</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contact Form -->
+                    <div class="contact-form">
+                        <h2>Оставить заявку</h2>
+                        <p>Заполните форму, и мы свяжемся с вами в ближайшее время</p>
+                        
+                        <form id="contactForm" onsubmit="submitForm(event)">
+                            <div class="form-group">
+                                <label for="name">Ваше имя *</label>
+                                <input type="text" id="name" name="name" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="phone">Телефон *</label>
+                                <input type="tel" id="phone" name="phone" required placeholder="+7 (___) ___-__-__">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" name="email" placeholder="example@email.com">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="subject">Тема обращения</label>
+                                <select id="subject" name="subject">
+                                    <option value="consultation">Консультация по мебели</option>
+                                    <option value="order">Заказ мебели</option>
+                                    <option value="delivery">Вопросы по доставке</option>
+                                    <option value="warranty">Гарантийные вопросы</option>
+                                    <option value="other">Другое</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="message">Сообщение *</label>
+                                <textarea id="message" name="message" rows="5" required placeholder="Расскажите, что вас интересует..."></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" required>
+                                    <span class="checkmark"></span>
+                                    Согласие на обработку персональных данных *
+                                </label>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Отправить заявку</button>
+                        </form>
+
+                        <div class="form-success" id="formSuccess" style="display: none;">
+                            <h3>Спасибо за обращение!</h3>
+                            <p>Ваша заявка успешно отправлена. Мы свяжемся с вами в ближайшее время.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Map Section -->
+                <div class="map-section">
+                    <h2>Как нас найти</h2>
+                    <div class="map-container">
+                        <iframe 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2906.1197200133677!2d76.95372531551858!3d43.25653067913396!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38836e8180382a27%3A0x4c9b9f0b8b9b0b0b!2sAbay%20Ave%20150%2C%20Almaty%2C%20Kazakhstan!5e0!3m2!1sen!2sus!4v1234567890123!5m2!1sen!2sus" 
+                            width="100%" 
+                            height="400" 
+                            style="border:0;" 
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+                    <div class="map-description">
+                        <p><strong>Как добраться:</strong></p>
+                        <ul>
+                            <li>На автобусе: маршруты №12, 25, 34 до остановки "Абая - Назарбаева"</li>
+                            <li>На метро: станция "Абая", далее 3 минуты пешком</li>
+                            <li>На автомобиле: парковка возле здания (бесплатно для клиентов)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="logo">
+                        <span class="logo-main">Samruk</span>
+                        <span class="logo-accent">Mebel</span>
+                    </div>
+                    <p>Качественная мебель в европейском стиле. Создаем уют и комфорт в вашем доме с 2010 года. Индивидуальный подход к каждому клиенту.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link">📷</a>
+                        <a href="#" class="social-link">📘</a>
+                        <a href="#" class="social-link">📺</a>
+                    </div>
+                </div>
+
+                <div class="footer-nav">
+                    <h3>Навигация</h3>
+                    <ul>
+                        <li><a href="index.html">Главная</a></li>
+                        <li><a href="catalog.html">Каталог</a></li>
+                        <li><a href="about.html">О нас</a></li>
+                        <li><a href="contacts.html">Контакты</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-contacts">
+                    <h3>Контакты</h3>
+                    <div class="contact-item">
+                        <span class="icon">📍</span>
+                        <span>г. Алматы, ул. Абая 150</span>
+                    </div>
+                    <div class="contact-item">
+                        <span class="icon">📞</span>
+                        <span>+7 (727) 123-45-67</span>
+                    </div>
+                    <div class="contact-item">
+                        <span class="icon">✉️</span>
+                        <span>info@samrukmebel.kz</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>© 2024 Samruk Mebel. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="scripts/main.js"></script>
+</body>
+</html>
