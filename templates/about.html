@@ -1,44 +1,6 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>О компании - Samruk Mebel</title>
-    <meta name="description" content="Узнайте больше о компании Samruk Mebel - 14 лет опыта в производстве качественной мебели в европейском стиле.">
-    
-    <link rel="stylesheet" href="styles/main.css">
-</head>
-<body>
-    <!-- Header -->
-    <header class="header">
-        <div class="container">
-            <div class="nav-wrapper">
-                <a href="index.html" class="logo">
-                    <span class="logo-main">Samruk</span>
-                    <span class="logo-accent">Mebel</span>
-                </a>
+{% extends 'base.html' %}
 
-                <nav class="nav-desktop">
-                    <a href="index.html" class="nav-link">Главная</a>
-                    <a href="catalog.html" class="nav-link">Каталог</a>
-                    <a href="about.html" class="nav-link active">О нас</a>
-                    <a href="contacts.html" class="nav-link">Контакты</a>
-                </nav>
-
-                <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
-                    <span class="hamburger"></span>
-                </button>
-            </div>
-
-            <nav class="nav-mobile" id="mobileMenu">
-                <a href="index.html" class="nav-link-mobile">Главная</a>
-                <a href="catalog.html" class="nav-link-mobile">Каталог</a>
-                <a href="about.html" class="nav-link-mobile">О нас</a>
-                <a href="contacts.html" class="nav-link-mobile">Контакты</a>
-            </nav>
-        </div>
-    </header>
-
+{% block content %}
     <main>
         <!-- Hero Section -->
         <section class="page-hero">
@@ -139,57 +101,4 @@
             </div>
         </section>
     </main>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-brand">
-                    <div class="logo">
-                        <span class="logo-main">Samruk</span>
-                        <span class="logo-accent">Mebel</span>
-                    </div>
-                    <p>Качественная мебель в европейском стиле. Создаем уют и комфорт в вашем доме с 2010 года. Индивидуальный подход к каждому клиенту.</p>
-                    <div class="social-links">
-                        <a href="#" class="social-link">📷</a>
-                        <a href="#" class="social-link">📘</a>
-                        <a href="#" class="social-link">📺</a>
-                    </div>
-                </div>
-
-                <div class="footer-nav">
-                    <h3>Навигация</h3>
-                    <ul>
-                        <li><a href="index.html">Главная</a></li>
-                        <li><a href="catalog.html">Каталог</a></li>
-                        <li><a href="about.html">О нас</a></li>
-                        <li><a href="contacts.html">Контакты</a></li>
-                    </ul>
-                </div>
-
-                <div class="footer-contacts">
-                    <h3>Контакты</h3>
-                    <div class="contact-item">
-                        <span class="icon">📍</span>
-                        <span>г. Алматы, ул. Абая 150</span>
-                    </div>
-                    <div class="contact-item">
-                        <span class="icon">📞</span>
-                        <span>+7 (727) 123-45-67</span>
-                    </div>
-                    <div class="contact-item">
-                        <span class="icon">✉️</span>
-                        <span>info@samrukmebel.kz</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="footer-bottom">
-                <p>© 2024 Samruk Mebel. Все права защищены.</p>
-            </div>
-        </div>
-    </footer>
-
-    <script src="scripts/main.js"></script>
-</body>
-</html>
+{% endblock %}

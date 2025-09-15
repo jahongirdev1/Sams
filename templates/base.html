@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Samruk Mebel - Качественная мебель в европейском стиле</title>
+    <meta name="description" content="Samruk Mebel - ведущий производитель качественной мебели в европейском стиле. Диваны, столы, шкафы, кровати и стулья для вашего дома. Доставка по Алматы.">
+    <meta name="author" content="Samruk Mebel">
+
+    <meta property="og:title" content="Samruk Mebel - Качественная мебель в европейском стиле">
+    <meta property="og:description" content="Качественная мебель в европейском стиле от Samruk Mebel. Более 14 лет опыта, индивидуальный подход к каждому клиенту.">
+    <meta property="og:type" content="website">
+
+    <link rel="stylesheet" href="/static/styles/main.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="nav-wrapper">
+                <a href="index.html" class="logo">
+                    <span class="logo-main">Samruk</span>
+                    <span class="logo-accent">Mebel</span>
+                </a>
+
+                <nav class="nav-desktop">
+                    <a href="/" class="nav-link {% if active_page == 'home' %}  active {% endif %}">Главная</a>
+                    <a href="/catalog" class="nav-link {% if active_page == 'catalog' %}  active {% endif %}">Каталог</a>
+                    <a href="/about" class="nav-link {% if active_page == 'about' %}  active {% endif %}">О нас</a>
+                    <a href="/contact" class="nav-link {% if active_page == 'contact' %}  active {% endif %}">Контакты</a>
+                </nav>
+
+                <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                    <span class="hamburger"></span>
+                </button>
+            </div>
+
+            <nav class="nav-mobile" id="mobileMenu">
+                <a href="/" class="nav-link-mobile">Главная</a>
+                <a href="/catalog" class="nav-link-mobile">Каталог</a>
+                <a href="/about" class="nav-link-mobile">О нас</a>
+                <a href="/contact" class="nav-link-mobile">Контакты</a>
+            </nav>
+        </div>
+    </header>
+
+
+
+{% block content %}
+
+
+{% endblock %}
+
+
+
+
+
+<!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="logo">
+                        <span class="logo-main">Samruk</span>
+                        <span class="logo-accent">Mebel</span>
+                    </div>
+                    <p>Качественная мебель в европейском стиле. Создаем уют и комфорт в вашем доме с 2010 года. Индивидуальный подход к каждому клиенту.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link">📷</a>
+                        <a href="#" class="social-link">📘</a>
+                        <a href="#" class="social-link">📺</a>
+                    </div>
+                </div>
+
+                <div class="footer-nav">
+                    <h3>Навигация</h3>
+                    <ul>
+                        <li><a href="index.html">Главная</a></li>
+                        <li><a href="catalog.html">Каталог</a></li>
+                        <li><a href="about.html">О нас</a></li>
+                        <li><a href="contacts.html">Контакты</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-contacts">
+                    <h3>Контакты</h3>
+                    <div class="contact-item">
+                        <span class="icon">📍</span>
+                        <span>г. Алматы, ул. Абая 150</span>
+                    </div>
+                    <div class="contact-item">
+                        <span class="icon">📞</span>
+                        <span>+7 (727) 123-45-67</span>
+                    </div>
+                    <div class="contact-item">
+                        <span class="icon">✉️</span>
+                        <span>info@samrukmebel.kz</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>© 2024 Samruk Mebel. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/static/scripts/main.js"></script>
+</body>
+</html>

@@ -110,7 +110,8 @@ class ProductFilter(filters.FilterSet):
 
 def index(request):
     carousel = CarouselItem.objects.filter(is_active=True).order_by("ordering")
-    return render(request, "index.html", {"carousel": carousel})
+    return render(request, "index.html", {"carousel": carousel,
+                                          'active_page': 'home'})
 
 
 def catalog(request):
@@ -136,6 +137,7 @@ def catalog(request):
         "page_obj": page_obj,
         "products": page_obj.object_list,
         "active_category": active_category,
+        'active_page': 'catalog',
     }
     return render(request, "catalog.html", context)
 
@@ -148,7 +150,10 @@ def product_detail(request, slug: str):
     return render(
         request,
         "product_detail.html",
-        {"product": product, "images": images},
+        {"product": product,
+         "images": images,
+         'active_page': 'catalog'
+         },
     )
 
 
@@ -164,9 +169,15 @@ def about(request):
         "team": team,
         "values": values,
         "company": company,
+        'active_page': 'about'
     }
     return render(request, "about.html", context)
 
+
+def contact(request):
+
+
+    return render(request, "contacts.html", {'active_page': 'contact'})
 
 # ----------------- API ViewSets -----------------
 
