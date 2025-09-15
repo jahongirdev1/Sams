@@ -28,6 +28,9 @@
                     <a href="/catalog" class="nav-link {% if active_page == 'catalog' %}  active {% endif %}">Каталог</a>
                     <a href="/about" class="nav-link {% if active_page == 'about' %}  active {% endif %}">О нас</a>
                     <a href="/contact" class="nav-link {% if active_page == 'contact' %}  active {% endif %}">Контакты</a>
+                    {% for cat in menu_categories %}
+                    <a href="/catalog/?category={{ cat.slug }}" class="nav-link">{{ cat.name }}</a>
+                    {% endfor %}
                 </nav>
 
                 <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
@@ -40,6 +43,9 @@
                 <a href="/catalog" class="nav-link-mobile">Каталог</a>
                 <a href="/about" class="nav-link-mobile">О нас</a>
                 <a href="/contact" class="nav-link-mobile">Контакты</a>
+                {% for cat in menu_categories %}
+                <a href="/catalog/?category={{ cat.slug }}" class="nav-link-mobile">{{ cat.name }}</a>
+                {% endfor %}
             </nav>
         </div>
     </header>
@@ -75,10 +81,10 @@
                 <div class="footer-nav">
                     <h3>Навигация</h3>
                     <ul>
-                        <li><a href="index.html">Главная</a></li>
-                        <li><a href="catalog.html">Каталог</a></li>
-                        <li><a href="about.html">О нас</a></li>
-                        <li><a href="contacts.html">Контакты</a></li>
+                        <li><a href="/">Главная</a></li>
+                        <li><a href="/catalog">Каталог</a></li>
+                        <li><a href="/about">О нас</a></li>
+                        <li><a href="/contact">Контакты</a></li>
                     </ul>
                 </div>
 

@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
     <main>
         <!-- Hero Slider Section -->
         <section class="hero-section">
@@ -27,7 +26,7 @@
                     <h2>Samruk Mebel – Качество в каждой детали</h2>
                     <p>Узнайте больше о нашем производстве и подходе к созданию мебели</p>
                 </div>
-                
+
                 <div class="video-container">
                     <div class="video-placeholder">
                         <div class="play-button">
@@ -51,65 +50,27 @@
                 </div>
 
                 <div class="products-grid">
-                    <a href="product-sofa-elegance.html" class="product-card">
+                    {% for product in products %}
+                    <a href="{% url 'product_detail' product.slug %}" class="product-card" data-category="{{ product.category.name }}">
                         <div class="product-image">
-                            <img src="src/assets/hero-sofa.jpg" alt="Диван Elegance">
+                            {% with img=product.images.first %}
+                            {% if img %}<img src="{{ img.image.url }}" alt="{{ img.alt_text|default:product.name }}">{% endif %}
+                            {% endwith %}
                         </div>
                         <div class="product-info">
-                            <div class="product-category">Диваны</div>
-                            <h3>Диван Elegance</h3>
+                            <div class="product-category">{{ product.category.name }}</div>
+                            <h3>{{ product.name }}</h3>
                             <div class="product-link">
                                 <span>Подробнее</span>
                                 <span class="arrow">→</span>
                             </div>
                         </div>
                     </a>
-
-                    <a href="product-dining-classic.html" class="product-card">
-                        <div class="product-image">
-                            <img src="src/assets/dining-set.jpg" alt="Обеденная группа Classic">
-                        </div>
-                        <div class="product-info">
-                            <div class="product-category">Столы</div>
-                            <h3>Обеденная группа Classic</h3>
-                            <div class="product-link">
-                                <span>Подробнее</span>
-                                <span class="arrow">→</span>
-                            </div>
-                        </div>
-                    </a>
-
-                    <a href="product-wardrobe-premium.html" class="product-card">
-                        <div class="product-image">
-                            <img src="src/assets/wardrobe.jpg" alt="Шкаф Premium">
-                        </div>
-                        <div class="product-info">
-                            <div class="product-category">Шкафы</div>
-                            <h3>Шкаф Premium</h3>
-                            <div class="product-link">
-                                <span>Подробнее</span>
-                                <span class="arrow">→</span>
-                            </div>
-                        </div>
-                    </a>
-
-                    <a href="product-bed-comfort.html" class="product-card">
-                        <div class="product-image">
-                            <img src="src/assets/bed.jpg" alt="Кровать Comfort">
-                        </div>
-                        <div class="product-info">
-                            <div class="product-category">Кровати</div>
-                            <h3>Кровать Comfort</h3>
-                            <div class="product-link">
-                                <span>Подробнее</span>
-                                <span class="arrow">→</span>
-                            </div>
-                        </div>
-                    </a>
+                    {% endfor %}
                 </div>
 
                 <div class="section-footer">
-                    <a href="catalog.html" class="btn btn-primary">Смотреть весь каталог</a>
+                    <a href="/catalog" class="btn btn-primary">Смотреть весь каталог</a>
                 </div>
             </div>
         </section>
@@ -120,23 +81,19 @@
                 <div class="about-grid">
                     <div class="about-content">
                         <h2>О компании Samruk Mebel</h2>
-                        <p>Более 14 лет мы создаем качественную мебель в европейском стиле. Наша миссия — делать ваш дом уютным и комфортным, используя только лучшие материалы и современные технологии производства.</p>
-                        <p>Мы предлагаем индивидуальный подход к каждому клиенту и гарантируем высокое качество всех наших изделий.</p>
-                        <a href="about.html" class="btn btn-outline">Узнать больше</a>
+                        {% if company %}
+                        <p>{{ company.about_text }}</p>
+                        <p>{{ company.mission_text }}</p>
+                        {% endif %}
+                        <a href="/about" class="btn btn-outline">Узнать больше</a>
                     </div>
                     <div class="stats-card">
+                        {% for m in metrics %}
                         <div class="stat">
-                            <div class="stat-number">14+</div>
-                            <div class="stat-label">лет опыта</div>
+                            <div class="stat-number">{{ m.value }}{{ m.suffix }}</div>
+                            <div class="stat-label">{{ m.name }}</div>
                         </div>
-                        <div class="stat">
-                            <div class="stat-number">1000+</div>
-                            <div class="stat-label">довольных клиентов</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-number">500+</div>
-                            <div class="stat-label">моделей мебели</div>
-                        </div>
+                        {% endfor %}
                     </div>
                 </div>
             </div>

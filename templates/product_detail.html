@@ -7,111 +7,67 @@
             <div class="container">
                 <!-- Breadcrumb -->
                 <nav class="breadcrumb" style="margin-bottom: 24px;">
-                    <a href="index.html" style="color: hsl(25, 6%, 45%); text-decoration: none;">Главная</a>
+                    <a href="/" style="color: hsl(25, 6%, 45%); text-decoration: none;">Главная</a>
                     <span style="margin: 0 8px; color: hsl(25, 6%, 45%);">→</span>
-                    <a href="catalog.html" style="color: hsl(25, 6%, 45%); text-decoration: none;">Каталог</a>
+                    <a href="/catalog" style="color: hsl(25, 6%, 45%); text-decoration: none;">Каталог</a>
                     <span style="margin: 0 8px; color: hsl(25, 6%, 45%);">→</span>
-                    <span style="color: hsl(25, 25%, 35%);">Диван Elegance</span>
+                    <span style="color: hsl(25, 25%, 35%);">{{ product.name }}</span>
                 </nav>
 
                 <div class="product-content">
                     <!-- Product Gallery -->
                     <div class="product-gallery">
-                        <img src="src/assets/hero-sofa.jpg" alt="Диван Elegance - основное фото" class="main-image" id="mainImage">
-                        
+                        {% with img=images.0 %}
+                        {% if img %}<img src="{{ img.image.url }}" alt="{{ img.alt_text|default:product.name }}" class="main-image" id="mainImage">{% endif %}
+                        {% endwith %}
+
                         <div class="thumbnail-grid">
-                            <img src="src/assets/hero-sofa.jpg" alt="Диван Elegance - вид 1" class="thumbnail active" onclick="changeMainImage(this.src)">
-                            <img src="src/assets/hero-sofa.jpg" alt="Диван Elegance - вид 2" class="thumbnail" onclick="changeMainImage(this.src)">
-                            <img src="src/assets/hero-sofa.jpg" alt="Диван Elegance - вид 3" class="thumbnail" onclick="changeMainImage(this.src)">
-                            <img src="src/assets/hero-sofa.jpg" alt="Диван Elegance - вид 4" class="thumbnail" onclick="changeMainImage(this.src)">
-                            <img src="src/assets/hero-sofa.jpg" alt="Диван Elegance - вид 5" class="thumbnail" onclick="changeMainImage(this.src)">
+                            {% for img in images %}
+                            <img src="{{ img.image.url }}" alt="{{ img.alt_text|default:product.name }}" class="thumbnail {% if forloop.first %}active{% endif %}" onclick="changeMainImage(this.src)">
+                            {% endfor %}
                         </div>
                     </div>
 
                     <!-- Product Info -->
                     <div class="product-info">
-                        <h1>Диван Elegance</h1>
-                        
+                        <h1>{{ product.name }}</h1>
+
                         <div class="spec-grid">
                             <div class="spec-item">
-                                <span class="spec-label">Модель:</span>
-                                <span class="spec-value">Elegance Premium</span>
+                                <span class="spec-label">Категория:</span>
+                                <span class="spec-value">{{ product.category.name }}</span>
                             </div>
                             <div class="spec-item">
-                                <span class="spec-label">Размеры (Д×Ш×В):</span>
-                                <span class="spec-value">210×95×85 см</span>
-                            </div>
-                            <div class="spec-item">
-                                <span class="spec-label">Цвета:</span>
-                                <span class="spec-value">Серый, Бежевый, Темно-синий, Коричневый</span>
-                            </div>
-                            <div class="spec-item">
-                                <span class="spec-label">Каркас:</span>
-                                <span class="spec-value">Массив бука, металлические пружины</span>
-                            </div>
-                            <div class="spec-item">
-                                <span class="spec-label">Обивка:</span>
-                                <span class="spec-value">Премиум ткань, экокожа (на выбор)</span>
-                            </div>
-                            <div class="spec-item">
-                                <span class="spec-label">Наполнитель:</span>
-                                <span class="spec-value">Пенополиуретан высокой плотности</span>
-                            </div>
-                            <div class="spec-item">
-                                <span class="spec-label">Вес:</span>
-                                <span class="spec-value">85 кг</span>
-                            </div>
-                            <div class="spec-item">
-                                <span class="spec-label">Гарантия:</span>
-                                <span class="spec-value">24 месяца</span>
+                                <span class="spec-label">Цена:</span>
+                                <span class="spec-value">{{ product.price }} ₸</span>
                             </div>
                         </div>
 
                         <div class="product-description">
                             <h3>Описание</h3>
-                            <p>Диван Elegance представляет собой идеальное сочетание комфорта и стиля. Созданный в лучших традициях европейского дизайна, этот диван станет центральным элементом вашей гостиной.</p>
-                            
-                            <p>Прочный каркас из массива бука обеспечивает долговечность, а высококачественный наполнитель гарантирует комфортный отдых. Элегантная обивка из премиальных материалов подчеркнет изысканность вашего интерьера.</p>
-                            
-                            <p>Диван рассчитан на 3 посадочных места и идеально подходит как для семейного отдыха, так и для приема гостей. Классический дизайн позволяет легко вписать его в любой интерьер.</p>
-                        </div>
-
-                        <div class="spec-grid">
-                            <div class="spec-item">
-                                <span class="spec-label">Информация по уходу:</span>
-                                <span class="spec-value">Регулярная чистка пылесосом, профессиональная химчистка раз в год</span>
-                            </div>
-                            <div class="spec-item">
-                                <span class="spec-label">Сборка:</span>
-                                <span class="spec-value">Требуется частичная сборка (ножки), инструкция прилагается</span>
-                            </div>
-                            <div class="spec-item">
-                                <span class="spec-label">Дополнительные опции:</span>
-                                <span class="spec-value">Декоративные подушки, плед в комплекте, защитный чехол</span>
-                            </div>
+                            <p>{{ product.description }}</p>
                         </div>
 
                         <div style="margin-top: 32px;">
-                            <a href="contacts.html" class="btn btn-primary" style="margin-right: 16px;">Заказать консультацию</a>
-                            <a href="catalog.html" class="btn btn-outline">Вернуться в каталог</a>
+                            <a href="/contact" class="btn btn-primary" style="margin-right: 16px;">Заказать консультацию</a>
+                            <a href="/catalog" class="btn btn-outline">Вернуться в каталог</a>
                         </div>
                     </div>
                 </div>
 
                 <!-- Additional Gallery -->
+                {% if images %}
                 <div class="additional-gallery">
                     <h3>Дополнительные фотографии</h3>
                     <div class="gallery-grid">
-                        <div class="gallery-item">Фото детали 1</div>
-                        <div class="gallery-item">Фото детали 2</div>
-                        <div class="gallery-item">Фото детали 3</div>
-                        <div class="gallery-item">Фото в интерьере</div>
-                        <div class="gallery-item">Варианты цветов</div>
-                        <div class="gallery-item">Фото комплектации</div>
+                        {% for img in images %}
+                        <div class="gallery-item"><img src="{{ img.image.url }}" alt="{{ img.alt_text|default:product.name }}"></div>
+                        {% endfor %}
                     </div>
                 </div>
+                {% endif %}
             </div>
         </section>
     </main>
 
-    {% endblock %}
+{% endblock %}
