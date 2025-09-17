@@ -1,5 +1,8 @@
 from django.contrib import admin
+from django.forms import Textarea
 from django.utils.html import format_html
+from django.db import models as django_models
+
 from . import models
 
 admin.site.site_header = "Samruks — Панель управления"
@@ -93,6 +96,20 @@ class ValueAdmin(admin.ModelAdmin):
 class CompanyInfoAdmin(admin.ModelAdmin):
     def has_add_permission(self, request):
         if models.CompanyInfo.objects.exists():
+            return False
+        return super().has_add_permission(request)
+
+
+@admin.register(models.SocialMap)
+class SocialMapAdmin(admin.ModelAdmin):
+    list_display = ("id", "is_active", "updated_at")
+    list_editable = ("is_active",)
+    formfield_overrides = {
+        django_models.TextField: {"widget": Textarea(attrs={"rows": 8})},
+    }
+
+    def has_add_permission(self, request):
+        if models.SocialMap.objects.filter(is_active=True).exists():
             return False
         return super().has_add_permission(request)
 

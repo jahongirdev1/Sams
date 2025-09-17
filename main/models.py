@@ -196,6 +196,32 @@ class CompanyInfo(models.Model):
 
 
 # --- Контакты ---
+
+
+class SocialMap(models.Model):
+    instagram_url = models.URLField(_("Instagram"), blank=True)
+    facebook_url = models.URLField(_("Facebook"), blank=True)
+    youtube_url = models.URLField(_("YouTube"), blank=True)
+    tiktok_url = models.URLField(_("TikTok"), blank=True)
+    telegram_url = models.URLField(_("Telegram"), blank=True)
+    map_embed = models.TextField(_("Карта (встраиваемый код)"), blank=True)
+    map_url = models.URLField(_("Ссылка на карту"), blank=True)
+    is_active = models.BooleanField(_("Активна"), default=True, db_index=True)
+    updated_at = models.DateTimeField(_("Обновлено"), auto_now=True)
+
+    class Meta:
+        verbose_name = _("Соцсети и карта")
+        verbose_name_plural = _("Соцсети и карта")
+
+    def save(self, *args, **kwargs):
+        if self.is_active:
+            SocialMap.objects.exclude(pk=self.pk).update(is_active=False)
+        return super().save(*args, **kwargs)
+
+    def __str__(self) -> str:
+        return f"SocialMap #{self.pk}" if self.pk else "SocialMap"
+
+
 class ContactAddress(models.Model):
     title = models.CharField(_("Название"), max_length=150, blank=True)
     city = models.CharField(_("Город"), max_length=120, blank=True)
