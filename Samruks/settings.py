@@ -173,11 +173,11 @@ CACHES = {
 
 # --- Jazzmin: русские заголовки админки ---
 JAZZMIN_SETTINGS = {
-    "site_title": "Админка Samruks",
-    "site_header": "Samruks — Панель управления",
-    "site_brand": "Samruks",
-    "welcome_sign": "Добро пожаловать в админ-панель Samruks",
-    "copyright": "Samruks",
+    "site_title": "Админка Samruk Mebel",
+    "site_header": "Samruk Mebel — Панель управления",
+    "site_brand": "Samruk Mebel",
+    "welcome_sign": "Добро пожаловать в админ-панель Samruk Mebel",
+    "copyright": "Samruk Mebel",
     # опционально: укажи иконки и порядок меню, если модели уже зарегистрированы
 }
 
@@ -186,5 +186,5 @@ JAZZMIN_SETTINGS = {
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-TELEGRAM_BOT_TOKEN = os.getenv('TELEGRAM_BOT_TOKEN', '')
-TELEGRAM_CHAT_ID = os.getenv('TELEGRAM_CHAT_ID', '')
+TELEGRAM_BOT_TOKEN = os.getenv('8281238479:AAFpptxxRGeOUs3YO3hQRdqF5cGzdpimQpM', '')
+TELEGRAM_CHAT_ID = os.getenv('758761122', '')

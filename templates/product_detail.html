@@ -61,7 +61,7 @@
                     <h3>Дополнительные фотографии</h3>
                     <div class="gallery-grid">
                         {% for img in images %}
-                        <div class="gallery-item"><img src="{{ img.image.url }}" alt="{{ img.alt_text|default:product.name }}"></div>
+                        <div class="gallery-item"><img width="200px" src="{{ img.image.url }}" alt="{{ img.alt_text|default:product.name }}"></div>
                         {% endfor %}
                     </div>
                 </div>

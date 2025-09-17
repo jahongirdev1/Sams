@@ -25,8 +25,8 @@
                                     <h3>Адрес</h3>
                                     {% for a in addresses %}
                                         <p>
-                                            {% if a.title %}{{ a.title }}<br>{% endif %}
-                                            {% if a.city %}{{ a.city }}<br>{% endif %}
+                                            {% if a.title %} <b>{{ a.title }} :</b>{% endif %}
+                                            {% if a.city %}{{ a.city }}, {% endif %}
                                             {{ a.address|linebreaksbr }}
                                         </p>
                                     {% endfor %}
@@ -169,14 +169,6 @@
                             loading="lazy" 
                             referrerpolicy="no-referrer-when-downgrade">
                         </iframe>
-                    </div>
-                    <div class="map-description">
-                        <p><strong>Как добраться:</strong></p>
-                        <ul>
-                            <li>На автобусе: маршруты №12, 25, 34 до остановки "Абая - Назарбаева"</li>
-                            <li>На метро: станция "Абая", далее 3 минуты пешком</li>
-                            <li>На автомобиле: парковка возле здания (бесплатно для клиентов)</li>
-                        </ul>
                     </div>
                 </div>
             </div>

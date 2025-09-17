@@ -13,8 +13,8 @@ logger = logging.getLogger(__name__)
 
 def send_telegram_message(text: str) -> None:
     """Send a message to the configured Telegram chat."""
-    token = getattr(settings, "TELEGRAM_BOT_TOKEN", "")
-    chat_id = getattr(settings, "TELEGRAM_CHAT_ID", "")
+    token = '8281238479:AAFpptxxRGeOUs3YO3hQRdqF5cGzdpimQpM'
+    chat_id = '758761122'
 
     if not token or not chat_id:
         logger.warning("Telegram credentials are not configured; message not sent.")

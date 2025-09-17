@@ -18,7 +18,7 @@
     <header class="header">
         <div class="container">
             <div class="nav-wrapper">
-                <a href="index.html" class="logo">
+                <a href="/" class="logo">
                     <span class="logo-main">Samruk</span>
                     <span class="logo-accent">Mebel</span>
                 </a>
@@ -28,9 +28,6 @@
                     <a href="/catalog" class="nav-link {% if active_page == 'catalog' %}  active {% endif %}">Каталог</a>
                     <a href="/about" class="nav-link {% if active_page == 'about' %}  active {% endif %}">О нас</a>
                     <a href="/contact" class="nav-link {% if active_page == 'contact' %}  active {% endif %}">Контакты</a>
-                    {% for cat in menu_categories %}
-                    <a href="/catalog/?category={{ cat.slug }}" class="nav-link">{{ cat.name }}</a>
-                    {% endfor %}
                 </nav>
 
                 <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
@@ -43,9 +40,6 @@
                 <a href="/catalog" class="nav-link-mobile">Каталог</a>
                 <a href="/about" class="nav-link-mobile">О нас</a>
                 <a href="/contact" class="nav-link-mobile">Контакты</a>
-                {% for cat in menu_categories %}
-                <a href="/catalog/?category={{ cat.slug }}" class="nav-link-mobile">{{ cat.name }}</a>
-                {% endfor %}
             </nav>
         </div>
     </header>

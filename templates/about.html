@@ -59,10 +59,10 @@
                     <h2>Наша команда</h2>
                     <p>Профессиональная команда дизайнеров, производственников и менеджеров работает для того, чтобы каждый клиент получил именно то, что нужно для создания уюта в своем доме.</p>
 
-                    <div class="team-placeholder">
+                    <div class="team-placeholder" style="display:grid; grid-template-columns: auto auto auto;">
                         {% for member in team %}
                         <div class="team-image">
-                            <img src="{{ member.photo.url }}" alt="{{ member.full_name }}">
+                            <img width="200px" src="{{ member.photo.url }}" alt="{{ member.full_name }}">
                         </div>
                         <h3>{{ member.full_name }}</h3>
                         <p>{{ member.role }}</p>
