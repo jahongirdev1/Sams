@@ -59,13 +59,17 @@
                     <h2>Наша команда</h2>
                     <p>Профессиональная команда дизайнеров, производственников и менеджеров работает для того, чтобы каждый клиент получил именно то, что нужно для создания уюта в своем доме.</p>
 
-                    <div class="team-placeholder" style="display:grid; grid-template-columns: auto auto auto;">
-                        {% for member in team %}
-                        <div class="team-image">
-                            <img width="200px" src="{{ member.photo.url }}" alt="{{ member.full_name }}">
-                        </div>
-                        <h3>{{ member.full_name }}</h3>
-                        <p>{{ member.role }}</p>
+                    <div class="team-grid">
+                        {% for m in team %}
+                        <article class="team-card">
+                            <div class="team-photo">
+                                <img src="/media/{{ m.photo }}" alt="{{ m.full_name }}">
+                            </div>
+                            <h3 class="team-name">{{ m.full_name }}</h3>
+                            <p class="team-role">{{ m.role }}</p>
+                        </article>
+                        {% empty %}
+                        <p class="team-empty">Команда будет опубликована позже.</p>
                         {% endfor %}
                     </div>
                 </div>
