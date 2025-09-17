@@ -193,3 +193,130 @@ class CompanyInfo(models.Model):
 
     def __str__(self) -> str:
         return _("Информация о компании")
+
+
+# --- Контакты ---
+class ContactAddress(models.Model):
+    title = models.CharField(_("Название"), max_length=150, blank=True)
+    city = models.CharField(_("Город"), max_length=120, blank=True)
+    address = models.TextField(_("Адрес"))
+    order = models.PositiveIntegerField(_("Порядок"), default=0, db_index=True)
+    is_active = models.BooleanField(_("Активен"), default=True, db_index=True)
+
+    class Meta:
+        verbose_name = _("Адрес")
+        verbose_name_plural = _("Адреса")
+        ordering = ["order", "id"]
+
+    def __str__(self) -> str:
+        parts = [
+            part
+            for part in [self.title, self.city, self.address]
+            if part
+        ]
+        return ", ".join(parts) if parts else f"Адрес #{self.pk}"
+
+
+class ContactPhone(models.Model):
+    label = models.CharField(_("Подпись"), max_length=120, blank=True)
+    phone = models.CharField(_("Телефон"), max_length=50)
+    order = models.PositiveIntegerField(_("Порядок"), default=0, db_index=True)
+    is_active = models.BooleanField(_("Активен"), default=True, db_index=True)
+
+    class Meta:
+        verbose_name = _("Телефон")
+        verbose_name_plural = _("Телефоны")
+        ordering = ["order", "id"]
+
+    def __str__(self) -> str:
+        return self.label or self.phone
+
+
+class ContactEmail(models.Model):
+    label = models.CharField(_("Подпись"), max_length=120, blank=True)
+    email = models.EmailField(_("Email"))
+    order = models.PositiveIntegerField(_("Порядок"), default=0, db_index=True)
+    is_active = models.BooleanField(_("Активен"), default=True, db_index=True)
+
+    class Meta:
+        verbose_name = _("Email")
+        verbose_name_plural = _("Email")
+        ordering = ["order", "id"]
+
+    def __str__(self) -> str:
+        return self.label or self.email
+
+
+class ContactWorkingHours(models.Model):
+    weekdays = models.CharField(_("Будни"), max_length=200)
+    saturday = models.CharField(_("Суббота"), max_length=200)
+    sunday = models.CharField(_("Воскресенье"), max_length=200)
+    note = models.CharField(_("Примечание"), max_length=200, blank=True)
+    is_active = models.BooleanField(_("Активен"), default=True, db_index=True)
+
+    class Meta:
+        verbose_name = _("Режим работы")
+        verbose_name_plural = _("Режим работы")
+
+    def clean(self):
+        super().clean()
+        if self.is_active:
+            qs = ContactWorkingHours.objects.filter(is_active=True)
+            if self.pk:
+                qs = qs.exclude(pk=self.pk)
+            if qs.exists():
+                raise ValidationError(_("Может существовать только одна активная запись времени работы."))
+
+    def __str__(self) -> str:
+        return self.weekdays
+
+
+class ContactTopic(models.Model):
+    name = models.CharField(_("Название"), max_length=150)
+    slug = models.SlugField(_("Слаг"), unique=True, max_length=160)
+
+    class Meta:
+        verbose_name = _("Тема обращения")
+        verbose_name_plural = _("Темы обращений")
+        ordering = ["name"]
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            base = slugify(self.name)
+            slug = base
+            index = 1
+            while ContactTopic.objects.filter(slug=slug).exclude(pk=self.pk).exists():
+                slug = f"{base}-{index}"
+                index += 1
+            self.slug = slug
+        return super().save(*args, **kwargs)
+
+    def __str__(self) -> str:
+        return self.name
+
+
+class ContactRequest(models.Model):
+    name = models.CharField(_("Имя"), max_length=150)
+    phone = models.CharField(_("Телефон"), max_length=50)
+    email = models.EmailField(_("Email"), blank=True)
+    topic = models.ForeignKey(
+        ContactTopic,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="requests",
+        verbose_name=_("Тема"),
+    )
+    message = models.TextField(_("Сообщение"))
+    consent = models.BooleanField(_("Согласие на обработку персональных данных"), default=False)
+    created_at = models.DateTimeField(_("Создано"), auto_now_add=True, db_index=True)
+    ip = models.GenericIPAddressField(_("IP"), null=True, blank=True)
+    user_agent = models.TextField(_("User-Agent"), blank=True)
+
+    class Meta:
+        verbose_name = _("Заявка")
+        verbose_name_plural = _("Заявки")
+        ordering = ["-created_at", "-id"]
+
+    def __str__(self) -> str:
+        return f"{self.name} — {self.phone}"
