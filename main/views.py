@@ -22,6 +22,7 @@ from .models import (
     TeamMember,
     Value,
     CompanyInfo,
+    SocialMap,
     ContactAddress,
     ContactPhone,
     ContactEmail,
@@ -236,6 +237,21 @@ def contact_view(request):
         .first()
     )
     topics = ContactTopic.objects.all().order_by("name").only("name", "slug")
+    social = (
+        SocialMap.objects.filter(is_active=True)
+        .only(
+            "instagram_url",
+            "facebook_url",
+            "youtube_url",
+            "tiktok_url",
+            "telegram_url",
+            "map_embed",
+            "map_url",
+            "is_active",
+            "updated_at",
+        )
+        .first()
+    )
 
     form_data = {
         "name": "",
@@ -330,6 +346,7 @@ def contact_view(request):
         "form_errors": form_errors,
         "form_success": form_success,
         "active_page": "contact",
+        "social": social,
     }
     status = 200 if not form_errors else 400
     return render(request, "contacts.html", context, status=status)
