@@ -655,6 +655,88 @@ body {
     font-size: 1.2rem;
 }
 
+/* Team grid */
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(220px, 1fr));
+    gap: 24px;
+    align-items: stretch;
+}
+
+/* адаптив */
+@media (max-width: 1200px) {
+    .team-grid {
+        grid-template-columns: repeat(3, minmax(220px, 1fr));
+    }
+}
+
+@media (max-width: 900px) {
+    .team-grid {
+        grid-template-columns: repeat(2, minmax(200px, 1fr));
+    }
+}
+
+@media (max-width: 560px) {
+    .team-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Team card */
+.team-card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px hsl(25 15% 85% / 0.15);
+    padding: 16px;
+    text-align: center;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.team-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px hsl(25 25% 35% / 0.12);
+}
+
+/* Фото сверху, квадрат, не «ломается» */
+.team-photo {
+    aspect-ratio: 1 / 1;
+    border-radius: 10px;
+    overflow: hidden;
+    background: hsl(30, 10%, 92%);
+}
+
+.team-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Тексты */
+.team-name {
+    margin-top: 12px;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: hsl(25, 25%, 35%);
+}
+
+.team-role {
+    margin-top: 4px;
+    font-size: 0.95rem;
+    color: hsl(25, 6%, 45%);
+}
+
+/* Пустое состояние */
+.team-empty {
+    color: hsl(25, 6%, 45%);
+    text-align: center;
+    grid-column: 1 / -1;
+    padding: 16px 0;
+}
+
 .mission-section {
     margin: 60px 0;
 }
