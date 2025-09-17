@@ -95,3 +95,53 @@ class CompanyInfoAdmin(admin.ModelAdmin):
         if models.CompanyInfo.objects.exists():
             return False
         return super().has_add_permission(request)
+
+
+@admin.register(models.ContactAddress)
+class ContactAddressAdmin(admin.ModelAdmin):
+    list_display = ("__str__", "order", "is_active")
+    list_filter = ("is_active",)
+    ordering = ("order", "id")
+    actions = [make_active, make_inactive]
+
+
+@admin.register(models.ContactPhone)
+class ContactPhoneAdmin(admin.ModelAdmin):
+    list_display = ("__str__", "order", "is_active")
+    list_filter = ("is_active",)
+    ordering = ("order", "id")
+    actions = [make_active, make_inactive]
+
+
+@admin.register(models.ContactEmail)
+class ContactEmailAdmin(admin.ModelAdmin):
+    list_display = ("__str__", "order", "is_active")
+    list_filter = ("is_active",)
+    ordering = ("order", "id")
+    actions = [make_active, make_inactive]
+
+
+@admin.register(models.ContactWorkingHours)
+class ContactWorkingHoursAdmin(admin.ModelAdmin):
+    list_display = ("weekdays", "saturday", "sunday", "is_active")
+    list_filter = ("is_active",)
+
+    def has_add_permission(self, request):
+        if models.ContactWorkingHours.objects.exists():
+            return False
+        return super().has_add_permission(request)
+
+
+@admin.register(models.ContactTopic)
+class ContactTopicAdmin(admin.ModelAdmin):
+    prepopulated_fields = {"slug": ("name",)}
+    search_fields = ("name", "slug")
+    ordering = ("name",)
+
+
+@admin.register(models.ContactRequest)
+class ContactRequestAdmin(admin.ModelAdmin):
+    list_display = ("name", "phone", "topic", "created_at")
+    readonly_fields = ("created_at", "ip", "user_agent")
+    list_filter = ("topic", "created_at")
+    search_fields = ("name", "phone", "email")

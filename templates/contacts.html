@@ -23,7 +23,13 @@
                                 <div class="contact-icon">📍</div>
                                 <div class="contact-text">
                                     <h3>Адрес</h3>
-                                    <p>Республика Казахстан<br>г. Алматы, ул. Абая 150<br>БЦ "Алатау", офис 304</p>
+                                    {% for a in addresses %}
+                                        <p>
+                                            {% if a.title %}{{ a.title }}<br>{% endif %}
+                                            {% if a.city %}{{ a.city }}<br>{% endif %}
+                                            {{ a.address|linebreaksbr }}
+                                        </p>
+                                    {% endfor %}
                                 </div>
                             </div>
 
@@ -31,8 +37,13 @@
                                 <div class="contact-icon">📞</div>
                                 <div class="contact-text">
                                     <h3>Телефон</h3>
-                                    <p><a href="tel:+77271234567">+7 (727) 123-45-67</a><br>
-                                    <a href="tel:+77051234567">+7 (705) 123-45-67</a></p>
+                                    {% if phones %}
+                                    <p>
+                                        {% for p in phones %}
+                                            {% if p.label %}{{ p.label }}: {% endif %}<a href="tel:{{ p.phone }}">{{ p.phone }}</a>{% if not forloop.last %}<br>{% endif %}
+                                        {% endfor %}
+                                    </p>
+                                    {% endif %}
                                 </div>
                             </div>
 
@@ -40,8 +51,13 @@
                                 <div class="contact-icon">✉️</div>
                                 <div class="contact-text">
                                     <h3>Email</h3>
-                                    <p><a href="mailto:info@samrukmebel.kz">info@samrukmebel.kz</a><br>
-                                    <a href="mailto:orders@samrukmebel.kz">orders@samrukmebel.kz</a></p>
+                                    {% if emails %}
+                                    <p>
+                                        {% for e in emails %}
+                                            {% if e.label %}{{ e.label }}: {% endif %}<a href="mailto:{{ e.email }}">{{ e.email }}</a>{% if not forloop.last %}<br>{% endif %}
+                                        {% endfor %}
+                                    </p>
+                                    {% endif %}
                                 </div>
                             </div>
 
@@ -49,9 +65,13 @@
                                 <div class="contact-icon">🕒</div>
                                 <div class="contact-text">
                                     <h3>Время работы</h3>
-                                    <p>Понедельник - Пятница: 9:00 - 18:00<br>
-                                    Суббота: 10:00 - 16:00<br>
-                                    Воскресенье: выходной</p>
+                                    {% if hours %}
+                                    <p>
+                                        {{ hours.weekdays }}<br>
+                                        {{ hours.saturday }}<br>
+                                        {{ hours.sunday }}{% if hours.note %}<br>{{ hours.note }}{% endif %}
+                                    </p>
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>
@@ -80,41 +100,47 @@
                         <h2>Оставить заявку</h2>
                         <p>Заполните форму, и мы свяжемся с вами в ближайшее время</p>
                         
-                        <form id="contactForm" onsubmit="submitForm(event)">
+                        <form id="contactForm" method="post" {% if form_success %}style="display: none;"{% endif %}>
+                            {% csrf_token %}
+                            {% if form_errors %}
+                                <div style="color: #d9534f; margin-bottom: 16px;">
+                                    {% for error in form_errors %}
+                                        <p style="margin: 0;">{{ error }}</p>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
                             <div class="form-group">
                                 <label for="name">Ваше имя *</label>
-                                <input type="text" id="name" name="name" required>
+                                <input type="text" id="name" name="name" required value="{{ form_data.name|default_if_none:'' }}">
                             </div>
 
                             <div class="form-group">
                                 <label for="phone">Телефон *</label>
-                                <input type="tel" id="phone" name="phone" required placeholder="+7 (___) ___-__-__">
+                                <input type="tel" id="phone" name="phone" required placeholder="+7 (___) ___-__-__" value="{{ form_data.phone|default_if_none:'' }}">
                             </div>
 
                             <div class="form-group">
                                 <label for="email">Email</label>
-                                <input type="email" id="email" name="email" placeholder="example@email.com">
+                                <input type="email" id="email" name="email" placeholder="example@email.com" value="{{ form_data.email|default_if_none:'' }}">
                             </div>
 
                             <div class="form-group">
                                 <label for="subject">Тема обращения</label>
-                                <select id="subject" name="subject">
-                                    <option value="consultation">Консультация по мебели</option>
-                                    <option value="order">Заказ мебели</option>
-                                    <option value="delivery">Вопросы по доставке</option>
-                                    <option value="warranty">Гарантийные вопросы</option>
-                                    <option value="other">Другое</option>
+                                <select id="subject" name="topic">
+                                    {% for t in topics %}
+                                        <option value="{{ t.slug }}" {% if form_data.topic == t.slug %}selected{% endif %}>{{ t.name }}</option>
+                                    {% endfor %}
                                 </select>
                             </div>
 
                             <div class="form-group">
                                 <label for="message">Сообщение *</label>
-                                <textarea id="message" name="message" rows="5" required placeholder="Расскажите, что вас интересует..."></textarea>
+                                <textarea id="message" name="message" rows="5" required placeholder="Расскажите, что вас интересует...">{{ form_data.message|default_if_none:'' }}</textarea>
                             </div>
 
                             <div class="form-group">
                                 <label class="checkbox-label">
-                                    <input type="checkbox" required>
+                                    <input type="checkbox" name="consent" value="1" required {% if form_data.consent %}checked{% endif %}>
                                     <span class="checkmark"></span>
                                     Согласие на обработку персональных данных *
                                 </label>
@@ -123,7 +149,7 @@
                             <button type="submit" class="btn btn-primary">Отправить заявку</button>
                         </form>
 
-                        <div class="form-success" id="formSuccess" style="display: none;">
+                        <div class="form-success" id="formSuccess" {% if not form_success %}style="display: none;"{% endif %}>
                             <h3>Спасибо за обращение!</h3>
                             <p>Ваша заявка успешно отправлена. Мы свяжемся с вами в ближайшее время.</p>
                         </div>

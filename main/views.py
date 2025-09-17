@@ -4,9 +4,13 @@ from django.core.paginator import Paginator
 from django.db.models import Count, Q, Prefetch
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
+from django.utils import timezone
+from django.utils.html import escape
 
 from rest_framework import viewsets, serializers
 from django_filters import rest_framework as filters
+
+from utils.telegram import send_telegram_message
 
 from .models import (
     CarouselItem,
@@ -18,6 +22,12 @@ from .models import (
     TeamMember,
     Value,
     CompanyInfo,
+    ContactAddress,
+    ContactPhone,
+    ContactEmail,
+    ContactWorkingHours,
+    ContactTopic,
+    ContactRequest,
 )
 
 
@@ -197,10 +207,132 @@ def about(request):
     return render(request, "about.html", context)
 
 
-def contact(request):
+def _get_client_ip(request):
+    forwarded = request.META.get("HTTP_X_FORWARDED_FOR")
+    if forwarded:
+        return forwarded.split(",")[0].strip()
+    return request.META.get("REMOTE_ADDR")
 
 
-    return render(request, "contacts.html", {'active_page': 'contact'})
+def contact_view(request):
+    addresses = (
+        ContactAddress.objects.filter(is_active=True)
+        .order_by("order", "id")
+        .only("title", "city", "address", "order", "is_active")
+    )
+    phones = (
+        ContactPhone.objects.filter(is_active=True)
+        .order_by("order", "id")
+        .only("label", "phone", "order", "is_active")
+    )
+    emails = (
+        ContactEmail.objects.filter(is_active=True)
+        .order_by("order", "id")
+        .only("label", "email", "order", "is_active")
+    )
+    hours = (
+        ContactWorkingHours.objects.filter(is_active=True)
+        .only("weekdays", "saturday", "sunday", "note", "is_active")
+        .first()
+    )
+    topics = ContactTopic.objects.all().order_by("name").only("name", "slug")
+
+    form_data = {
+        "name": "",
+        "phone": "",
+        "email": "",
+        "topic": "",
+        "message": "",
+        "consent": False,
+    }
+    form_errors = []
+    form_success = False
+
+    if request.method == "POST":
+        name = request.POST.get("name", "").strip()
+        phone = request.POST.get("phone", "").strip()
+        email = request.POST.get("email", "").strip()
+        topic_value = request.POST.get("topic", "").strip()
+        message_text = request.POST.get("message", "").strip()
+        consent_value = request.POST.get("consent")
+
+        form_data.update(
+            {
+                "name": name,
+                "phone": phone,
+                "email": email,
+                "topic": topic_value,
+                "message": message_text,
+                "consent": bool(consent_value),
+            }
+        )
+
+        if not name:
+            form_errors.append("Укажите имя.")
+        if not phone:
+            form_errors.append("Укажите телефон.")
+        if not message_text:
+            form_errors.append("Введите сообщение.")
+        if not consent_value:
+            form_errors.append("Необходимо согласие на обработку данных.")
+
+        topic = None
+        if topic_value:
+            topic = ContactTopic.objects.filter(slug=topic_value).only("id", "name", "slug").first()
+            if topic is None:
+                topic = ContactTopic.objects.filter(pk=topic_value).only("id", "name", "slug").first()
+
+        if not form_errors:
+            contact_request = ContactRequest.objects.create(
+                name=name,
+                phone=phone,
+                email=email,
+                topic=topic,
+                message=message_text,
+                consent=bool(consent_value),
+                ip=_get_client_ip(request),
+                user_agent=request.META.get("HTTP_USER_AGENT", ""),
+            )
+
+            timestamp = timezone.localtime(contact_request.created_at).strftime("%d.%m.%Y %H:%M")
+            topic_name = topic.name if topic else "Не выбрана"
+            email_display = email or "—"
+            telegram_text = "\n".join(
+                [
+                    "<b>Новая заявка</b>",
+                    f"Имя: {escape(name)}",
+                    f"Телефон: {escape(phone)}",
+                    f"Email: {escape(email_display)}",
+                    f"Тема: {escape(topic_name)}",
+                    f"Сообщение: {escape(message_text)}",
+                    f"Время: {timestamp}",
+                ]
+            )
+            send_telegram_message(telegram_text)
+
+            form_success = True
+            form_data = {
+                "name": "",
+                "phone": "",
+                "email": "",
+                "topic": "",
+                "message": "",
+                "consent": False,
+            }
+
+    context = {
+        "addresses": addresses,
+        "phones": phones,
+        "emails": emails,
+        "hours": hours,
+        "topics": topics,
+        "form_data": form_data,
+        "form_errors": form_errors,
+        "form_success": form_success,
+        "active_page": "contact",
+    }
+    status = 200 if not form_errors else 400
+    return render(request, "contacts.html", context, status=status)
 
 # ----------------- API ViewSets -----------------
 
