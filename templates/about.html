@@ -31,7 +31,7 @@
                     <div class="stats-section">
                         {% for m in metrics %}
                         <div class="stat-card">
-                            <div class="stat-number">{{ m.value }}{{ m.suffix }}</div>
+                            <div class="stat-number">+{{ m.value }}{{ m.suffix }}</div>
                             <div class="stat-label">{{ m.name }}</div>
                         </div>
                         {% endfor %}
