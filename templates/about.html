@@ -73,10 +73,6 @@
                 <!-- Mission Section -->
                 <div class="mission-section">
                     <div class="mission-grid">
-                        <div class="mission-item">
-                            <h3>Наша миссия</h3>
-                            {% if company %}<p>{{ company.mission_text }}</p>{% endif %}
-                        </div>
                         {% for v in values %}
                         <div class="mission-item">
                             <h3>{{ v.title }}</h3>
