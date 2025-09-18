@@ -121,21 +121,21 @@ class ProductFilter(filters.FilterSet):
 
 def index(request):
     carousel = CarouselItem.objects.filter(is_active=True).order_by("ordering")
-    products = (
-        Product.objects.filter(is_active=True)
+    images_prefetch = Prefetch(
+        "images",
+        queryset=ProductImage.objects.order_by("-is_primary", "ordering", "id"),
+    )
+    main_products = (
+        Product.objects.filter(is_active=True, is_main=True)
         .select_related("category")
-        .prefetch_related(
-            Prefetch(
-                "images",
-                queryset=ProductImage.objects.order_by("-is_primary", "ordering", "id"),
-            )
-        )[:4]
+        .prefetch_related(images_prefetch)
+        .order_by("-created_at")[:8]
     )
     metrics = Metric.objects.filter(is_active=True).order_by("ordering")[:3]
     company = CompanyInfo.objects.first()
     context = {
         "carousel": carousel,
-        "products": products,
+        "main_products": main_products,
         "metrics": metrics,
         "company": company,
         "active_page": "home",
@@ -144,15 +144,15 @@ def index(request):
 
 
 def catalog(request):
+    images_prefetch = Prefetch(
+        "images",
+        queryset=ProductImage.objects.order_by("-is_primary", "ordering", "id"),
+    )
     qs = (
         Product.objects.filter(is_active=True)
         .select_related("category")
-        .prefetch_related(
-            Prefetch(
-                "images",
-                queryset=ProductImage.objects.order_by("-is_primary", "ordering", "id"),
-            )
-        )
+        .prefetch_related(images_prefetch)
+        .order_by("-created_at")
     )
     categories = Category.objects.all()
     category_slug = request.GET.get("category")
@@ -166,12 +166,18 @@ def catalog(request):
     paginator = Paginator(qs, 12)
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
+    query_params = request.GET.copy()
+    query_params.pop("page", None)
+    query_string = query_params.urlencode()
     context = {
         "categories": categories,
         "page_obj": page_obj,
         "products": page_obj.object_list,
         "active_category": active_category,
-        'active_page': 'catalog',
+        "active_page": "catalog",
+        "q": q,
+        "query_string": query_string,
+        "category_slug": category_slug,
     }
     return render(request, "catalog.html", context)
 

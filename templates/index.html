@@ -50,22 +50,23 @@
                 </div>
 
                 <div class="products-grid">
-                    {% for product in products %}
-                    <a href="{% url 'product_detail' product.slug %}" class="product-card" data-category="{{ product.category.name }}">
+                    {% for p in main_products %}
+                    <a href="{% url 'product_detail' p.slug %}" class="product-card" data-category="{{ p.category.name }}">
                         <div class="product-image">
-                            {% with img=product.images.first %}
-                            {% if img %}<img src="{{ img.image.url }}" alt="{{ img.alt_text|default:product.name }}">{% endif %}
+                            {% with img=p.images.all.0 %}
+                                {% if img %}<img src="{{ img.image.url }}" alt="{{ p.name }}">{% else %}
+                                <img src="/static/placeholder.jpg" alt="{{ p.name }}">
+                                {% endif %}
                             {% endwith %}
                         </div>
                         <div class="product-info">
-                            <div class="product-category">{{ product.category.name }}</div>
-                            <h3>{{ product.name }}</h3>
-                            <div class="product-link">
-                                <span>Подробнее</span>
-                                <span class="arrow">→</span>
-                            </div>
+                            <div class="product-category">{{ p.category.name }}</div>
+                            <h3>{{ p.name }}</h3>
+                            <div class="product-link"><span>Подробнее</span><span class="arrow">→</span></div>
                         </div>
                     </a>
+                    {% empty %}
+                    <p class="no-products">Товары скоро появятся.</p>
                     {% endfor %}
                 </div>
 
