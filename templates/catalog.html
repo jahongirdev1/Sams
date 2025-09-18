@@ -16,28 +16,27 @@
             <div class="container">
                 <!-- Category Filters -->
                 <div class="category-filters">
-                    <button class="filter-btn {% if not active_category %}active{% endif %}" onclick="filterProducts('all')">Все</button>
+                    <button class="filter-btn {% if not active_category %}active{% endif %}" onclick="filterProducts('all'); window.location.href='{% url 'catalog' %}{% if q %}?q={{ q|urlencode }}{% endif %}';">Все</button>
                     {% for category in categories %}
-                    <button class="filter-btn {% if active_category and active_category.id == category.id %}active{% endif %}" onclick="filterProducts('{{ category.name }}')">{{ category.name }}</button>
+                    <button class="filter-btn {% if active_category and active_category.id == category.id %}active{% endif %}" onclick="filterProducts('{{ category.name }}'); window.location.href='{% url 'catalog' %}?category={{ category.slug }}{% if q %}&q={{ q|urlencode }}{% endif %}';">{{ category.name }}</button>
                     {% endfor %}
                 </div>
 
                 <!-- Products Grid -->
                 <div class="products-grid" id="productsGrid">
-                    {% for product in products %}
-                    <a href="{% url 'product_detail' product.slug %}" class="product-card" data-category="{{ product.category.name }}">
+                    {% for p in products %}
+                    <a href="{% url 'product_detail' p.slug %}" class="product-card" data-category="{{ p.category.name }}">
                         <div class="product-image">
-                            {% with img=product.images.first %}
-                            {% if img %}<img src="{{ img.image.url }}" alt="{{ img.alt_text|default:product.name }}">{% endif %}
+                            {% with img=p.images.all.0 %}
+                                {% if img %}<img src="{{ img.image.url }}" alt="{{ p.name }}">{% else %}
+                                <img src="/static/placeholder.jpg" alt="{{ p.name }}">
+                                {% endif %}
                             {% endwith %}
                         </div>
                         <div class="product-info">
-                            <div class="product-category">{{ product.category.name }}</div>
-                            <h3>{{ product.name }}</h3>
-                            <div class="product-link">
-                                <span>Подробнее</span>
-                                <span class="arrow">→</span>
-                            </div>
+                            <div class="product-category">{{ p.category.name }}</div>
+                            <h3>{{ p.name }}</h3>
+                            <div class="product-link"><span>Подробнее</span><span class="arrow">→</span></div>
                         </div>
                     </a>
                     {% endfor %}
@@ -46,6 +45,24 @@
                 <div class="no-products" id="noProducts" {% if products %}style="display: none;"{% endif %}>
                     <p>Товары данной категории не найдены.</p>
                 </div>
+
+                {% if page_obj.has_other_pages %}
+                <div class="pagination">
+                    {% if page_obj.has_previous %}
+                    <a class="page-link prev" href="{% if query_string %}?{{ query_string }}&page={{ page_obj.previous_page_number }}{% else %}?page={{ page_obj.previous_page_number }}{% endif %}">Назад</a>
+                    {% endif %}
+                    {% for num in page_obj.paginator.page_range %}
+                        {% if num == page_obj.number %}
+                        <span class="page-link active">{{ num }}</span>
+                        {% else %}
+                        <a class="page-link" href="{% if query_string %}?{{ query_string }}&page={{ num }}{% else %}?page={{ num }}{% endif %}">{{ num }}</a>
+                        {% endif %}
+                    {% endfor %}
+                    {% if page_obj.has_next %}
+                    <a class="page-link next" href="{% if query_string %}?{{ query_string }}&page={{ page_obj.next_page_number }}{% else %}?page={{ page_obj.next_page_number }}{% endif %}">Вперед</a>
+                    {% endif %}
+                </div>
+                {% endif %}
             </div>
         </section>
     </main>

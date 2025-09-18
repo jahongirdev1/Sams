@@ -58,6 +58,7 @@ class Product(models.Model):
     description = models.TextField(_("Описание"), blank=True)
     price = models.DecimalField(_("Цена"), max_digits=10, decimal_places=2, default=0)
     is_active = models.BooleanField(_("Активен"), default=True, db_index=True)
+    is_main = models.BooleanField(_("Показывать на главной"), default=False, db_index=True)
     category = models.ForeignKey(
         Category,
         on_delete=models.PROTECT,
