@@ -591,6 +591,47 @@ body {
 
 .category-filters { display: contents; }
 
+/* Горизонтальная карусель в ОДНУ строку */
+.category-row {
+    display: flex;
+    flex-wrap: nowrap;          /* ключ: запретить перенос */
+    align-items: center;
+    gap: 12px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x proximity;
+    width: 100%;
+    max-width: 100%;
+    min-height: 48px;           /* высота ряда под кнопки */
+    padding-bottom: 8px;        /* место под (тонкий) скроллбар */
+    overscroll-behavior-x: contain;
+    /* защищаемся от переносов изнутри */
+    white-space: nowrap;
+    min-width: 0;               /* не раздуваться шире контейнера */
+}
+
+/* Кнопки не сжимаются и не переносятся */
+.category-row .filter-btn {
+    flex: 0 0 auto;             /* фиксированный размер, только скролл */
+    display: inline-flex;       /* чтобы white-space работал ожидаемо */
+    scroll-snap-align: start;
+    white-space: nowrap;
+    /* на случай глобальных margin у .filter-btn — используем только gap */
+    margin: 0;
+}
+
+/* косметика скроллбара (опционально) */
+.category-row::-webkit-scrollbar { height: 6px; }
+.category-row::-webkit-scrollbar-track { background: transparent; }
+.category-row::-webkit-scrollbar-thumb {
+    background: hsl(30 12% 88%);
+    border-radius: 4px;
+}
+
+/* если где-то остался старый блок .category-фilters, чтобы не ломал сетку */
+.category-filters { display: contents; }
+
 .no-products {
     text-align: center;
     padding: 60px 0;

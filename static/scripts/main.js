@@ -81,36 +81,26 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function makeHorizontalScroll(el) {
     if (!el) return;
-    let isDown = false;
-    let startX = 0;
-    let scrollLeft = 0;
+    let isDown = false, startX = 0, scrollLeft = 0;
 
-    // Drag to scroll (мышью)
+    // Drag-to-scroll
     el.addEventListener('mousedown', (e) => {
         isDown = true;
-        startX = e.pageX - el.offsetLeft;
+        startX = e.pageX - el.getBoundingClientRect().left;
         scrollLeft = el.scrollLeft;
         el.classList.add('dragging');
     });
-    window.addEventListener('mouseup', () => {
-        isDown = false;
-        el.classList.remove('dragging');
-    });
-    el.addEventListener('mouseleave', () => {
-        isDown = false;
-        el.classList.remove('dragging');
-    });
+    window.addEventListener('mouseup', () => { isDown = false; el.classList.remove('dragging'); });
+    el.addEventListener('mouseleave', () => { isDown = false; el.classList.remove('dragging'); });
     el.addEventListener('mousemove', (e) => {
         if (!isDown) return;
         e.preventDefault();
-        const x = e.pageX - el.offsetLeft;
-        const walk = (x - startX);
-        el.scrollLeft = scrollLeft - walk;
+        const x = e.pageX - el.getBoundingClientRect().left;
+        el.scrollLeft = scrollLeft - (x - startX);
     });
 
-    // Вертикальное колесо → горизонтальный скролл
+    // Вертикальное колесо -> горизонтальный скролл
     el.addEventListener('wheel', (e) => {
-        // если пользователь крутит вертикально — скроллим вбок
         if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
             el.scrollLeft += e.deltaY;
             e.preventDefault();
@@ -118,9 +108,8 @@ function makeHorizontalScroll(el) {
     }, { passive: false });
 }
 
-document.addEventListener('DOMContentLoaded', function () {
-    const scroller = document.getElementById('catScroller');
-    makeHorizontalScroll(scroller);
+document.addEventListener('DOMContentLoaded', () => {
+    makeHorizontalScroll(document.getElementById('catRow'));
 });
 
 // Catalog filtering functionality
