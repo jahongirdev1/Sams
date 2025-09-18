@@ -61,13 +61,13 @@
 
                     <div class="team-grid">
                         {% for m in team %}
-                        <article class="team-card">
+                        <div class="team-card">
                             <div class="team-photo">
                                 <img src="/media/{{ m.photo }}" alt="{{ m.full_name }}">
                             </div>
                             <h3 class="team-name">{{ m.full_name }}</h3>
                             <p class="team-role">{{ m.role }}</p>
-                        </article>
+                        </div>
                         {% empty %}
                         <p class="team-empty">Команда будет опубликована позже.</p>
                         {% endfor %}
