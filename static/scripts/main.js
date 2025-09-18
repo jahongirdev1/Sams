@@ -79,6 +79,50 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
+function makeHorizontalScroll(el) {
+    if (!el) return;
+    let isDown = false;
+    let startX = 0;
+    let scrollLeft = 0;
+
+    // Drag to scroll (мышью)
+    el.addEventListener('mousedown', (e) => {
+        isDown = true;
+        startX = e.pageX - el.offsetLeft;
+        scrollLeft = el.scrollLeft;
+        el.classList.add('dragging');
+    });
+    window.addEventListener('mouseup', () => {
+        isDown = false;
+        el.classList.remove('dragging');
+    });
+    el.addEventListener('mouseleave', () => {
+        isDown = false;
+        el.classList.remove('dragging');
+    });
+    el.addEventListener('mousemove', (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - el.offsetLeft;
+        const walk = (x - startX);
+        el.scrollLeft = scrollLeft - walk;
+    });
+
+    // Вертикальное колесо → горизонтальный скролл
+    el.addEventListener('wheel', (e) => {
+        // если пользователь крутит вертикально — скроллим вбок
+        if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+            el.scrollLeft += e.deltaY;
+            e.preventDefault();
+        }
+    }, { passive: false });
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    const scroller = document.getElementById('catScroller');
+    makeHorizontalScroll(scroller);
+});
+
 // Catalog filtering functionality
 function filterProducts(category) {
     const products = document.querySelectorAll('.product-card[data-category]');
