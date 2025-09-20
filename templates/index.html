@@ -28,15 +28,34 @@
                 </div>
 
                 <div class="video-container">
-                    <div class="video-placeholder">
-                        <div class="play-button">
-                            <div class="play-icon"></div>
+                    {% if home_video %}
+                        {% if home_video.file %}
+                            <video class="video-player" controls preload="metadata" playsinline>
+                                <source src="{{ home_video.file.url }}" type="video/mp4">
+                                Ваш браузер не поддерживает видео.
+                            </video>
+                        {% elif home_video.youtube_embed %}
+                            <div class="video-embed">
+                                <iframe
+                                  src="{{ home_video.youtube_embed }}"
+                                  title="{{ home_video.title|default:'Видео' }}"
+                                  frameborder="0"
+                                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                  allowfullscreen
+                                  referrerpolicy="strict-origin-when-cross-origin"></iframe>
+                            </div>
+                        {% endif %}
+                    {% else %}
+                        <div class="video-placeholder">
+                            <div class="play-button">
+                                <div class="play-icon"></div>
+                            </div>
+                            <div class="video-info">
+                                <h3>Видео о нашей компании</h3>
+                                <p>Производство • Качество • Европейский дизайн</p>
+                            </div>
                         </div>
-                        <div class="video-info">
-                            <h3>Видео о нашей компании</h3>
-                            <p>Производство • Качество • Европейский дизайн</p>
-                        </div>
-                    </div>
+                    {% endif %}
                 </div>
             </div>
         </section>

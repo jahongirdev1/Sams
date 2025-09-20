@@ -389,6 +389,16 @@ a:focus {
     margin: 0 auto;
 }
 
+.video-player,
+.video-embed iframe {
+    width: 100%;
+    max-width: 100%;
+    aspect-ratio: 16/9;
+    border-radius: 12px;
+    display: block;
+    background: #000;
+}
+
 .video-placeholder {
     position: relative;
     background: linear-gradient(135deg, rgba(217, 170, 92, 0.3), rgba(138, 87, 56, 0.18));

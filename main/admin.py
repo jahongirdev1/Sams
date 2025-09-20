@@ -93,6 +93,14 @@ class ValueAdmin(admin.ModelAdmin):
     actions = [make_active, make_inactive]
 
 
+@admin.register(models.Video)
+class VideoAdmin(admin.ModelAdmin):
+    list_display = ("id", "title", "page", "is_active", "order", "created_at")
+    list_filter = ("page", "is_active")
+    search_fields = ("title", "youtube_url")
+    ordering = ("order", "-created_at")
+
+
 @admin.register(models.CompanyInfo)
 class CompanyInfoAdmin(admin.ModelAdmin):
     def has_add_permission(self, request):
