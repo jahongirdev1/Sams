@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import re
+
 from django.db import models
 from django.utils.text import slugify
 from django.core.exceptions import ValidationError
@@ -178,6 +180,48 @@ class Value(models.Model):
         ordering = ["ordering", "id"]
 
 
+class Video(models.Model):
+    class Page(models.TextChoices):
+        HOME = "home", _("Главная")
+        ABOUT = "about", _("О нас")
+
+    title = models.CharField(_("Заголовок"), max_length=200, blank=True)
+    page = models.CharField(_("Страница"), max_length=10, choices=Page.choices)
+    file = models.FileField(_("Видео-файл"), upload_to="videos/", blank=True, null=True)
+    youtube_url = models.URLField(_("YouTube ссылка"), blank=True)
+    is_active = models.BooleanField(_("Активно"), default=True)
+    order = models.PositiveIntegerField(_("Порядок"), default=0)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name = _("Видео")
+        verbose_name_plural = _("Видео")
+        ordering = ("order", "-created_at")
+
+    def __str__(self) -> str:
+        base = self.title or dict(self.Page.choices).get(self.page, "Video")
+        return f"{base}"
+
+    def clean(self):
+        if not self.file and not self.youtube_url:
+            raise ValidationError(_("Заполните видеофайл или ссылку YouTube."))
+        if self.youtube_url and "youtu" not in self.youtube_url:
+            raise ValidationError(_("Поддерживаются только ссылки YouTube."))
+        # Можно разрешить указание и файла, и ссылки, но если нужно строго одно,
+        # можно раскомментировать код ниже.
+        # if self.file and self.youtube_url:
+        #     raise ValidationError(_("Укажите либо файл, либо ссылку, но не оба."))
+
+    @property
+    def youtube_embed(self) -> str | None:
+        if not self.youtube_url:
+            return None
+        url = self.youtube_url.strip()
+        match = re.search(r"(?:youtu\.be/|v=)([\w\-]{11})", url)
+        video_id = match.group(1) if match else None
+        return f"https://www.youtube.com/embed/{video_id}" if video_id else None
+
+
 class CompanyInfo(models.Model):
     mission_text = models.TextField(_("Миссия"), blank=True)
     about_text = models.TextField(_("О компании"), blank=True)
@@ -193,7 +237,7 @@ class CompanyInfo(models.Model):
         verbose_name_plural = _("Информация о компании")
 
     def __str__(self) -> str:
-        return _("Информация о компании")
+        return str(_("Информация о компании"))
 
 
 # --- Контакты ---

@@ -21,6 +21,7 @@ from .models import (
     Metric,
     TeamMember,
     Value,
+    Video,
     CompanyInfo,
     SocialMap,
     ContactAddress,
@@ -132,11 +133,17 @@ def index(request):
         .order_by("-created_at")[:8]
     )
     metrics = Metric.objects.filter(is_active=True).order_by("ordering")[:3]
+    home_video = (
+        Video.objects.filter(page=Video.Page.HOME, is_active=True)
+        .order_by("order", "-created_at")
+        .first()
+    )
     company = CompanyInfo.objects.first()
     context = {
         "carousel": carousel,
         "main_products": main_products,
         "metrics": metrics,
+        "home_video": home_video,
         "company": company,
         "active_page": "home",
     }
@@ -202,12 +209,18 @@ def about(request):
     metrics = Metric.objects.filter(is_active=True).order_by("ordering")
     team = TeamMember.objects.filter(is_active=True).order_by("ordering")
     values = Value.objects.filter(is_active=True).order_by("ordering")
+    about_video = (
+        Video.objects.filter(page=Video.Page.ABOUT, is_active=True)
+        .order_by("order", "-created_at")
+        .first()
+    )
     company = CompanyInfo.objects.first()
     context = {
         "advantages": advantages,
         "metrics": metrics,
         "team": team,
         "values": values,
+        "about_video": about_video,
         "company": company,
         'active_page': 'about'
     }

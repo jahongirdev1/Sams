@@ -42,15 +42,34 @@
                 <div class="company-video">
                     <h2>Видео о нашей компании</h2>
                     <div class="video-container">
-                        <div class="video-placeholder">
-                            <div class="play-button">
-                                <div class="play-icon"></div>
+                        {% if about_video %}
+                            {% if about_video.file %}
+                                <video class="video-player" controls preload="metadata" playsinline>
+                                    <source src="{{ about_video.file.url }}" type="video/mp4">
+                                    Ваш браузер не поддерживает видео.
+                                </video>
+                            {% elif about_video.youtube_embed %}
+                                <div class="video-embed">
+                                    <iframe
+                                      src="{{ about_video.youtube_embed }}"
+                                      title="{{ about_video.title|default:'Видео' }}"
+                                      frameborder="0"
+                                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                      allowfullscreen
+                                      referrerpolicy="strict-origin-when-cross-origin"></iframe>
+                                </div>
+                            {% endif %}
+                        {% else %}
+                            <div class="video-placeholder">
+                                <div class="play-button">
+                                    <div class="play-icon"></div>
+                                </div>
+                                <div class="video-info">
+                                    <h3>Производство Samruk Mebel</h3>
+                                    <p>Узнайте о наших технологиях производства и контроле качества</p>
+                                </div>
                             </div>
-                            <div class="video-info">
-                                <h3>Производство Samruk Mebel</h3>
-                                <p>Узнайте о наших технологиях производства и контроле качества</p>
-                            </div>
-                        </div>
+                        {% endif %}
                     </div>
                 </div>
 
