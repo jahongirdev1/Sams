@@ -9,11 +9,30 @@ html {
     scroll-behavior: smooth;
 }
 
+:root {
+    --brand-gold: #d9aa5c;
+    --brand-brown: #8a5738;
+    --bg: #f6ede2;
+    --text-main: #3f2c21;
+    --text-muted: #7a5b45;
+    --border: #e6d5c4;
+}
+
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
     line-height: 1.6;
-    color: hsl(25, 8%, 20%);
-    background-color: hsl(30, 15%, 98%);
+    color: var(--text-main);
+    background-color: var(--bg);
+}
+
+a {
+    color: var(--brand-brown);
+    transition: color 0.3s ease;
+}
+
+a:hover,
+a:focus {
+    color: var(--brand-gold);
 }
 
 /* Container */
@@ -25,8 +44,8 @@ body {
 
 /* Header */
 .header {
-    background: hsl(0, 0%, 100%);
-    box-shadow: 0 2px 12px hsl(25, 15%, 85%, 0.15);
+    background: var(--bg);
+    box-shadow: 0 2px 16px rgba(138, 87, 56, 0.08);
     position: sticky;
     top: 0;
     z-index: 1000;
@@ -37,24 +56,46 @@ body {
     align-items: center;
     justify-content: space-between;
     height: 64px;
+    gap: 24px;
 }
 
 .logo {
     display: flex;
     align-items: center;
     text-decoration: none;
-    gap: 8px;
+    gap: 12px;
+    color: inherit;
+}
+
+.site-logo {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    background: linear-gradient(135deg, rgba(217, 170, 92, 0.35), rgba(138, 87, 56, 0.15));
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.logo-text {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    line-height: 1;
 }
 
 .logo-main {
     font-size: 24px;
     font-weight: bold;
-    color: hsl(25, 25%, 35%);
+    color: var(--brand-brown);
 }
 
 .logo-accent {
     font-size: 20px;
-    color: hsl(45, 35%, 70%);
+    color: var(--brand-gold);
 }
 
 .nav-desktop {
@@ -64,19 +105,20 @@ body {
 
 .nav-link {
     text-decoration: none;
-    color: hsl(25, 6%, 45%);
+    color: var(--text-muted);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     padding-bottom: 4px;
 }
 
 .nav-link:hover,
+.nav-link:focus,
 .nav-link.active {
-    color: hsl(25, 25%, 35%);
+    color: var(--brand-brown);
 }
 
 .nav-link.active {
     font-weight: 500;
-    border-bottom: 2px solid hsl(25, 25%, 35%);
+    border-bottom: 2px solid var(--brand-gold);
 }
 
 .mobile-menu-btn {
@@ -85,13 +127,14 @@ body {
     border: none;
     cursor: pointer;
     padding: 8px;
+    color: var(--brand-brown);
 }
 
 .hamburger {
     display: block;
     width: 20px;
     height: 2px;
-    background: hsl(25, 25%, 35%);
+    background: var(--brand-brown);
     position: relative;
 }
 
@@ -101,7 +144,7 @@ body {
     position: absolute;
     width: 20px;
     height: 2px;
-    background: hsl(25, 25%, 35%);
+    background: var(--brand-brown);
     transition: all 0.3s;
 }
 
@@ -116,20 +159,22 @@ body {
 .nav-mobile {
     display: none;
     padding: 16px 0;
-    border-top: 1px solid hsl(30, 12%, 88%);
+    border-top: 1px solid var(--border);
+    background: var(--bg);
 }
 
 .nav-link-mobile {
     display: block;
     padding: 8px 16px;
     text-decoration: none;
-    color: hsl(25, 6%, 45%);
+    color: var(--text-muted);
     transition: all 0.3s;
 }
 
-.nav-link-mobile:hover {
-    background: hsl(30, 10%, 92%);
-    color: hsl(25, 25%, 35%);
+.nav-link-mobile:hover,
+.nav-link-mobile:focus {
+    background: rgba(217, 170, 92, 0.15);
+    color: var(--brand-brown);
 }
 
 /* Buttons */
@@ -145,27 +190,34 @@ body {
     cursor: pointer;
     border: none;
     font-size: 16px;
+    color: var(--text-main);
 }
 
 .btn-primary {
-    background: hsl(25, 25%, 35%);
-    color: hsl(30, 15%, 98%);
+    background: var(--brand-brown);
+    color: #fffaf3;
 }
 
 .btn-primary:hover {
-    background: hsl(25, 25%, 30%);
+    background: var(--brand-gold);
+    color: var(--text-main);
     transform: translateY(-1px);
 }
 
 .btn-outline {
     background: transparent;
-    color: hsl(25, 25%, 35%);
-    border: 2px solid hsl(25, 25%, 35%);
+    color: var(--brand-brown);
+    border: 2px solid var(--brand-brown);
 }
 
 .btn-outline:hover {
-    background: hsl(25, 25%, 35%);
-    color: hsl(30, 15%, 98%);
+    background: var(--brand-brown);
+    color: #fffaf3;
+}
+
+.btn:focus-visible {
+    outline: 3px solid rgba(217, 170, 92, 0.4);
+    outline-offset: 2px;
 }
 
 /* Hero Section */
@@ -297,13 +349,13 @@ body {
 .page-hero h1 {
     font-size: 3rem;
     font-weight: bold;
-    color: hsl(25, 25%, 35%);
+    color: var(--brand-brown);
     margin-bottom: 16px;
 }
 
 .page-hero p {
     font-size: 1.2rem;
-    color: hsl(25, 6%, 45%);
+    color: var(--text-muted);
     max-width: 600px;
     margin: 0 auto;
 }
@@ -322,12 +374,12 @@ body {
 .section-header h2 {
     font-size: 2.5rem;
     font-weight: bold;
-    color: hsl(25, 25%, 35%);
+    color: var(--brand-brown);
     margin-bottom: 16px;
 }
 
 .section-header p {
-    color: hsl(25, 6%, 45%);
+    color: var(--text-muted);
     max-width: 600px;
     margin: 0 auto;
 }
@@ -339,21 +391,21 @@ body {
 
 .video-placeholder {
     position: relative;
-    background: linear-gradient(135deg, hsl(30, 20%, 90%), hsl(25, 15%, 85%));
+    background: linear-gradient(135deg, rgba(217, 170, 92, 0.3), rgba(138, 87, 56, 0.18));
     border-radius: 12px;
     height: 400px;
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    box-shadow: 0 8px 32px hsl(25, 25%, 35%, 0.1);
+    box-shadow: 0 8px 32px rgba(138, 87, 56, 0.12);
     cursor: pointer;
     transition: all 0.3s;
 }
 
 .video-placeholder:hover {
     transform: translateY(-4px);
-    box-shadow: 0 12px 40px hsl(25, 25%, 35%, 0.15);
+    box-shadow: 0 12px 40px rgba(138, 87, 56, 0.18);
 }
 
 .play-button {
@@ -367,7 +419,7 @@ body {
 .play-icon {
     width: 0;
     height: 0;
-    border-left: 20px solid hsl(25, 25%, 35%);
+    border-left: 20px solid var(--brand-brown);
     border-top: 12px solid transparent;
     border-bottom: 12px solid transparent;
     margin-left: 4px;
@@ -380,12 +432,12 @@ body {
 .video-info h3 {
     font-size: 1.5rem;
     font-weight: 600;
-    color: hsl(25, 25%, 35%);
+    color: var(--brand-brown);
     margin-bottom: 8px;
 }
 
 .video-info p {
-    color: hsl(25, 6%, 45%);
+    color: var(--text-muted);
 }
 
 /* Products Section */
@@ -407,12 +459,12 @@ body {
     overflow: hidden;
     text-decoration: none;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 2px 12px hsl(25, 15%, 85%, 0.15);
+    box-shadow: 0 2px 12px rgba(138, 87, 56, 0.08);
 }
 
 .product-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 8px 32px hsl(25, 25%, 35%, 0.1);
+    box-shadow: 0 8px 32px rgba(138, 87, 56, 0.14);
 }
 
 .product-image {
@@ -438,26 +490,26 @@ body {
 
 .product-category {
     font-size: 0.9rem;
-    color: hsl(45, 35%, 70%);
+    color: var(--brand-gold);
     margin-bottom: 8px;
 }
 
 .product-info h3 {
     font-size: 1.2rem;
     font-weight: 600;
-    color: hsl(25, 8%, 20%);
+    color: var(--text-main);
     margin-bottom: 12px;
     transition: all 0.3s;
 }
 
 .product-card:hover .product-info h3 {
-    color: hsl(25, 25%, 35%);
+    color: var(--brand-brown);
 }
 
 .product-link {
     display: flex;
     align-items: center;
-    color: hsl(25, 25%, 35%);
+    color: var(--brand-brown);
     font-weight: 500;
     transition: all 0.3s;
 }
@@ -490,17 +542,17 @@ body {
 .about-content h2 {
     font-size: 2.5rem;
     font-weight: bold;
-    color: hsl(25, 25%, 35%);
+    color: var(--brand-brown);
     margin-bottom: 24px;
 }
 
 .about-content p {
-    color: hsl(25, 6%, 45%);
+    color: var(--text-muted);
     margin-bottom: 24px;
 }
 
 .stats-card {
-    background: linear-gradient(135deg, hsl(30, 20%, 90%), hsl(25, 15%, 85%));
+    background: linear-gradient(135deg, rgba(217, 170, 92, 0.28), rgba(247, 239, 226, 0.9));
     border-radius: 12px;
     padding: 32px;
     text-align: center;
@@ -517,12 +569,12 @@ body {
 .stat-number {
     font-size: 2.5rem;
     font-weight: bold;
-    color: hsl(25, 25%, 35%);
+    color: var(--brand-brown);
     margin-bottom: 4px;
 }
 
 .stat-label {
-    color: hsl(25, 6%, 45%);
+    color: var(--text-muted);
 }
 
 /* Catalog Section */
@@ -541,7 +593,7 @@ body {
 .filter-btn {
     padding: 10px 20px;
     background: hsl(0, 0%, 100%);
-    border: 2px solid hsl(30, 12%, 88%);
+    border: 2px solid var(--border);
     border-radius: 24px;
     cursor: pointer;
     transition: all 0.3s;
@@ -551,9 +603,9 @@ body {
 
 .filter-btn:hover,
 .filter-btn.active {
-    background: hsl(25, 25%, 35%);
-    color: hsl(30, 15%, 98%);
-    border-color: hsl(25, 25%, 35%);
+    background: var(--brand-brown);
+    color: #fffaf3;
+    border-color: var(--brand-brown);
 }
 
 /* Горизонтальная карусель категорий без стрелок */
@@ -580,7 +632,7 @@ body {
 .category-scroller::-webkit-scrollbar { height: 6px; }
 .category-scroller::-webkit-scrollbar-track { background: transparent; }
 .category-scroller::-webkit-scrollbar-thumb {
-    background: hsl(30 12% 88%);
+    background: var(--border);
     border-radius: 4px;
 }
 
@@ -594,7 +646,7 @@ body {
 .no-products {
     text-align: center;
     padding: 60px 0;
-    color: hsl(25, 6%, 45%);
+    color: var(--text-muted);
 }
 
 /* About Content */
@@ -612,19 +664,19 @@ body {
 
 .about-text h2 {
     font-size: 2rem;
-    color: hsl(25, 25%, 35%);
+    color: var(--brand-brown);
     margin-bottom: 24px;
 }
 
 .about-text h3 {
     font-size: 1.5rem;
-    color: hsl(25, 25%, 35%);
+    color: var(--brand-brown);
     margin: 32px 0 16px;
 }
 
 .about-text p {
     margin-bottom: 16px;
-    color: hsl(25, 6%, 45%);
+    color: var(--text-muted);
     line-height: 1.7;
 }
 
@@ -637,14 +689,14 @@ body {
     padding: 8px 0;
     padding-left: 24px;
     position: relative;
-    color: hsl(25, 6%, 45%);
+    color: var(--text-muted);
 }
 
 .advantages-list li::before {
     content: '✓';
     position: absolute;
     left: 0;
-    color: hsl(25, 25%, 35%);
+    color: var(--brand-brown);
     font-weight: bold;
 }
 
@@ -659,7 +711,7 @@ body {
     padding: 24px;
     border-radius: 12px;
     text-align: center;
-    box-shadow: 0 2px 12px hsl(25, 15%, 85%, 0.15);
+    box-shadow: 0 2px 12px rgba(138, 87, 56, 0.08);
 }
 
 .company-video,
@@ -670,7 +722,7 @@ body {
 .company-video h2,
 .team-section h2 {
     font-size: 2rem;
-    color: hsl(25, 25%, 35%);
+    color: var(--brand-brown);
     margin-bottom: 24px;
     text-align: center;
 }
@@ -686,7 +738,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: hsl(25, 6%, 45%);
+    color: var(--text-muted);
     font-size: 1.2rem;
 }
 
@@ -749,18 +801,18 @@ body {
     font-size: 1rem;
     font-weight: 600;
     margin-bottom: 4px;
-    color: hsl(25, 25%, 35%);
+    color: var(--brand-brown);
 }
 
 .team-role {
     font-size: 0.9rem;
-    color: hsl(25, 6%, 45%);
+    color: var(--text-muted);
 }
 
 .team-empty {
     grid-column: 1 / -1;
     text-align: center;
-    color: hsl(25, 6%, 45%);
+    color: var(--text-muted);
 }
 
 .mission-section {
@@ -777,17 +829,17 @@ body {
     background: hsl(0, 0%, 100%);
     padding: 32px;
     border-radius: 12px;
-    box-shadow: 0 2px 12px hsl(25, 15%, 85%, 0.15);
+    box-shadow: 0 2px 12px rgba(138, 87, 56, 0.08);
 }
 
 .mission-item h3 {
     font-size: 1.3rem;
-    color: hsl(25, 25%, 35%);
+    color: var(--brand-brown);
     margin-bottom: 16px;
 }
 
 .mission-item p {
-    color: hsl(25, 6%, 45%);
+    color: var(--text-muted);
     line-height: 1.7;
 }
 
@@ -806,7 +858,7 @@ body {
 .contact-info h2,
 .contact-form h2 {
     font-size: 2rem;
-    color: hsl(25, 25%, 35%);
+    color: var(--brand-brown);
     margin-bottom: 24px;
 }
 
@@ -829,17 +881,17 @@ body {
 .contact-text h3 {
     font-size: 1.1rem;
     font-weight: 600;
-    color: hsl(25, 8%, 20%);
+    color: var(--text-main);
     margin-bottom: 4px;
 }
 
 .contact-text p {
-    color: hsl(25, 6%, 45%);
+    color: var(--text-muted);
     line-height: 1.6;
 }
 
 .contact-text a {
-    color: hsl(25, 25%, 35%);
+    color: var(--brand-brown);
     text-decoration: none;
     transition: all 0.3s;
 }
@@ -850,7 +902,7 @@ body {
 
 .social-section h3 {
     font-size: 1.2rem;
-    color: hsl(25, 8%, 20%);
+    color: var(--text-main);
     margin-bottom: 16px;
 }
 
@@ -866,17 +918,17 @@ body {
     gap: 8px;
     padding: 8px 16px;
     background: hsl(0, 0%, 100%);
-    border: 2px solid hsl(30, 12%, 88%);
+    border: 2px solid var(--border);
     border-radius: 8px;
     text-decoration: none;
-    color: hsl(25, 6%, 45%);
+    color: var(--text-muted);
     transition: all 0.3s;
     font-size: 14px;
 }
 
 .social-link:hover {
-    border-color: hsl(25, 25%, 35%);
-    color: hsl(25, 25%, 35%);
+    border-color: var(--brand-brown);
+    color: var(--brand-brown);
 }
 
 .social-icon {
@@ -888,11 +940,11 @@ body {
     background: hsl(0, 0%, 100%);
     padding: 32px;
     border-radius: 12px;
-    box-shadow: 0 2px 12px hsl(25, 15%, 85%, 0.15);
+    box-shadow: 0 2px 12px rgba(138, 87, 56, 0.08);
 }
 
 .contact-form p {
-    color: hsl(25, 6%, 45%);
+    color: var(--text-muted);
     margin-bottom: 24px;
 }
 
@@ -904,7 +956,7 @@ body {
     display: block;
     margin-bottom: 6px;
     font-weight: 500;
-    color: hsl(25, 8%, 20%);
+    color: var(--text-main);
 }
 
 .form-group input,
@@ -912,7 +964,7 @@ body {
 .form-group textarea {
     width: 100%;
     padding: 12px;
-    border: 2px solid hsl(30, 12%, 88%);
+    border: 2px solid var(--border);
     border-radius: 8px;
     font-size: 16px;
     transition: all 0.3s;
@@ -923,7 +975,7 @@ body {
 .form-group select:focus,
 .form-group textarea:focus {
     outline: none;
-    border-color: hsl(25, 25%, 35%);
+    border-color: var(--brand-brown);
 }
 
 .checkbox-label {
@@ -964,7 +1016,7 @@ body {
 
 .map-section h2 {
     font-size: 2rem;
-    color: hsl(25, 25%, 35%);
+    color: var(--brand-brown);
     margin-bottom: 24px;
     text-align: center;
 }
@@ -972,7 +1024,7 @@ body {
 .map-container {
     border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 4px 20px hsl(25, 15%, 85%, 0.2);
+    box-shadow: 0 4px 20px rgba(138, 87, 56, 0.12);
     margin-bottom: 24px;
 }
 
@@ -980,12 +1032,12 @@ body {
     background: hsl(0, 0%, 100%);
     padding: 24px;
     border-radius: 12px;
-    box-shadow: 0 2px 12px hsl(25, 15%, 85%, 0.15);
+    box-shadow: 0 2px 12px rgba(138, 87, 56, 0.08);
 }
 
 .map-description p {
     font-weight: 600;
-    color: hsl(25, 8%, 20%);
+    color: var(--text-main);
     margin-bottom: 12px;
 }
 
@@ -998,20 +1050,21 @@ body {
     padding: 4px 0;
     padding-left: 20px;
     position: relative;
-    color: hsl(25, 6%, 45%);
+    color: var(--text-muted);
 }
 
 .map-description li::before {
     content: '→';
     position: absolute;
     left: 0;
-    color: hsl(25, 25%, 35%);
+    color: var(--brand-brown);
 }
 
 /* Footer */
 .footer {
-    background: hsl(30, 10%, 92%);
+    background: linear-gradient(180deg, rgba(217, 170, 92, 0.12), var(--bg));
     margin-top: 80px;
+    border-top: 1px solid var(--border);
 }
 
 .footer .container {
@@ -1026,7 +1079,7 @@ body {
 }
 
 .footer-brand p {
-    color: hsl(25, 6%, 45%);
+    color: var(--text-muted);
     margin: 16px 0 24px;
     max-width: 400px;
 }
@@ -1037,20 +1090,20 @@ body {
 }
 
 .footer-brand .social-link {
-    color: hsl(25, 6%, 45%);
+    color: var(--text-muted);
     font-size: 1.2rem;
     text-decoration: none;
     transition: all 0.3s;
 }
 
 .footer-brand .social-link:hover {
-    color: hsl(25, 25%, 35%);
+    color: var(--brand-gold);
 }
 
 .footer-nav h3,
 .footer-contacts h3 {
     font-weight: 600;
-    color: hsl(25, 8%, 20%);
+    color: var(--text-main);
     margin-bottom: 16px;
 }
 
@@ -1063,13 +1116,13 @@ body {
 }
 
 .footer-nav a {
-    color: hsl(25, 6%, 45%);
+    color: var(--text-muted);
     text-decoration: none;
     transition: all 0.3s;
 }
 
 .footer-nav a:hover {
-    color: hsl(25, 25%, 35%);
+    color: var(--brand-gold);
 }
 
 .footer-contacts .contact-item {
@@ -1084,18 +1137,18 @@ body {
 }
 
 .footer-contacts span:not(.icon) {
-    color: hsl(25, 6%, 45%);
+    color: var(--text-muted);
     font-size: 14px;
 }
 
 .footer-bottom {
-    border-top: 1px solid hsl(30, 12%, 88%);
+    border-top: 1px solid var(--border);
     padding-top: 24px;
     text-align: center;
 }
 
 .footer-bottom p {
-    color: hsl(25, 6%, 45%);
+    color: var(--text-muted);
     font-size: 14px;
 }
 
@@ -1111,6 +1164,19 @@ body {
 
     .nav-mobile.active {
         display: block;
+    }
+
+    .header .logo {
+        gap: 10px;
+    }
+
+    .header .site-logo {
+        width: 42px;
+        height: 42px;
+    }
+
+    .header .logo-main {
+        font-size: 22px;
     }
 
     .slide-content h1 {
@@ -1175,6 +1241,19 @@ body {
 @media (max-width: 480px) {
     .container {
         padding: 0 16px;
+    }
+
+    .header .site-logo {
+        width: 36px;
+        height: 36px;
+    }
+
+    .header .logo-main {
+        font-size: 18px;
+    }
+
+    .header .logo-accent {
+        font-size: 16px;
     }
 
     .slide-content {
@@ -1246,7 +1325,7 @@ body {
 
 .product-info h1 {
     font-size: 2.5rem;
-    color: hsl(25, 25%, 35%);
+    color: var(--brand-brown);
     margin-bottom: 24px;
 }
 
@@ -1260,16 +1339,16 @@ body {
     display: flex;
     justify-content: space-between;
     padding: 12px 0;
-    border-bottom: 1px solid hsl(30, 12%, 88%);
+    border-bottom: 1px solid var(--border);
 }
 
 .spec-label {
     font-weight: 600;
-    color: hsl(25, 8%, 20%);
+    color: var(--text-main);
 }
 
 .spec-value {
-    color: hsl(25, 6%, 45%);
+    color: var(--text-muted);
 }
 
 .product-description {
@@ -1278,12 +1357,12 @@ body {
 
 .product-description h3 {
     font-size: 1.3rem;
-    color: hsl(25, 25%, 35%);
+    color: var(--brand-brown);
     margin-bottom: 16px;
 }
 
 .product-description p {
-    color: hsl(25, 6%, 45%);
+    color: var(--text-muted);
     line-height: 1.7;
     margin-bottom: 16px;
 }
@@ -1294,7 +1373,7 @@ body {
 
 .additional-gallery h3 {
     font-size: 1.5rem;
-    color: hsl(25, 25%, 35%);
+    color: var(--brand-brown);
     margin-bottom: 24px;
     text-align: center;
 }
@@ -1312,7 +1391,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: hsl(25, 6%, 45%);
+    color: var(--text-muted);
     cursor: pointer;
     transition: all 0.3s;
 }
