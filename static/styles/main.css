@@ -344,18 +344,18 @@ a:focus {
 
 /* Page Hero */
 .page-hero {
-    padding: 80px 20px;
+    padding: 200px 20px;
     text-align: center;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    background-color: var(--bg);
+    background-color: #fff6eb;
 }
 
 .page-hero h1 {
     font-size: 2.5rem;
     font-weight: 700;
-    color: var(--brand-ink);
+    color: #8a5738;
 }
 
 .page-hero p {
