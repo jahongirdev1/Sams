@@ -14,6 +14,7 @@ from utils.telegram import send_telegram_message
 
 from .models import (
     CarouselItem,
+    SectionHeader,
     Category,
     Product,
     ProductImage,
@@ -179,6 +180,7 @@ def catalog(request):
     query_params.pop("page", None)
     query_string = query_params.urlencode()
     contacts = CompanyInfo.objects.first()
+    header = SectionHeader.objects.filter(slug="catalog", is_active=True).first()
     context = {
         "categories": categories,
         "page_obj": page_obj,
@@ -189,6 +191,7 @@ def catalog(request):
         "query_string": query_string,
         "category_slug": category_slug,
         "contacts": contacts,
+        "header": header,
     }
     return render(request, "catalog.html", context)
 
@@ -223,6 +226,7 @@ def about(request):
     )
     company = CompanyInfo.objects.first()
     contacts = company
+    header = SectionHeader.objects.filter(slug="about", is_active=True).first()
     context = {
         "advantages": advantages,
         "metrics": metrics,
@@ -232,6 +236,7 @@ def about(request):
         "company": company,
         "contacts": contacts,
         "active_page": "about",
+        "header": header,
     }
     return render(request, "about.html", context)
 
@@ -365,6 +370,7 @@ def contact_view(request):
             }
 
     contacts = CompanyInfo.objects.first()
+    header = SectionHeader.objects.filter(slug="contact", is_active=True).first()
     context = {
         "addresses": addresses,
         "phones": phones,
@@ -377,6 +383,7 @@ def contact_view(request):
         "active_page": "contact",
         "social": social,
         "contacts": contacts,
+        "header": header,
     }
     status = 200 if not form_errors else 400
     return render(request, "contact.html", context, status=status)

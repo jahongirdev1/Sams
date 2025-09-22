@@ -17,6 +17,7 @@ html {
     --bg: #f6ede2;
     --text-main: #3f2c21;
     --text-muted: #7a5b45;
+    --muted: #7a5b45;
     --border: #e6d5c4;
 }
 
@@ -343,23 +344,24 @@ a:focus {
 
 /* Page Hero */
 .page-hero {
-    background: linear-gradient(135deg, hsl(30, 15%, 98%), hsl(30, 10%, 95%));
-    padding: 80px 0;
+    padding: 80px 20px;
     text-align: center;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: var(--bg);
 }
 
 .page-hero h1 {
-    font-size: 3rem;
-    font-weight: bold;
-    color: var(--brand-brown);
-    margin-bottom: 16px;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--brand-ink);
 }
 
 .page-hero p {
     font-size: 1.2rem;
-    color: var(--text-muted);
-    max-width: 600px;
-    margin: 0 auto;
+    color: var(--muted);
+    margin-top: 10px;
 }
 
 /* Video Section */

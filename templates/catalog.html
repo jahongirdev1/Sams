@@ -4,12 +4,16 @@
 
     <main>
         <!-- Hero Section -->
-        <section class="page-hero">
-            <div class="container">
-                <h1>Каталог мебели</h1>
-                <p>Выберите качественную мебель в европейском стиле для вашего дома</p>
-            </div>
-        </section>
+        {% if header %}
+            <section class="page-hero" {% if header.photo %}style="background-image:url('{{ header.photo.url }}')" {% endif %}>
+                <div class="container">
+                    <h1>{{ header.title }}</h1>
+                    {% if header.description %}
+                        <p>{{ header.description }}</p>
+                    {% endif %}
+                </div>
+            </section>
+        {% endif %}
 
         <!-- Catalog Section -->
         <section class="catalog-section">

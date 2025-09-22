@@ -4,12 +4,16 @@
 
     <main>
         <!-- Hero Section -->
-        <section class="page-hero">
-            <div class="container">
-                <h1>Контакты</h1>
-                <p>Свяжитесь с нами для консультации и заказа мебели</p>
-            </div>
-        </section>
+        {% if header %}
+            <section class="page-hero" {% if header.photo %}style="background-image:url('{{ header.photo.url }}')" {% endif %}>
+                <div class="container">
+                    <h1>{{ header.title }}</h1>
+                    {% if header.description %}
+                        <p>{{ header.description }}</p>
+                    {% endif %}
+                </div>
+            </section>
+        {% endif %}
 
         <!-- Contacts Content -->
         <section class="contacts-section">
