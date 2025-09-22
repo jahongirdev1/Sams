@@ -123,29 +123,116 @@
 
                 <div class="footer-contacts">
                     <h3>Контакты</h3>
-                    {% if footer_addresses %}
-                    <div class="contact-item">
-                        <span class="icon">📍</span>
-                        <span>
-                            {% for a in footer_addresses %}
-                                {% if a.title %}<strong>{{ a.title }}</strong><br>{% endif %}
-                                {% if a.city %}{{ a.city }}, {% endif %}{{ a.address }}{% if not forloop.last %}<br>{% endif %}
-                            {% endfor %}
-                        </span>
-                    </div>
-                    {% endif %}
-                    {% for p in footer_phones %}
-                    <div class="contact-item">
-                        <span class="icon">📞</span>
-                        <a href="tel:{{ p.phone }}">{% if p.label %}{{ p.label }}: {% endif %}{{ p.phone }}</a>
-                    </div>
-                    {% endfor %}
-                    {% for e in footer_emails %}
-                    <div class="contact-item">
-                        <span class="icon">✉️</span>
-                        <a href="mailto:{{ e.email }}">{% if e.label %}{{ e.label }}: {% endif %}{{ e.email }}</a>
-                    </div>
-                    {% endfor %}
+                    {% with company_contacts=contacts.contacts %}
+                        {% if footer_addresses %}
+                        <div class="contact-item contact-item--desktop">
+                            <span class="icon">📍</span>
+                            <span>
+                                {% for a in footer_addresses %}
+                                    {% if a.title %}<strong>{{ a.title }}</strong><br>{% endif %}
+                                    {% if a.city %}{{ a.city }}{% if a.address %}, {% endif %}{% endif %}{{ a.address }}{% if not forloop.last %}<br>{% endif %}
+                                {% endfor %}
+                            </span>
+                        </div>
+                        {% endif %}
+                        {% with primary_address=footer_addresses|first %}
+                            {% if primary_address %}
+                                <div class="contact-item contact-item--mobile">
+                                    <span class="icon">📍</span>
+                                    <span>
+                                        {% if primary_address.address or primary_address.city %}
+                                            {% if primary_address.title %}<strong>{{ primary_address.title }}</strong><br>{% endif %}
+                                            {% if primary_address.city %}{{ primary_address.city }}{% if primary_address.address %}, {% endif %}{% endif %}
+                                            {% if primary_address.address %}{{ primary_address.address }}{% endif %}
+                                        {% else %}
+                                            {{ primary_address }}
+                                        {% endif %}
+                                    </span>
+                                </div>
+                            {% elif company_contacts and company_contacts.addresses %}
+                                {% with primary_address=company_contacts.addresses.0 %}
+                                    {% if primary_address %}
+                                    <div class="contact-item contact-item--mobile">
+                                        <span class="icon">📍</span>
+                                        <span>
+                                            {% if primary_address.address or primary_address.city %}
+                                                {% if primary_address.title %}<strong>{{ primary_address.title }}</strong><br>{% endif %}
+                                                {% if primary_address.city %}{{ primary_address.city }}{% if primary_address.address %}, {% endif %}{% endif %}
+                                                {% if primary_address.address %}{{ primary_address.address }}{% endif %}
+                                            {% else %}
+                                                {{ primary_address }}
+                                            {% endif %}
+                                        </span>
+                                    </div>
+                                    {% endif %}
+                                {% endwith %}
+                            {% endif %}
+                        {% endwith %}
+
+                        {% for p in footer_phones %}
+                        <div class="contact-item contact-item--desktop">
+                            <span class="icon">📞</span>
+                            <a href="tel:{{ p.phone }}">{% if p.label %}{{ p.label }}: {% endif %}{{ p.phone }}</a>
+                        </div>
+                        {% endfor %}
+                        {% with primary_phone=footer_phones|first %}
+                            {% if primary_phone %}
+                                <div class="contact-item contact-item--mobile">
+                                    <span class="icon">📞</span>
+                                    {% if primary_phone.phone %}
+                                        <a href="tel:{{ primary_phone.phone }}">{% if primary_phone.label %}{{ primary_phone.label }}: {% endif %}{{ primary_phone.phone }}</a>
+                                    {% else %}
+                                        <a href="tel:{{ primary_phone }}">{{ primary_phone }}</a>
+                                    {% endif %}
+                                </div>
+                            {% elif company_contacts and company_contacts.phones %}
+                                {% with primary_phone=company_contacts.phones.0 %}
+                                    {% if primary_phone %}
+                                    <div class="contact-item contact-item--mobile">
+                                        <span class="icon">📞</span>
+                                        {% if primary_phone.phone %}
+                                            <a href="tel:{{ primary_phone.phone }}">{% if primary_phone.label %}{{ primary_phone.label }}: {% endif %}{{ primary_phone.phone }}</a>
+                                        {% else %}
+                                            <a href="tel:{{ primary_phone }}">{{ primary_phone }}</a>
+                                        {% endif %}
+                                    </div>
+                                    {% endif %}
+                                {% endwith %}
+                            {% endif %}
+                        {% endwith %}
+
+                        {% for e in footer_emails %}
+                        <div class="contact-item contact-item--desktop">
+                            <span class="icon">✉️</span>
+                            <a href="mailto:{{ e.email }}">{% if e.label %}{{ e.label }}: {% endif %}{{ e.email }}</a>
+                        </div>
+                        {% endfor %}
+                        {% with primary_email=footer_emails|first %}
+                            {% if primary_email %}
+                                <div class="contact-item contact-item--mobile">
+                                    <span class="icon">✉️</span>
+                                    {% if primary_email.email %}
+                                        <a href="mailto:{{ primary_email.email }}">{% if primary_email.label %}{{ primary_email.label }}: {% endif %}{{ primary_email.email }}</a>
+                                    {% else %}
+                                        <a href="mailto:{{ primary_email }}">{{ primary_email }}</a>
+                                    {% endif %}
+                                </div>
+                            {% elif company_contacts and company_contacts.emails %}
+                                {% with primary_email=company_contacts.emails.0 %}
+                                    {% if primary_email %}
+                                    <div class="contact-item contact-item--mobile">
+                                        <span class="icon">✉️</span>
+                                        {% if primary_email.email %}
+                                            <a href="mailto:{{ primary_email.email }}">{% if primary_email.label %}{{ primary_email.label }}: {% endif %}{{ primary_email.email }}</a>
+                                        {% else %}
+                                            <a href="mailto:{{ primary_email }}">{{ primary_email }}</a>
+                                        {% endif %}
+                                    </div>
+                                    {% endif %}
+                                {% endwith %}
+                            {% endif %}
+                        {% endwith %}
+                    {% endwith %}
                 </div>
             </div>
 
