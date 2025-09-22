@@ -12,6 +12,8 @@ html {
 :root {
     --brand-gold: #d9aa5c;
     --brand-brown: #8a5738;
+    --brand-gold-2: #e8c07a;
+    --brand-ink: #322417;
     --bg: #f6ede2;
     --text-main: #3f2c21;
     --text-muted: #7a5b45;
@@ -232,6 +234,8 @@ a:focus {
     position: relative;
     width: 100%;
     height: 100%;
+    opacity: 1;
+    visibility: visible;
 }
 
 .slide {
@@ -638,12 +642,20 @@ a:focus {
     scroll-snap-align: start;
 }
 
-/* Скрыть/смягчить горизонтальный скроллбар (доступность сохраняется) */
-.category-scroller::-webkit-scrollbar { height: 6px; }
-.category-scroller::-webkit-scrollbar-track { background: transparent; }
-.category-scroller::-webkit-scrollbar-thumb {
-    background: var(--border);
-    border-radius: 4px;
+/* Скрываем индикатор скролла, но сохраняем сам скролл */
+.category-row,
+.category-scroller {
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.category-row::-webkit-scrollbar,
+.category-scroller::-webkit-scrollbar {
+    display: none;
+    height: 0;
+    width: 0;
+    background: transparent;
 }
 
 /* При узких экранах кнопки остаются горизонтальными — без переносов */
@@ -923,26 +935,30 @@ a:focus {
 }
 
 .social-link {
-    display: flex;
+    display: inline-flex;
     align-items: center;
-    gap: 8px;
-    padding: 8px 16px;
-    background: hsl(0, 0%, 100%);
-    border: 2px solid var(--border);
+    justify-content: center;
+    width: 32px;
+    height: 32px;
     border-radius: 8px;
+    background: #fff;
+    border: 1px solid var(--border);
     text-decoration: none;
-    color: var(--text-muted);
-    transition: all 0.3s;
-    font-size: 14px;
+    color: var(--brand-ink);
+    transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease;
 }
 
 .social-link:hover {
-    border-color: var(--brand-brown);
-    color: var(--brand-brown);
+    transform: translateY(-1px);
+    border-color: var(--brand-gold-2);
+    background: #fffaf0;
 }
 
-.social-icon {
-    font-size: 1.2rem;
+.social-link .icon-16 {
+    width: 16px;
+    height: 16px;
+    fill: currentColor;
+    color: var(--brand-ink);
 }
 
 /* Contact Form */
@@ -1100,14 +1116,11 @@ a:focus {
 }
 
 .footer-brand .social-link {
-    color: var(--text-muted);
-    font-size: 1.2rem;
-    text-decoration: none;
-    transition: all 0.3s;
+    color: var(--brand-ink);
 }
 
 .footer-brand .social-link:hover {
-    color: var(--brand-gold);
+    color: var(--brand-ink);
 }
 
 .footer-nav h3,
@@ -1144,6 +1157,16 @@ a:focus {
 
 .footer-contacts .icon {
     font-size: 1rem;
+}
+
+.footer-contacts a {
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-contacts a:hover {
+    color: var(--brand-gold);
 }
 
 .footer-contacts span:not(.icon) {

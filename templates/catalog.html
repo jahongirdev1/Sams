@@ -17,9 +17,9 @@
                 <!-- Category Filters -->
                 <div class="category-filters">
                     <div class="category-scroller" id="catScroller" aria-label="Категории">
-                        <button class="filter-btn {% if not active_category %}active{% endif %}" onclick="filterProducts('all'); window.location.href='{% url 'catalog' %}{% if q %}?q={{ q|urlencode }}{% endif %}';">Все</button>
+                        <button type="button" class="filter-btn {% if not active_category %}active{% endif %}" onclick="filterProducts('all'); window.location.href='{% url 'catalog' %}{% if q %}?q={{ q|urlencode }}{% endif %}';">Все</button>
                         {% for category in categories %}
-                        <button class="filter-btn {% if active_category and active_category.id == category.id %}active{% endif %}" onclick="filterProducts('{{ category.name }}'); window.location.href='{% url 'catalog' %}?category={{ category.slug }}{% if q %}&q={{ q|urlencode }}{% endif %}';">{{ category.name }}</button>
+                        <button type="button" class="filter-btn {% if active_category and active_category.id == category.id %}active{% endif %}" onclick="filterProducts('{{ category.name }}'); window.location.href='{% url 'catalog' %}?category={{ category.slug }}{% if q %}&q={{ q|urlencode }}{% endif %}';">{{ category.name }}</button>
                         {% endfor %}
                     </div>
                 </div>

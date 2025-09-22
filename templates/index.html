@@ -6,7 +6,7 @@
         <section class="hero-section">
             <div class="hero-slider" id="heroSlider">
                 {% for i in carousel %}
-                <div class="slide">
+                <div class="slide{% if forloop.first %} active{% endif %}">
                     <img src="/media/{{ i.image }}" alt="Качественные диваны">
                     <div class="slide-content">
                         <h1>{{ i.title }}</h1>
