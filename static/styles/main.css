@@ -73,8 +73,6 @@ a:focus {
     width: 48px;
     height: 48px;
     border-radius: 12px;
-    border: 1px solid var(--border);
-    background: linear-gradient(135deg, rgba(217, 170, 92, 0.35), rgba(138, 87, 56, 0.15));
     flex-shrink: 0;
     display: flex;
     align-items: center;
@@ -941,8 +939,6 @@ a:focus {
     width: 32px;
     height: 32px;
     border-radius: 8px;
-    background: #fff;
-    border: 1px solid var(--border);
     text-decoration: none;
     color: var(--brand-ink);
     transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease;

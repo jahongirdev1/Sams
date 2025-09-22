@@ -247,7 +247,7 @@ class SocialMap(models.Model):
     instagram_url = models.URLField(_("Instagram"), blank=True)
     facebook_url = models.URLField(_("Facebook"), blank=True)
     youtube_url = models.URLField(_("YouTube"), blank=True)
-    tiktok_url = models.URLField(_("TikTok"), blank=True)
+    tiktok_url = models.URLField(_("Whatsapp"), blank=True)
     telegram_url = models.URLField(_("Telegram"), blank=True)
     map_embed = models.TextField(_("Карта (встраиваемый код)"), blank=True)
     map_url = models.URLField(_("Ссылка на карту"), blank=True)
