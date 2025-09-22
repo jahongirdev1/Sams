@@ -6,14 +6,18 @@ function toggleMobileMenu() {
 
 // Hero slider functionality
 let currentSlide = 0;
-const slides = document.querySelectorAll('.slide');
-const totalSlides = slides.length;
+let slides = [];
+let totalSlides = 0;
 
 function showSlide(index) {
+    if (!slides.length) {
+        return;
+    }
+
     slides.forEach((slide, i) => {
         slide.classList.toggle('active', i === index);
     });
-    
+
     // Update dots
     const dots = document.querySelectorAll('.dot');
     dots.forEach((dot, i) => {
@@ -22,26 +26,51 @@ function showSlide(index) {
 }
 
 function nextSlide() {
+    if (totalSlides <= 1) {
+        return;
+    }
+
     currentSlide = (currentSlide + 1) % totalSlides;
     showSlide(currentSlide);
 }
 
 function prevSlide() {
+    if (totalSlides <= 1) {
+        return;
+    }
+
     currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
     showSlide(currentSlide);
 }
 
 function goToSlide(index) {
+    if (index < 0 || index >= totalSlides) {
+        return;
+    }
+
     currentSlide = index;
     showSlide(currentSlide);
 }
 
 // Initialize slider
 document.addEventListener('DOMContentLoaded', function() {
+    const heroSlider = document.getElementById('heroSlider');
+    slides = heroSlider ? heroSlider.querySelectorAll('.slide') : [];
+    totalSlides = slides.length;
+
+    if (!totalSlides) {
+        return;
+    }
+
+    if (heroSlider) {
+        heroSlider.classList.add('is-ready');
+    }
+
     // Create dots for slider
     const sliderDots = document.getElementById('sliderDots');
-    if (sliderDots && slides.length > 0) {
-        for (let i = 0; i < slides.length; i++) {
+    if (sliderDots) {
+        sliderDots.innerHTML = '';
+        for (let i = 0; i < totalSlides; i++) {
             const dot = document.createElement('div');
             dot.className = 'dot';
             if (i === 0) dot.classList.add('active');
@@ -50,8 +79,12 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    // Show the first slide immediately
+    currentSlide = 0;
+    showSlide(currentSlide);
+
     // Auto-play slider
-    if (slides.length > 0) {
+    if (totalSlides > 1) {
         setInterval(nextSlide, 5000);
     }
 

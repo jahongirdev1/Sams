@@ -368,7 +368,7 @@ def contact_view(request):
         "social": social,
     }
     status = 200 if not form_errors else 400
-    return render(request, "contacts.html", context, status=status)
+    return render(request, "contact.html", context, status=status)
 
 # ----------------- API ViewSets -----------------
 
