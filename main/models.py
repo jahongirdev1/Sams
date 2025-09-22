@@ -28,6 +28,31 @@ class CarouselItem(models.Model):
         return self.title or f"Carousel #{self.pk}"
 
 
+class SectionHeader(models.Model):
+    title = models.CharField(_("Заголовок"), max_length=200)
+    description = models.TextField(_("Описание"), blank=True)
+    photo = models.ImageField(
+        _("Фото"),
+        upload_to="section_headers/",
+        blank=True,
+        null=True,
+        help_text=_("Фон для блока, можно не добавлять"),
+    )
+    slug = models.SlugField(
+        _("Слаг"),
+        unique=True,
+        help_text=_("Ключ страницы: catalog, about, contact и т.д."),
+    )
+    is_active = models.BooleanField(_("Активен"), default=True)
+
+    class Meta:
+        verbose_name = _("Заголовок секции")
+        verbose_name_plural = _("Заголовки секций")
+
+    def __str__(self) -> str:
+        return self.title
+
+
 # --- Каталог ---
 class Category(models.Model):
     name = models.CharField(_("Название"), max_length=120)

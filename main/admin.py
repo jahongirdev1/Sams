@@ -59,6 +59,14 @@ class CarouselItemAdmin(admin.ModelAdmin):
     actions = [make_active, make_inactive]
 
 
+@admin.register(models.SectionHeader)
+class SectionHeaderAdmin(admin.ModelAdmin):
+    list_display = ("title", "slug", "is_active")
+    list_filter = ("is_active",)
+    search_fields = ("title", "slug")
+    actions = [make_active, make_inactive]
+
+
 @admin.register(models.ProductImage)
 class ProductImageAdmin(admin.ModelAdmin):
     list_display = ("product", "ordering", "is_primary")
