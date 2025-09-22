@@ -139,12 +139,14 @@ def index(request):
         .first()
     )
     company = CompanyInfo.objects.first()
+    contacts = company
     context = {
         "carousel": carousel,
         "main_products": main_products,
         "metrics": metrics,
         "home_video": home_video,
         "company": company,
+        "contacts": contacts,
         "active_page": "home",
     }
     return render(request, "index.html", context)
@@ -176,6 +178,7 @@ def catalog(request):
     query_params = request.GET.copy()
     query_params.pop("page", None)
     query_string = query_params.urlencode()
+    contacts = CompanyInfo.objects.first()
     context = {
         "categories": categories,
         "page_obj": page_obj,
@@ -185,6 +188,7 @@ def catalog(request):
         "q": q,
         "query_string": query_string,
         "category_slug": category_slug,
+        "contacts": contacts,
     }
     return render(request, "catalog.html", context)
 
@@ -194,13 +198,16 @@ def product_detail(request, slug: str):
         Product.objects.select_related("category"), slug=slug, is_active=True
     )
     images = product.images.all().order_by("-is_primary", "ordering", "id")
+    contacts = CompanyInfo.objects.first()
     return render(
         request,
         "product_detail.html",
-        {"product": product,
-         "images": images,
-         'active_page': 'catalog'
-         },
+        {
+            "product": product,
+            "images": images,
+            "active_page": "catalog",
+            "contacts": contacts,
+        },
     )
 
 
@@ -215,6 +222,7 @@ def about(request):
         .first()
     )
     company = CompanyInfo.objects.first()
+    contacts = company
     context = {
         "advantages": advantages,
         "metrics": metrics,
@@ -222,7 +230,8 @@ def about(request):
         "values": values,
         "about_video": about_video,
         "company": company,
-        'active_page': 'about'
+        "contacts": contacts,
+        "active_page": "about",
     }
     return render(request, "about.html", context)
 
@@ -355,6 +364,7 @@ def contact_view(request):
                 "consent": False,
             }
 
+    contacts = CompanyInfo.objects.first()
     context = {
         "addresses": addresses,
         "phones": phones,
@@ -366,6 +376,7 @@ def contact_view(request):
         "form_success": form_success,
         "active_page": "contact",
         "social": social,
+        "contacts": contacts,
     }
     status = 200 if not form_errors else 400
     return render(request, "contact.html", context, status=status)
