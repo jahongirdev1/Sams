@@ -15,8 +15,6 @@ html {
     --brand-gold-2: #e8c07a;
     --brand-ink: #322417;
     --bg: #f6ede2;
-    --header-bg: #f6ede2;
-    --header-h: 64px;
     --text-main: #3f2c21;
     --text-muted: #7a5b45;
     --muted: #7a5b45;
@@ -28,7 +26,6 @@ body {
     line-height: 1.6;
     color: var(--text-main);
     background-color: var(--bg);
-    padding-top: var(--header-h, 0px);
 }
 
 a {
@@ -50,67 +47,13 @@ a:focus {
 
 /* Header */
 .header {
-    background: var(--header-bg, var(--bg));
+    background: var(--bg);
     box-shadow: 0 2px 16px rgba(138, 87, 56, 0.08);
     position: sticky;
     top: 0;
     z-index: 1000;
 }
 
-.site-header {
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
-    backdrop-filter: saturate(160%) blur(6px);
-}
-
-.site-header.is-transparent {
-    background: rgba(0, 0, 0, 0.08);
-    box-shadow: none;
-}
-
-.site-header.is-transparent .nav-link,
-.site-header.is-transparent .logo-main,
-.site-header.is-transparent .logo-accent,
-.site-header.is-transparent .mobile-menu-btn {
-    color: #fff;
-}
-
-.site-header.is-transparent .hamburger,
-.site-header.is-transparent .hamburger::before,
-.site-header.is-transparent .hamburger::after {
-    background: #fff;
-}
-
-.site-header.is-transparent .nav-link:hover,
-.site-header.is-transparent .nav-link:focus,
-.site-header.is-transparent .nav-link.active {
-    color: var(--brand-brown);
-}
-
-.site-header.is-solid {
-    background: var(--header-bg, #f7efe5);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
-}
-
-.site-header.is-solid .nav-link {
-    color: var(--text-muted);
-}
-
-.site-header.is-solid .mobile-menu-btn {
-    color: var(--brand-brown);
-}
-
-.site-header.is-solid .hamburger,
-.site-header.is-solid .hamburger::before,
-.site-header.is-solid .hamburger::after {
-    background: var(--brand-brown);
-}
-
-.site-header.is-transparent .site-logo img {
-    filter: drop-shadow(0 1px 0 rgba(0, 0, 0, 0.25)) brightness(1.15);
-}
 
 .nav-wrapper {
     display: flex;
@@ -1254,34 +1197,6 @@ a:focus {
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    .site-header {
-        background: var(--header-bg, #f7efe5) !important;
-    }
-
-    .site-header .nav-link,
-    .site-header .nav-link-mobile,
-    .site-header .mobile-menu-btn {
-        color: var(--brand-ink) !important;
-    }
-
-    .site-header .hamburger,
-    .site-header .hamburger::before,
-    .site-header .hamburger::after {
-        background: var(--brand-ink) !important;
-    }
-
-    .site-header .logo-main {
-        color: var(--brand-brown) !important;
-    }
-
-    .site-header .logo-accent {
-        color: var(--brand-gold) !important;
-    }
-
-    .site-header .site-logo img {
-        filter: none !important;
-    }
-
     .nav-desktop {
         display: none;
     }
