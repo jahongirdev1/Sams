@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
 {% block content %}
 
@@ -20,13 +21,13 @@
             <div class="container">
                 <div class="contacts-grid">
                     <div class="contact-info">
-                        <h2>Наши контакты</h2>
+                        <h2>{% trans 'Наши контакты' %}</h2>
                         
                         <div class="contact-details">
                             <div class="contact-item">
                                 <div class="contact-icon">📍</div>
                                 <div class="contact-text">
-                                    <h3>Адрес</h3>
+                                    <h3>{% trans 'Адрес' %}</h3>
                                     {% for a in addresses %}
                                         <p>
                                             {% if a.title %} <b>{{ a.title }} :</b>{% endif %}
@@ -40,7 +41,7 @@
                             <div class="contact-item">
                                 <div class="contact-icon">📞</div>
                                 <div class="contact-text">
-                                    <h3>Телефон</h3>
+                                    <h3>{% trans 'Телефон' %}</h3>
                                     {% if phones %}
                                     <p>
                                         {% for p in phones %}
@@ -54,7 +55,7 @@
                             <div class="contact-item">
                                 <div class="contact-icon">✉️</div>
                                 <div class="contact-text">
-                                    <h3>Email</h3>
+                                    <h3>{% trans 'Email' %}</h3>
                                     {% if emails %}
                                     <p>
                                         {% for e in emails %}
@@ -68,7 +69,7 @@
                             <div class="contact-item">
                                 <div class="contact-icon">🕒</div>
                                 <div class="contact-text">
-                                    <h3>Время работы</h3>
+                                    <h3>{% trans 'Время работы' %}</h3>
                                     {% if hours %}
                                     <p>
                                         {{ hours.weekdays }}<br>
@@ -81,7 +82,7 @@
                         </div>
 
                         <div class="social-section">
-                            <h3>Мы в социальных сетях</h3>
+                            <h3>{% trans 'Мы в социальных сетях' %}</h3>
                             {% with s=footer_social|default_if_none:social %}
                             {% if s %}
                             <div class="social-links">
@@ -128,8 +129,8 @@
 
                     <!-- Contact Form -->
                     <div class="contact-form">
-                        <h2>Оставить заявку</h2>
-                        <p>Заполните форму, и мы свяжемся с вами в ближайшее время</p>
+                        <h2>{% trans 'Оставить заявку' %}</h2>
+                        <p>{% trans 'Заполните форму, и мы свяжемся с вами в ближайшее время' %}</p>
                         
                         <form id="contactForm" method="post" {% if form_success %}style="display: none;"{% endif %}>
                             {% csrf_token %}
@@ -141,22 +142,22 @@
                                 </div>
                             {% endif %}
                             <div class="form-group">
-                                <label for="name">Ваше имя *</label>
+                                <label for="name">{% trans 'Ваше имя *' %}</label>
                                 <input type="text" id="name" name="name" required value="{{ form_data.name|default_if_none:'' }}">
                             </div>
 
                             <div class="form-group">
-                                <label for="phone">Телефон *</label>
-                                <input type="tel" id="phone" name="phone" required placeholder="+7 (___) ___-__-__" value="{{ form_data.phone|default_if_none:'' }}">
+                                <label for="phone">{% trans 'Телефон *' %}</label>
+                                <input type="tel" id="phone" name="phone" required placeholder="{% trans '+7 (___) ___-__-__' %}" value="{{ form_data.phone|default_if_none:'' }}">
                             </div>
 
                             <div class="form-group">
-                                <label for="email">Email</label>
-                                <input type="email" id="email" name="email" placeholder="example@email.com" value="{{ form_data.email|default_if_none:'' }}">
+                                <label for="email">{% trans 'Email' %}</label>
+                                <input type="email" id="email" name="email" placeholder="{% trans 'example@email.com' %}" value="{{ form_data.email|default_if_none:'' }}">
                             </div>
 
                             <div class="form-group">
-                                <label for="subject">Тема обращения</label>
+                                <label for="subject">{% trans 'Тема обращения' %}</label>
                                 <select id="subject" name="topic">
                                     {% for t in topics %}
                                         <option value="{{ t.slug }}" {% if form_data.topic == t.slug %}selected{% endif %}>{{ t.name }}</option>
@@ -165,31 +166,31 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="message">Сообщение *</label>
-                                <textarea id="message" name="message" rows="5" required placeholder="Расскажите, что вас интересует...">{{ form_data.message|default_if_none:'' }}</textarea>
+                                <label for="message">{% trans 'Сообщение *' %}</label>
+                                <textarea id="message" name="message" rows="5" required placeholder="{% trans 'Расскажите, что вас интересует…' %}">{{ form_data.message|default_if_none:'' }}</textarea>
                             </div>
 
                             <div class="form-group">
                                 <label class="checkbox-label">
                                     <input type="checkbox" name="consent" value="1" required {% if form_data.consent %}checked{% endif %}>
                                     <span class="checkmark"></span>
-                                    Согласие на обработку персональных данных *
+                                    {% trans 'Согласие на обработку персональных данных *' %}
                                 </label>
                             </div>
 
-                            <button type="submit" class="btn btn-primary">Отправить заявку</button>
+                            <button type="submit" class="btn btn-primary">{% trans 'Отправить заявку' %}</button>
                         </form>
 
                         <div class="form-success" id="formSuccess" {% if not form_success %}style="display: none;"{% endif %}>
-                            <h3>Спасибо за обращение!</h3>
-                            <p>Ваша заявка успешно отправлена. Мы свяжемся с вами в ближайшее время.</p>
+                            <h3>{% trans 'Спасибо за обращение!' %}</h3>
+                            <p>{% trans 'Ваша заявка успешно отправлена. Мы свяжемся с вами в ближайшее время.' %}</p>
                         </div>
                     </div>
                 </div>
 
                 <!-- Map Section -->
                 <div class="map-section">
-                    <h2>Как нас найти</h2>
+                    <h2>{% trans 'Как нас найти' %}</h2>
                     <div class="map-container">
                         {% with s=footer_social|default_if_none:social %}
                             {% if s and s.map_embed %}

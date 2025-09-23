@@ -10,3 +10,4 @@ whitenoise
 django-jazzmin
 requests
 django-ckeditor
+django-parler

@@ -1,7 +1,9 @@
 from django.conf import settings
 from django.conf.urls.static import static
+from django.conf.urls.i18n import i18n_patterns
 from django.contrib import admin
 from django.urls import path, include
+from django.views.i18n import set_language
 from rest_framework.routers import DefaultRouter
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 
@@ -18,18 +20,17 @@ router.register(r'about/values', main_views.ValueViewSet, basename='value')
 router.register(r'about/company', main_views.CompanyInfoViewSet, basename='company')
 
 urlpatterns = [
-    # HTML pages
-    path('', main_views.index, name='index'),
-    path('catalog/', main_views.catalog_view, name='catalog'),
-    path('product/<slug:slug>/', main_views.product_detail, name='product_detail'),
-    path('about/', main_views.about, name='about'),
-    path('contact/', main_views.contact_view, name='contact'),
-
+    path('i18n/setlang/', set_language, name='set_language'),
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('admin/', admin.site.urls),
-
-    # API schema and docs
     path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
     path('api/docs/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
     path('api/', include(router.urls)),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
+
+urlpatterns += i18n_patterns(
+    path('', include('main.urls')),
+    prefix_default_language=False,
+)
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

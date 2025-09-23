@@ -1,20 +1,21 @@
+{% load i18n static %}
 <div class="products-grid">
   {% for p in products %}
-    <a href="{% url 'product_detail' p.slug %}" class="product-card" data-category="{{ p.category.name }}">
+    <a href="{% url 'main:product_detail' p.slug %}" class="product-card" data-category="{{ p.category.name }}">
       <div class="product-image">
         {% with img=p.images.all.0 %}
           {% if img %}<img src="{{ img.image.url }}" alt="{{ p.name }}">{% else %}
-          <img src="/static/placeholder.jpg" alt="{{ p.name }}">
+          <img src="{% static 'placeholder.jpg' %}" alt="{{ p.name }}">
           {% endif %}
         {% endwith %}
       </div>
       <div class="product-info">
         <div class="product-category">{{ p.category.name }}</div>
         <h3>{{ p.name }}</h3>
-        <div class="product-link"><span>Подробнее</span><span class="arrow">→</span></div>
+        <div class="product-link"><span>{% trans 'Подробнее' %}</span><span class="arrow">→</span></div>
       </div>
     </a>
   {% empty %}
-    <p class="no-products">Товары скоро появятся.</p>
+    <p class="no-products">{% trans 'Товары скоро появятся.' %}</p>
   {% endfor %}
 </div>

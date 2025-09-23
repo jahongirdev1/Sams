@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 from dotenv import load_dotenv
+from django.utils.translation import gettext_lazy as _
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -48,6 +49,7 @@ INSTALLED_APPS = [
     'drf_spectacular',
     'ckeditor',
     'ckeditor_uploader',
+    'parler',
     'main',
 ]
 
@@ -75,6 +77,7 @@ TEMPLATES = [
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
+                'django.template.context_processors.i18n',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'main.context_processors.categories',
@@ -123,17 +126,28 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # --- I18N (Русский как дефолт) ---
 LANGUAGE_CODE = "ru"
+LANGUAGES = (
+    ("ru", _("Russian")),
+    ("en", _("English")),
+)
+
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
 TIME_ZONE = "Asia/Almaty"
 
-LANGUAGES = [
-    ("ru", "Русский"),
-    ("en", "English"),  # на будущее, но дефолт — ru
-]
-
 LOCALE_PATHS = [BASE_DIR / "locale"]  # папка для переводов проекта (пока не нужна для админки)
+
+PARLER_LANGUAGES = {
+    None: (
+        {"code": "ru"},
+        {"code": "en"},
+    ),
+    "default": {
+        "fallbacks": ["ru"],
+        "hide_untranslated": False,
+    },
+}
 
 
 # Static files (CSS, JavaScript, Images)
