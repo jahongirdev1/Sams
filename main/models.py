@@ -6,14 +6,17 @@ from django.db import models
 from django.utils.text import slugify
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
+from parler.models import TranslatableModel, TranslatedFields
 
 from ckeditor.fields import RichTextField
 
 
 # --- Главная: карусель ---
-class CarouselItem(models.Model):
-    title = models.CharField(_("Заголовок"), max_length=150, blank=True)
-    subtitle = models.CharField(_("Подзаголовок"), max_length=250, blank=True)
+class CarouselItem(TranslatableModel):
+    translations = TranslatedFields(
+        title=models.CharField(_("Заголовок"), max_length=150, blank=True),
+        subtitle=models.CharField(_("Подзаголовок"), max_length=250, blank=True),
+    )
     image = models.ImageField(_("Изображение"), upload_to="carousel/")
     link_url = models.URLField(_("Ссылка"), blank=True)
     is_active = models.BooleanField(_("Активен"), default=True, db_index=True)
@@ -27,12 +30,14 @@ class CarouselItem(models.Model):
         ordering = ["ordering", "-id"]
 
     def __str__(self) -> str:
-        return self.title or f"Carousel #{self.pk}"
+        return self.safe_translation_getter("title", any_language=True) or f"Carousel #{self.pk}"
 
 
-class SectionHeader(models.Model):
-    title = models.CharField(_("Заголовок"), max_length=200)
-    description = models.TextField(_("Описание"), blank=True)
+class SectionHeader(TranslatableModel):
+    translations = TranslatedFields(
+        title=models.CharField(_("Заголовок"), max_length=200),
+        description=models.TextField(_("Описание"), blank=True),
+    )
     photo = models.ImageField(
         _("Фото"),
         upload_to="section_headers/",
@@ -52,14 +57,16 @@ class SectionHeader(models.Model):
         verbose_name_plural = _("Заголовки секций")
 
     def __str__(self) -> str:
-        return self.title
+        return self.safe_translation_getter("title", any_language=True) or self.slug
 
 
 # --- Каталог ---
-class Category(models.Model):
-    name = models.CharField(_("Название"), max_length=120)
+class Category(TranslatableModel):
+    translations = TranslatedFields(
+        name=models.CharField(_("Название"), max_length=120),
+        description=models.TextField(_("Описание"), blank=True),
+    )
     slug = models.SlugField(_("Слаг"), unique=True, db_index=True, max_length=140)
-    description = models.TextField(_("Описание"), blank=True)
 
     class Meta:
         verbose_name = _("Категория")
@@ -68,7 +75,8 @@ class Category(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            base = slugify(self.name)
+            name_value = self.safe_translation_getter("name", any_language=True) or ""
+            base = slugify(name_value) or "category"
             slug = base
             n = 1
             while Category.objects.filter(slug=slug).exclude(pk=self.pk).exists():
@@ -78,13 +86,15 @@ class Category(models.Model):
         return super().save(*args, **kwargs)
 
     def __str__(self) -> str:
-        return self.name
+        return self.safe_translation_getter("name", any_language=True) or f"Category {self.pk}"
 
 
-class Product(models.Model):
-    name = models.CharField(_("Название"), max_length=180)
+class Product(TranslatableModel):
+    translations = TranslatedFields(
+        name=models.CharField(_("Название"), max_length=180),
+        description=RichTextField(_("Описание"), blank=True),
+    )
     slug = models.SlugField(_("Слаг"), unique=True, db_index=True, max_length=200)
-    description = RichTextField(_("Описание"), blank=True)
     price = models.DecimalField(_("Цена"), max_digits=10, decimal_places=2, default=0)
     is_active = models.BooleanField(_("Активен"), default=True, db_index=True)
     is_main = models.BooleanField(_("Показывать на главной"), default=False, db_index=True)
@@ -109,7 +119,8 @@ class Product(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            base = slugify(self.name)
+            name_value = self.safe_translation_getter("name", any_language=True) or ""
+            base = slugify(name_value) or "product"
             slug = base
             n = 1
             while Product.objects.filter(slug=slug).exclude(pk=self.pk).exists():
@@ -119,18 +130,20 @@ class Product(models.Model):
         return super().save(*args, **kwargs)
 
     def __str__(self) -> str:
-        return self.name
+        return self.safe_translation_getter("name", any_language=True) or f"Product {self.pk}"
 
 
-class ProductImage(models.Model):
+class ProductImage(TranslatableModel):
     product = models.ForeignKey(
         Product,
         on_delete=models.CASCADE,
         related_name="images",
         verbose_name=_("Товар"),
     )
+    translations = TranslatedFields(
+        alt_text=models.CharField(_("Альтернативный текст"), max_length=150, blank=True),
+    )
     image = models.ImageField(_("Изображение"), upload_to="products/")
-    alt_text = models.CharField(_("Альтернативный текст"), max_length=150, blank=True)
     ordering = models.PositiveIntegerField(_("Порядок"), default=0, db_index=True)
     is_primary = models.BooleanField(_("Основное"), default=False)
 
@@ -146,16 +159,21 @@ class ProductImage(models.Model):
             if self.pk:
                 qs = qs.exclude(pk=self.pk)
             if qs.exists():
-                raise ValidationError("У продукта может быть только одно основное изображение (is_primary=True).")
+                raise ValidationError(
+                    _("У продукта может быть только одно основное изображение (is_primary=True).")
+                )
 
     def __str__(self) -> str:
-        return f"{self.product} image #{self.pk}"
+        name = self.product.safe_translation_getter("name", any_language=True)
+        return f"{name or self.product_id} image #{self.pk}"
 
 
 # --- О нас ---
-class Advantage(models.Model):
-    title = models.CharField(_("Заголовок"), max_length=150)
-    description = models.TextField(_("Описание"))
+class Advantage(TranslatableModel):
+    translations = TranslatedFields(
+        title=models.CharField(_("Заголовок"), max_length=150),
+        description=models.TextField(_("Описание")),
+    )
     icon = models.ImageField(_("Иконка"), upload_to="about/icons/", blank=True)
     ordering = models.PositiveIntegerField(_("Порядок"), default=0, db_index=True)
     is_active = models.BooleanField(_("Активно"), default=True, db_index=True)
@@ -165,11 +183,16 @@ class Advantage(models.Model):
         verbose_name_plural = _("Преимущества")
         ordering = ["ordering", "id"]
 
+    def __str__(self) -> str:
+        return self.safe_translation_getter("title", any_language=True) or f"Advantage {self.pk}"
 
-class Metric(models.Model):
-    name = models.CharField(_("Название"), max_length=120)
-    value = models.CharField(_("Значение"), max_length=60)
-    suffix = models.CharField(_("Суффикс"), max_length=20, blank=True)
+
+class Metric(TranslatableModel):
+    translations = TranslatedFields(
+        name=models.CharField(_("Название"), max_length=120),
+        value=models.CharField(_("Значение"), max_length=60),
+        suffix=models.CharField(_("Суффикс"), max_length=20, blank=True),
+    )
     ordering = models.PositiveIntegerField(_("Порядок"), default=0, db_index=True)
     is_active = models.BooleanField(_("Активно"), default=True, db_index=True)
 
@@ -178,12 +201,17 @@ class Metric(models.Model):
         verbose_name_plural = _("Показатели")
         ordering = ["ordering", "id"]
 
+    def __str__(self) -> str:
+        return self.safe_translation_getter("name", any_language=True) or f"Metric {self.pk}"
 
-class TeamMember(models.Model):
-    full_name = models.CharField(_("ФИО"), max_length=150)
-    role = models.CharField(_("Роль"), max_length=120)
+
+class TeamMember(TranslatableModel):
+    translations = TranslatedFields(
+        full_name=models.CharField(_("ФИО"), max_length=150),
+        role=models.CharField(_("Роль"), max_length=120),
+        short_bio=models.TextField(_("Краткая биография"), blank=True),
+    )
     photo = models.ImageField(_("Фото"), upload_to="about/team/")
-    short_bio = models.TextField(_("Краткая биография"), blank=True)
     social_links = models.JSONField(_("Соцсети"), blank=True, null=True)
     ordering = models.PositiveIntegerField(_("Порядок"), default=0, db_index=True)
     is_active = models.BooleanField(_("Активен"), default=True, db_index=True)
@@ -193,10 +221,15 @@ class TeamMember(models.Model):
         verbose_name_plural = _("Команда")
         ordering = ["ordering", "id"]
 
+    def __str__(self) -> str:
+        return self.safe_translation_getter("full_name", any_language=True) or f"Team member {self.pk}"
 
-class Value(models.Model):
-    title = models.CharField(_("Заголовок"), max_length=150)
-    description = models.TextField(_("Описание"))
+
+class Value(TranslatableModel):
+    translations = TranslatedFields(
+        title=models.CharField(_("Заголовок"), max_length=150),
+        description=models.TextField(_("Описание")),
+    )
     icon = models.ImageField(_("Иконка"), upload_to="about/values/", blank=True)
     ordering = models.PositiveIntegerField(_("Порядок"), default=0, db_index=True)
     is_active = models.BooleanField(_("Активно"), default=True, db_index=True)
@@ -206,13 +239,18 @@ class Value(models.Model):
         verbose_name_plural = _("Ценности")
         ordering = ["ordering", "id"]
 
+    def __str__(self) -> str:
+        return self.safe_translation_getter("title", any_language=True) or f"Value {self.pk}"
 
-class Video(models.Model):
+
+class Video(TranslatableModel):
     class Page(models.TextChoices):
         HOME = "home", _("Главная")
         ABOUT = "about", _("О нас")
 
-    title = models.CharField(_("Заголовок"), max_length=200, blank=True)
+    translations = TranslatedFields(
+        title=models.CharField(_("Заголовок"), max_length=200, blank=True),
+    )
     page = models.CharField(_("Страница"), max_length=10, choices=Page.choices)
     file = models.FileField(_("Видео-файл"), upload_to="videos/", blank=True, null=True)
     youtube_url = models.URLField(_("YouTube ссылка"), blank=True)
@@ -226,7 +264,9 @@ class Video(models.Model):
         ordering = ("order", "-created_at")
 
     def __str__(self) -> str:
-        base = self.title or dict(self.Page.choices).get(self.page, "Video")
+        base = self.safe_translation_getter("title", any_language=True) or dict(self.Page.choices).get(
+            self.page, "Video"
+        )
         return f"{base}"
 
     def clean(self):
@@ -249,22 +289,26 @@ class Video(models.Model):
         return f"https://www.youtube.com/embed/{video_id}" if video_id else None
 
 
-class CompanyInfo(models.Model):
-    mission_text = models.TextField(_("Миссия"), blank=True)
-    about_text = models.TextField(_("О компании"), blank=True)
+class CompanyInfo(TranslatableModel):
+    translations = TranslatedFields(
+        mission_text=models.TextField(_("Миссия"), blank=True),
+        about_text=models.TextField(_("О компании"), blank=True),
+    )
     contacts = models.JSONField(_("Контакты"), blank=True, null=True)
     updated_at = models.DateTimeField(_("Обновлено"), auto_now=True)
 
     def clean(self):
         if CompanyInfo.objects.exclude(pk=self.pk).exists():
-            raise ValidationError("Разрешена только одна запись CompanyInfo (singleton).")
+            raise ValidationError(_("Разрешена только одна запись CompanyInfo (singleton)."))
 
     class Meta:
         verbose_name = _("Информация о компании")
         verbose_name_plural = _("Информация о компании")
 
     def __str__(self) -> str:
-        return str(_("Информация о компании"))
+        return self.safe_translation_getter("about_text", any_language=True) or str(
+            _("Информация о компании")
+        )
 
 
 # --- Контакты ---
@@ -294,10 +338,12 @@ class SocialMap(models.Model):
         return f"SocialMap #{self.pk}" if self.pk else "SocialMap"
 
 
-class ContactAddress(models.Model):
-    title = models.CharField(_("Название"), max_length=150, blank=True)
-    city = models.CharField(_("Город"), max_length=120, blank=True)
-    address = models.TextField(_("Адрес"))
+class ContactAddress(TranslatableModel):
+    translations = TranslatedFields(
+        title=models.CharField(_("Название"), max_length=150, blank=True),
+        city=models.CharField(_("Город"), max_length=120, blank=True),
+        address=models.TextField(_("Адрес")),
+    )
     order = models.PositiveIntegerField(_("Порядок"), default=0, db_index=True)
     is_active = models.BooleanField(_("Активен"), default=True, db_index=True)
 
@@ -307,16 +353,17 @@ class ContactAddress(models.Model):
         ordering = ["order", "id"]
 
     def __str__(self) -> str:
-        parts = [
-            part
-            for part in [self.title, self.city, self.address]
-            if part
-        ]
+        title = self.safe_translation_getter("title", any_language=True)
+        city = self.safe_translation_getter("city", any_language=True)
+        address = self.safe_translation_getter("address", any_language=True)
+        parts = [part for part in [title, city, address] if part]
         return ", ".join(parts) if parts else f"Адрес #{self.pk}"
 
 
-class ContactPhone(models.Model):
-    label = models.CharField(_("Подпись"), max_length=120, blank=True)
+class ContactPhone(TranslatableModel):
+    translations = TranslatedFields(
+        label=models.CharField(_("Подпись"), max_length=120, blank=True),
+    )
     phone = models.CharField(_("Телефон"), max_length=50)
     order = models.PositiveIntegerField(_("Порядок"), default=0, db_index=True)
     is_active = models.BooleanField(_("Активен"), default=True, db_index=True)
@@ -327,11 +374,14 @@ class ContactPhone(models.Model):
         ordering = ["order", "id"]
 
     def __str__(self) -> str:
-        return self.label or self.phone
+        label = self.safe_translation_getter("label", any_language=True)
+        return label or self.phone
 
 
-class ContactEmail(models.Model):
-    label = models.CharField(_("Подпись"), max_length=120, blank=True)
+class ContactEmail(TranslatableModel):
+    translations = TranslatedFields(
+        label=models.CharField(_("Подпись"), max_length=120, blank=True),
+    )
     email = models.EmailField(_("Email"))
     order = models.PositiveIntegerField(_("Порядок"), default=0, db_index=True)
     is_active = models.BooleanField(_("Активен"), default=True, db_index=True)
@@ -342,14 +392,17 @@ class ContactEmail(models.Model):
         ordering = ["order", "id"]
 
     def __str__(self) -> str:
-        return self.label or self.email
+        label = self.safe_translation_getter("label", any_language=True)
+        return label or self.email
 
 
-class ContactWorkingHours(models.Model):
-    weekdays = models.CharField(_("Будни"), max_length=200)
-    saturday = models.CharField(_("Суббота"), max_length=200)
-    sunday = models.CharField(_("Воскресенье"), max_length=200)
-    note = models.CharField(_("Примечание"), max_length=200, blank=True)
+class ContactWorkingHours(TranslatableModel):
+    translations = TranslatedFields(
+        weekdays=models.CharField(_("Будни"), max_length=200),
+        saturday=models.CharField(_("Суббота"), max_length=200),
+        sunday=models.CharField(_("Воскресенье"), max_length=200),
+        note=models.CharField(_("Примечание"), max_length=200, blank=True),
+    )
     is_active = models.BooleanField(_("Активен"), default=True, db_index=True)
 
     class Meta:
@@ -366,21 +419,24 @@ class ContactWorkingHours(models.Model):
                 raise ValidationError(_("Может существовать только одна активная запись времени работы."))
 
     def __str__(self) -> str:
-        return self.weekdays
+        return self.safe_translation_getter("weekdays", any_language=True) or f"Hours {self.pk}"
 
 
-class ContactTopic(models.Model):
-    name = models.CharField(_("Название"), max_length=150)
+class ContactTopic(TranslatableModel):
+    translations = TranslatedFields(
+        name=models.CharField(_("Название"), max_length=150),
+    )
     slug = models.SlugField(_("Слаг"), unique=True, max_length=160)
 
     class Meta:
         verbose_name = _("Тема обращения")
         verbose_name_plural = _("Темы обращений")
-        ordering = ["name"]
+        ordering = ["slug"]
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            base = slugify(self.name)
+            name_value = self.safe_translation_getter("name", any_language=True) or ""
+            base = slugify(name_value) or "topic"
             slug = base
             index = 1
             while ContactTopic.objects.filter(slug=slug).exclude(pk=self.pk).exists():
@@ -390,7 +446,7 @@ class ContactTopic(models.Model):
         return super().save(*args, **kwargs)
 
     def __str__(self) -> str:
-        return self.name
+        return self.safe_translation_getter("name", any_language=True) or f"Topic {self.pk}"
 
 
 class ContactRequest(models.Model):

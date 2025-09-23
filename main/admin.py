@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.forms import Textarea
 from django.utils.html import format_html
 from django.db import models as django_models
+from parler.admin import TranslatableAdmin, TranslatableTabularInline
 
 from . import models
 
@@ -20,7 +21,7 @@ def make_inactive(modeladmin, request, queryset):
     queryset.update(is_active=False)
 
 
-class ProductImageInline(admin.TabularInline):
+class ProductImageInline(TranslatableTabularInline):
     model = models.ProductImage
     extra = 1
     fields = ("preview", "image", "alt_text", "ordering", "is_primary")
@@ -35,17 +36,15 @@ class ProductImageInline(admin.TabularInline):
 
 
 @admin.register(models.Category)
-class CategoryAdmin(admin.ModelAdmin):
-    prepopulated_fields = {"slug": ("name",)}
-    search_fields = ("name", "slug")
-    list_display = ("name", "slug")
+class CategoryAdmin(TranslatableAdmin):
+    search_fields = ("translations__name", "slug")
+    list_display = ("__str__", "slug")
 
 
 @admin.register(models.Product)
-class ProductAdmin(admin.ModelAdmin):
-    prepopulated_fields = {"slug": ("name",)}
-    search_fields = ("name", "slug")
-    list_display = ("name", "category", "price", "is_active", "is_main", "created_at")
+class ProductAdmin(TranslatableAdmin):
+    search_fields = ("translations__name", "slug", "translations__description")
+    list_display = ("__str__", "category", "price", "is_active", "is_main", "created_at")
     list_filter = ("is_active", "is_main", "category")
     list_editable = ("is_main",)
     actions = [make_active, make_inactive]
@@ -53,64 +52,67 @@ class ProductAdmin(admin.ModelAdmin):
 
 
 @admin.register(models.CarouselItem)
-class CarouselItemAdmin(admin.ModelAdmin):
-    list_display = ("title", "ordering", "is_active")
+class CarouselItemAdmin(TranslatableAdmin):
+    list_display = ("__str__", "ordering", "is_active")
     list_filter = ("is_active",)
     actions = [make_active, make_inactive]
 
 
 @admin.register(models.SectionHeader)
-class SectionHeaderAdmin(admin.ModelAdmin):
-    list_display = ("title", "slug", "is_active")
+class SectionHeaderAdmin(TranslatableAdmin):
+    list_display = ("__str__", "slug", "is_active")
     list_filter = ("is_active",)
-    search_fields = ("title", "slug")
+    search_fields = ("translations__title", "slug")
     actions = [make_active, make_inactive]
 
 
 @admin.register(models.ProductImage)
-class ProductImageAdmin(admin.ModelAdmin):
+class ProductImageAdmin(TranslatableAdmin):
     list_display = ("product", "ordering", "is_primary")
     list_filter = ("is_primary",)
 
 
 @admin.register(models.Advantage)
-class AdvantageAdmin(admin.ModelAdmin):
-    list_display = ("title", "ordering", "is_active")
+class AdvantageAdmin(TranslatableAdmin):
+    list_display = ("__str__", "ordering", "is_active")
     list_filter = ("is_active",)
     actions = [make_active, make_inactive]
 
 
 @admin.register(models.Metric)
-class MetricAdmin(admin.ModelAdmin):
-    list_display = ("name", "value", "ordering", "is_active")
+class MetricAdmin(TranslatableAdmin):
+    list_display = ("__str__", "value", "ordering", "is_active")
     list_filter = ("is_active",)
+    search_fields = ("translations__name", "translations__value")
     actions = [make_active, make_inactive]
 
 
 @admin.register(models.TeamMember)
-class TeamMemberAdmin(admin.ModelAdmin):
-    list_display = ("full_name", "role", "ordering", "is_active")
+class TeamMemberAdmin(TranslatableAdmin):
+    list_display = ("__str__", "role", "ordering", "is_active")
     list_filter = ("is_active",)
+    search_fields = ("translations__full_name", "translations__role")
     actions = [make_active, make_inactive]
 
 
 @admin.register(models.Value)
-class ValueAdmin(admin.ModelAdmin):
-    list_display = ("title", "ordering", "is_active")
+class ValueAdmin(TranslatableAdmin):
+    list_display = ("__str__", "ordering", "is_active")
     list_filter = ("is_active",)
+    search_fields = ("translations__title",)
     actions = [make_active, make_inactive]
 
 
 @admin.register(models.Video)
-class VideoAdmin(admin.ModelAdmin):
-    list_display = ("id", "title", "page", "is_active", "order", "created_at")
+class VideoAdmin(TranslatableAdmin):
+    list_display = ("id", "__str__", "page", "is_active", "order", "created_at")
     list_filter = ("page", "is_active")
-    search_fields = ("title", "youtube_url")
+    search_fields = ("translations__title", "youtube_url")
     ordering = ("order", "-created_at")
 
 
 @admin.register(models.CompanyInfo)
-class CompanyInfoAdmin(admin.ModelAdmin):
+class CompanyInfoAdmin(TranslatableAdmin):
     def has_add_permission(self, request):
         if models.CompanyInfo.objects.exists():
             return False
@@ -132,33 +134,37 @@ class SocialMapAdmin(admin.ModelAdmin):
 
 
 @admin.register(models.ContactAddress)
-class ContactAddressAdmin(admin.ModelAdmin):
+class ContactAddressAdmin(TranslatableAdmin):
     list_display = ("__str__", "order", "is_active")
     list_filter = ("is_active",)
     ordering = ("order", "id")
+    search_fields = ("translations__title", "translations__city", "translations__address")
     actions = [make_active, make_inactive]
 
 
 @admin.register(models.ContactPhone)
-class ContactPhoneAdmin(admin.ModelAdmin):
+class ContactPhoneAdmin(TranslatableAdmin):
     list_display = ("__str__", "order", "is_active")
     list_filter = ("is_active",)
     ordering = ("order", "id")
+    search_fields = ("translations__label", "phone")
     actions = [make_active, make_inactive]
 
 
 @admin.register(models.ContactEmail)
-class ContactEmailAdmin(admin.ModelAdmin):
+class ContactEmailAdmin(TranslatableAdmin):
     list_display = ("__str__", "order", "is_active")
     list_filter = ("is_active",)
     ordering = ("order", "id")
+    search_fields = ("translations__label", "email")
     actions = [make_active, make_inactive]
 
 
 @admin.register(models.ContactWorkingHours)
-class ContactWorkingHoursAdmin(admin.ModelAdmin):
+class ContactWorkingHoursAdmin(TranslatableAdmin):
     list_display = ("weekdays", "saturday", "sunday", "is_active")
     list_filter = ("is_active",)
+    search_fields = ("translations__weekdays", "translations__saturday", "translations__sunday")
 
     def has_add_permission(self, request):
         if models.ContactWorkingHours.objects.exists():
@@ -167,10 +173,9 @@ class ContactWorkingHoursAdmin(admin.ModelAdmin):
 
 
 @admin.register(models.ContactTopic)
-class ContactTopicAdmin(admin.ModelAdmin):
-    prepopulated_fields = {"slug": ("name",)}
-    search_fields = ("name", "slug")
-    ordering = ("name",)
+class ContactTopicAdmin(TranslatableAdmin):
+    search_fields = ("translations__name", "slug")
+    ordering = ("slug",)
 
 
 @admin.register(models.ContactRequest)

@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
 {% block content %}
 
@@ -20,10 +21,10 @@
             <div class="container">
                 <!-- Category Filters -->
                 <div class="category-filters">
-                    <div class="category-scroller" id="catScroller" aria-label="Категории">
-                        <a href="{% url 'catalog' %}?category=all{% if q %}&q={{ q|urlencode }}{% endif %}#grid" class="filter-btn {% if active_cat == 'all' %}active{% endif %}" data-all="1" data-cat="all">Все</a>
+                    <div class="category-scroller" id="catScroller" aria-label="{% trans 'Категории' %}">
+                        <a href="{% url 'main:catalog' %}?category=all{% if q %}&q={{ q|urlencode }}{% endif %}#grid" class="filter-btn {% if active_cat == 'all' %}active{% endif %}" data-all="1" data-cat="all">{% trans 'Все' %}</a>
                         {% for category in categories %}
-                        <a href="{% url 'catalog' %}?category={{ category.slug }}{% if q %}&q={{ q|urlencode }}{% endif %}#grid" class="filter-btn {% if active_cat == category.slug %}active{% endif %}" data-cat="{{ category.slug }}">{{ category.name }}</a>
+                        <a href="{% url 'main:catalog' %}?category={{ category.slug }}{% if q %}&q={{ q|urlencode }}{% endif %}#grid" class="filter-btn {% if active_cat == category.slug %}active{% endif %}" data-cat="{{ category.slug }}">{{ category.name }}</a>
                         {% endfor %}
                     </div>
                 </div>
@@ -37,7 +38,7 @@
                 {% if page_obj.has_other_pages %}
                 <div class="pagination">
                     {% if page_obj.has_previous %}
-                    <a class="page-link prev" href="{% if query_string %}?{{ query_string }}&page={{ page_obj.previous_page_number }}{% else %}?page={{ page_obj.previous_page_number }}{% endif %}">Назад</a>
+                    <a class="page-link prev" href="{% if query_string %}?{{ query_string }}&page={{ page_obj.previous_page_number }}{% else %}?page={{ page_obj.previous_page_number }}{% endif %}">{% trans 'Назад' %}</a>
                     {% endif %}
                     {% for num in page_obj.paginator.page_range %}
                         {% if num == page_obj.number %}
@@ -47,7 +48,7 @@
                         {% endif %}
                     {% endfor %}
                     {% if page_obj.has_next %}
-                    <a class="page-link next" href="{% if query_string %}?{{ query_string }}&page={{ page_obj.next_page_number }}{% else %}?page={{ page_obj.next_page_number }}{% endif %}">Вперед</a>
+                    <a class="page-link next" href="{% if query_string %}?{{ query_string }}&page={{ page_obj.next_page_number }}{% else %}?page={{ page_obj.next_page_number }}{% endif %}">{% trans 'Вперед' %}</a>
                     {% endif %}
                 </div>
                 {% endif %}

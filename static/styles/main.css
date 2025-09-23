@@ -105,6 +105,23 @@ a:focus {
     gap: 32px;
 }
 
+.lang-switcher {
+    display: flex;
+    gap: 8px;
+}
+
+.lang-btn {
+    background: transparent;
+    border: 1px solid var(--border);
+    padding: 0.25rem 0.5rem;
+    color: inherit;
+    cursor: pointer;
+}
+
+.lang-btn.active {
+    border-color: var(--brand-gold-2);
+}
+
 .nav-link {
     text-decoration: none;
     color: var(--text-muted);

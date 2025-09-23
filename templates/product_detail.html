@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
 {% block content %}
 
@@ -7,9 +8,9 @@
             <div class="container">
                 <!-- Breadcrumb -->
                 <nav class="breadcrumb" style="margin-bottom: 24px;">
-                    <a href="/" style="color: hsl(25, 6%, 45%); text-decoration: none;">Главная</a>
+                    <a href="{% url 'main:index' %}" style="color: hsl(25, 6%, 45%); text-decoration: none;">{% trans 'Главная' %}</a>
                     <span style="margin: 0 8px; color: hsl(25, 6%, 45%);">→</span>
-                    <a href="/catalog" style="color: hsl(25, 6%, 45%); text-decoration: none;">Каталог</a>
+                    <a href="{% url 'main:catalog' %}" style="color: hsl(25, 6%, 45%); text-decoration: none;">{% trans 'Каталог' %}</a>
                     <span style="margin: 0 8px; color: hsl(25, 6%, 45%);">→</span>
                     <span style="color: hsl(25, 25%, 35%);">{{ product.name }}</span>
                 </nav>
@@ -34,23 +35,23 @@
 
                         <div class="spec-grid">
                             <div class="spec-item">
-                                <span class="spec-label">Категория:</span>
+                                <span class="spec-label">{% trans 'Категория:' %}</span>
                                 <span class="spec-value">{{ product.category.name }}</span>
                             </div>
                             <div class="spec-item">
-                                <span class="spec-label">Цена:</span>
+                                <span class="spec-label">{% trans 'Цена:' %}</span>
                                 <span class="spec-value">{{ product.price }} ₸</span>
                             </div>
                         </div>
 
                         <div class="product-description">
-                            <h3>Описание</h3>
+                            <h3>{% trans 'Описание' %}</h3>
                             {{ product.description|safe }}
                         </div>
 
                         <div style="margin-top: 32px;">
-                            <a href="/contact" class="btn btn-primary" style="margin-right: 16px;">Заказать консультацию</a>
-                            <a href="/catalog" class="btn btn-outline">Вернуться в каталог</a>
+                            <a href="{% url 'main:contact' %}" class="btn btn-primary" style="margin-right: 16px;">{% trans 'Заказать консультацию' %}</a>
+                            <a href="{% url 'main:catalog' %}" class="btn btn-outline">{% trans 'Вернуться в каталог' %}</a>
                         </div>
                     </div>
                 </div>
@@ -58,7 +59,7 @@
                 <!-- Additional Gallery -->
                 {% if images %}
                 <div class="additional-gallery">
-                    <h3>Дополнительные фотографии</h3>
+                    <h3>{% trans 'Дополнительные фотографии' %}</h3>
                     <div class="gallery-grid">
                         {% for img in images %}
                         <div class="gallery-item"><img width="200px" src="{{ img.image.url }}" alt="{{ img.alt_text|default:product.name }}"></div>
