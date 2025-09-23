@@ -152,37 +152,9 @@ function makeHorizontalScroll(el) {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-    const scroller = document.getElementById('catScroller');
+    const scroller = document.getElementById('catScroller') || document.getElementById('catRow');
     makeHorizontalScroll(scroller);
 });
-
-// Catalog filtering functionality
-function filterProducts(category) {
-    const products = document.querySelectorAll('.product-card[data-category]');
-    const filterBtns = document.querySelectorAll('.filter-btn');
-    const noProducts = document.getElementById('noProducts');
-    
-    // Update active button
-    filterBtns.forEach(btn => btn.classList.remove('active'));
-    event.target.classList.add('active');
-    
-    let visibleCount = 0;
-    
-    products.forEach(product => {
-        const productCategory = product.getAttribute('data-category');
-        if (category === 'all' || productCategory === category) {
-            product.style.display = 'block';
-            visibleCount++;
-        } else {
-            product.style.display = 'none';
-        }
-    });
-    
-    // Show/hide no products message
-    if (noProducts) {
-        noProducts.style.display = visibleCount === 0 ? 'block' : 'none';
-    }
-}
 
 // Contact form functionality
 function submitForm(event) {
@@ -286,3 +258,83 @@ document.addEventListener('DOMContentLoaded', function() {
         observer.observe(el);
     });
 });
+
+(function () {
+  function initCatalogFilter() {
+    const scroller = document.getElementById("catRow") || document.getElementById("catScroller");
+    const grid = document.getElementById("productsGrid");
+    if (!grid) return;
+
+    // делегирование кликов
+    document.addEventListener("click", async (e) => {
+      const btn = e.target.closest(".filter-btn");
+      if (!btn) return;
+
+      const slug = btn.dataset.cat || (btn.dataset.all ? "all" : null);
+      if (!slug) return;
+
+      e.preventDefault();
+
+      // активная кнопка
+      document.querySelectorAll(".filter-btn.active").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+
+      // Плавное обновление грида
+      grid.style.opacity = "0.5";
+
+      const params = new URLSearchParams(window.location.search);
+      params.set("category", slug);
+      params.delete("page");
+      params.set("partial", "1");
+
+      try {
+        const resp = await fetch(`${window.location.pathname}?${params.toString()}`, {
+          headers: {"X-Requested-With": "fetch"}
+        });
+        const html = await resp.text();
+        grid.innerHTML = html;
+        grid.style.opacity = "1";
+
+        // обновляем URL (без перезагрузки)
+        params.delete("partial");
+        const baseSearch = params.toString();
+        const url = baseSearch ? `${window.location.pathname}?${baseSearch}#grid` : `${window.location.pathname}#grid`;
+        window.history.pushState({cat: slug}, "", url);
+
+        // оставаться на месте: скролл к гриду (на всякий случай)
+        document.getElementById("grid")?.scrollIntoView({block: "start", behavior: "smooth"});
+      } catch (err) {
+        // фоллбек: обычная навигация с якорем
+        params.delete("partial");
+        const fallbackSearch = params.toString();
+        const fallbackUrl = fallbackSearch ? `${window.location.pathname}?${fallbackSearch}#grid` : `${window.location.pathname}#grid`;
+        window.location.href = fallbackUrl;
+      }
+    });
+
+    // если пришли по ссылке/Back — не прыгать наверх
+    window.addEventListener("popstate", () => {
+      const params = new URLSearchParams(location.search);
+      const slug = params.get("category") || "all";
+      // подсветим кнопку
+      document.querySelectorAll(".filter-btn.active").forEach(b => b.classList.remove("active"));
+      const activeBtn = document.querySelector(`.filter-btn[data-cat="${slug}"], .filter-btn[data-all="${slug==='all'?'1':''}"]`);
+      activeBtn?.classList.add("active");
+      // при навигации браузера можно подгрузить частично
+      const fetchParams = new URLSearchParams(params.toString());
+      fetchParams.set("category", slug);
+      fetchParams.delete("page");
+      fetchParams.set("partial", "1");
+      fetch(`${window.location.pathname}?${fetchParams.toString()}`)
+        .then(r => r.text())
+        .then(html => { grid.innerHTML = html; });
+    });
+
+    // если мы зашли с #grid — прокрутим к нему
+    if (location.hash === "#grid") {
+      document.getElementById("grid")?.scrollIntoView({block: "start"});
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", initCatalogFilter);
+})();
