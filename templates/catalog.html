@@ -21,35 +21,17 @@
                 <!-- Category Filters -->
                 <div class="category-filters">
                     <div class="category-scroller" id="catScroller" aria-label="Категории">
-                        <button type="button" class="filter-btn {% if not active_category %}active{% endif %}" onclick="filterProducts('all'); window.location.href='{% url 'catalog' %}{% if q %}?q={{ q|urlencode }}{% endif %}';">Все</button>
+                        <a href="{% url 'catalog' %}?category=all{% if q %}&q={{ q|urlencode }}{% endif %}#grid" class="filter-btn {% if active_cat == 'all' %}active{% endif %}" data-all="1" data-cat="all">Все</a>
                         {% for category in categories %}
-                        <button type="button" class="filter-btn {% if active_category and active_category.id == category.id %}active{% endif %}" onclick="filterProducts('{{ category.name }}'); window.location.href='{% url 'catalog' %}?category={{ category.slug }}{% if q %}&q={{ q|urlencode }}{% endif %}';">{{ category.name }}</button>
+                        <a href="{% url 'catalog' %}?category={{ category.slug }}{% if q %}&q={{ q|urlencode }}{% endif %}#grid" class="filter-btn {% if active_cat == category.slug %}active{% endif %}" data-cat="{{ category.slug }}">{{ category.name }}</a>
                         {% endfor %}
                     </div>
                 </div>
 
                 <!-- Products Grid -->
-                <div class="products-grid" id="productsGrid">
-                    {% for p in products %}
-                    <a href="{% url 'product_detail' p.slug %}" class="product-card" data-category="{{ p.category.name }}">
-                        <div class="product-image">
-                            {% with img=p.images.all.0 %}
-                                {% if img %}<img src="{{ img.image.url }}" alt="{{ p.name }}">{% else %}
-                                <img src="/static/placeholder.jpg" alt="{{ p.name }}">
-                                {% endif %}
-                            {% endwith %}
-                        </div>
-                        <div class="product-info">
-                            <div class="product-category">{{ p.category.name }}</div>
-                            <h3>{{ p.name }}</h3>
-                            <div class="product-link"><span>Подробнее</span><span class="arrow">→</span></div>
-                        </div>
-                    </a>
-                    {% endfor %}
-                </div>
-
-                <div class="no-products" id="noProducts" {% if products %}style="display: none;"{% endif %}>
-                    <p>Товары данной категории не найдены.</p>
+                <section id="grid"></section>
+                <div id="productsGrid">
+                    {% include "partials/_products_grid.html" with products=products %}
                 </div>
 
                 {% if page_obj.has_other_pages %}

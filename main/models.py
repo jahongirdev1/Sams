@@ -7,6 +7,8 @@ from django.utils.text import slugify
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
 
+from ckeditor.fields import RichTextField
+
 
 # --- Главная: карусель ---
 class CarouselItem(models.Model):
@@ -82,7 +84,7 @@ class Category(models.Model):
 class Product(models.Model):
     name = models.CharField(_("Название"), max_length=180)
     slug = models.SlugField(_("Слаг"), unique=True, db_index=True, max_length=200)
-    description = models.TextField(_("Описание"), blank=True)
+    description = RichTextField(_("Описание"), blank=True)
     price = models.DecimalField(_("Цена"), max_digits=10, decimal_places=2, default=0)
     is_active = models.BooleanField(_("Активен"), default=True, db_index=True)
     is_main = models.BooleanField(_("Показывать на главной"), default=False, db_index=True)

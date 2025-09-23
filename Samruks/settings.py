@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'django_filters',
     'drf_spectacular',
+    'ckeditor',
+    'ckeditor_uploader',
     'main',
 ]
 
@@ -146,6 +148,16 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
+
+CKEDITOR_UPLOAD_PATH = "uploads/ckeditor/"
+CKEDITOR_CONFIGS = {
+    "default": {
+        "toolbar": "Basic",
+        "removePlugins": "elementspath",
+        "height": 220,
+        "extraAllowedContent": "span[*];a[*];p[*];strong;em;ul;ol;li;br",
+    }
+}
 
 # CORS (development)
 CORS_ALLOW_ALL_ORIGINS = False

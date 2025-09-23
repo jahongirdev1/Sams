@@ -153,43 +153,50 @@ def index(request):
     return render(request, "index.html", context)
 
 
-def catalog(request):
+def catalog_view(request):
+    cat_slug = request.GET.get("category")
+    search_query = request.GET.get("q")
+
     images_prefetch = Prefetch(
         "images",
         queryset=ProductImage.objects.order_by("-is_primary", "ordering", "id"),
     )
+    qs = Product.objects.filter(is_active=True)
+    if cat_slug and cat_slug != "all":
+        qs = qs.filter(category__slug=cat_slug)
+    if search_query:
+        qs = qs.filter(Q(name__icontains=search_query) | Q(description__icontains=search_query))
+
     qs = (
-        Product.objects.filter(is_active=True)
-        .select_related("category")
+        qs.select_related("category")
         .prefetch_related(images_prefetch)
         .order_by("-created_at")
     )
-    categories = Category.objects.all()
-    category_slug = request.GET.get("category")
-    q = request.GET.get("q")
-    active_category = None
-    if category_slug:
-        qs = qs.filter(category__slug=category_slug)
-        active_category = categories.filter(slug=category_slug).first()
-    if q:
-        qs = qs.filter(Q(name__icontains=q) | Q(description__icontains=q))
+
     paginator = Paginator(qs, 12)
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
+
+    if request.GET.get("partial") == "1":
+        return render(request, "partials/_products_grid.html", {"products": page_obj.object_list})
+
     query_params = request.GET.copy()
     query_params.pop("page", None)
     query_string = query_params.urlencode()
+
+    categories = Category.objects.all()
     contacts = CompanyInfo.objects.first()
     header = SectionHeader.objects.filter(slug="catalog", is_active=True).first()
+    active_cat = cat_slug or "all"
+
     context = {
         "categories": categories,
         "page_obj": page_obj,
         "products": page_obj.object_list,
-        "active_category": active_category,
         "active_page": "catalog",
-        "q": q,
+        "active_cat": active_cat,
+        "q": search_query,
         "query_string": query_string,
-        "category_slug": category_slug,
         "contacts": contacts,
         "header": header,
     }

@@ -20,11 +20,12 @@ router.register(r'about/company', main_views.CompanyInfoViewSet, basename='compa
 urlpatterns = [
     # HTML pages
     path('', main_views.index, name='index'),
-    path('catalog/', main_views.catalog, name='catalog'),
+    path('catalog/', main_views.catalog_view, name='catalog'),
     path('product/<slug:slug>/', main_views.product_detail, name='product_detail'),
     path('about/', main_views.about, name='about'),
     path('contact/', main_views.contact_view, name='contact'),
 
+    path('ckeditor/', include('ckeditor_uploader.urls')),
     path('admin/', admin.site.urls),
 
     # API schema and docs
