@@ -298,11 +298,20 @@ document.addEventListener('DOMContentLoaded', function() {
         // обновляем URL (без перезагрузки)
         params.delete("partial");
         const baseSearch = params.toString();
-        const url = baseSearch ? `${window.location.pathname}?${baseSearch}#grid` : `${window.location.pathname}#grid`;
-        window.history.pushState({cat: slug}, "", url);
+        const cleanUrl = baseSearch ? `${window.location.pathname}?${baseSearch}` : `${window.location.pathname}`;
+        const targetState = {cat: slug};
+        const urlWithHash = `${cleanUrl}#grid`;
+
+        window.history.pushState(targetState, "", urlWithHash);
+
+        if (location.hash) {
+          window.history.replaceState(targetState, "", cleanUrl);
+        }
 
         // оставаться на месте: скролл к гриду (на всякий случай)
-        document.getElementById("grid")?.scrollIntoView({block: "start", behavior: "smooth"});
+        document.getElementById("grid")?.scrollIntoView({behavior: "smooth", block: "start"});
+
+        window.history.replaceState(targetState, "", urlWithHash);
       } catch (err) {
         // фоллбек: обычная навигация с якорем
         params.delete("partial");
