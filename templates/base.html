@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-{% load static i18n %}
+{% load static i18n i18n_tools %}
 <html lang="{{ LANGUAGE_CODE }}">
 <head>
     <meta charset="UTF-8">
@@ -37,12 +37,21 @@
                     <a href="{% url 'main:contact' %}" class="nav-link {% if active_page == 'contact' %}  active {% endif %}">{% trans 'Контакты' %}</a>
                 </nav>
 
-                <form action="{% url 'set_language' %}" method="post" class="lang-switcher">
-                  {% csrf_token %}
-                  <input type="hidden" name="next" value="{{ request.get_full_path }}">
-                  <button name="language" value="ru" type="submit" class="lang-btn{% if LANGUAGE_CODE == 'ru' %} active{% endif %}">RU</button>
-                  <button name="language" value="en" type="submit" class="lang-btn{% if LANGUAGE_CODE == 'en' %} active{% endif %}">EN</button>
-                </form>
+                <div class="lang-switcher-group">
+                    <form action="{% url 'set_language' %}" method="post" class="lang-switcher">
+                      {% csrf_token %}
+                      <input type="hidden" name="next" value="{% translate_current 'ru' %}">
+                      <button name="language" value="ru" type="submit"
+                              class="lang-btn{% if LANGUAGE_CODE == 'ru' %} active{% endif %}">RU</button>
+                    </form>
+
+                    <form action="{% url 'set_language' %}" method="post" class="lang-switcher">
+                      {% csrf_token %}
+                      <input type="hidden" name="next" value="{% translate_current 'en' %}">
+                      <button name="language" value="en" type="submit"
+                              class="lang-btn{% if LANGUAGE_CODE == 'en' %} active{% endif %}">EN</button>
+                    </form>
+                </div>
 
                 <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
                     <span class="hamburger"></span>

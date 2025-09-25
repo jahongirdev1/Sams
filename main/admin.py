@@ -1,22 +1,23 @@
 from django.contrib import admin
+from django.db import models as django_models
 from django.forms import Textarea
 from django.utils.html import format_html
-from django.db import models as django_models
+from django.utils.translation import gettext_lazy as _
 from parler.admin import TranslatableAdmin, TranslatableTabularInline
 
 from . import models
 
-admin.site.site_header = "Samruks — Панель управления"
-admin.site.site_title = "Админка Samruks"
-admin.site.index_title = "Управление сайтом"
+admin.site.site_header = _("Samruks — Панель управления")
+admin.site.site_title = _("Админка Samruks")
+admin.site.index_title = _("Управление сайтом")
 
 
-@admin.action(description="Включить выбранные")
+@admin.action(description=_("Включить выбранные"))
 def make_active(modeladmin, request, queryset):
     queryset.update(is_active=True)
 
 
-@admin.action(description="Выключить выбранные")
+@admin.action(description=_("Выключить выбранные"))
 def make_inactive(modeladmin, request, queryset):
     queryset.update(is_active=False)
 
@@ -32,7 +33,7 @@ class ProductImageInline(TranslatableTabularInline):
             return format_html('<img src="{}" style="height: 80px;" />', obj.image.url)
         return ""
 
-    preview.short_description = "Превью"
+    preview.short_description = _("Превью")
 
 
 @admin.register(models.Category)

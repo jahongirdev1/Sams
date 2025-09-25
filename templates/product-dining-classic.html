@@ -1,38 +1,39 @@
-
+{% load i18n %}
 
     <main>
         <section class="product-detail">
             <div class="container">
                 <div class="product-content">
                     <div class="product-gallery">
-                        <img src="src/assets/foto.jpg" alt="Обеденная группа Classic" class="main-image" id="mainImage">
+                        <img src="src/assets/foto.jpg" alt="{% trans 'Обеденная группа Classic' %}" class="main-image" id="mainImage">
                     </div>
                     <div class="product-info">
-                        <h1>Обеденная группа Classic</h1>
+                        <h1>{% trans 'Обеденная группа Classic' %}</h1>
                         <div class="spec-grid">
                             <div class="spec-item">
-                                <span class="spec-label">Размеры стола (Д×Ш×В):</span>
-                                <span class="spec-value">160×90×75 см</span>
-                            </div>
-                            <div class="spec-item">
-                                <span class="spec-label">Материал:</span>
-                                <span class="spec-value">Массив дуба, лак</span>
-                            </div>
-                            <div class="spec-item">
-                                <span class="spec-label">Комплектация:</span>
-                                <span class="spec-value">Стол + 6 стульев</span>
+                                <span class="spec-label">{% trans 'Размеры стола (Д×Ш×В):' %}</span>
+                                <span class="spec-value">{% trans '160×90×75 см' %}</span>
                             </div>
                         </div>
-                        <div class="product-description">
-                            <h3>Описание</h3>
-                            <p>Элегантная обеденная группа Classic создана для семейных ужинов и торжественных мероприятий.</p>
+                        <div class="spec-item">
+                            <span class="spec-label">{% trans 'Материал:' %}</span>
+                            <span class="spec-value">{% trans 'Массив дуба, лак' %}</span>
                         </div>
-                        <div style="margin-top: 32px;">
-                            <a href="{% url 'contact' %}" class="btn btn-primary">Заказать консультацию</a>
+                        <div class="spec-item">
+                            <span class="spec-label">{% trans 'Комплектация:' %}</span>
+                            <span class="spec-value">{% trans 'Стол + 6 стульев' %}</span>
                         </div>
+                    </div>
+                    <div class="product-description">
+                        <h3>{% trans 'Описание' %}</h3>
+                        <p>{% trans 'Элегантная обеденная группа Classic создана для семейных ужинов и торжественных мероприятий.' %}</p>
+                    </div>
+                    <div style="margin-top: 32px;">
+                        <a href="{% url 'main:contact' %}" class="btn btn-primary">{% trans 'Заказать консультацию' %}</a>
                     </div>
                 </div>
             </div>
-        </section>
-    </main>
+        </div>
+    </section>
+</main>
 

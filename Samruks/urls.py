@@ -2,8 +2,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.conf.urls.i18n import i18n_patterns
 from django.contrib import admin
-from django.urls import path, include
-from django.views.i18n import set_language
+from django.urls import include, path
 from rest_framework.routers import DefaultRouter
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 
@@ -20,7 +19,7 @@ router.register(r'about/values', main_views.ValueViewSet, basename='value')
 router.register(r'about/company', main_views.CompanyInfoViewSet, basename='company')
 
 urlpatterns = [
-    path('i18n/setlang/', set_language, name='set_language'),
+    path("i18n/", include("django.conf.urls.i18n")),
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('admin/', admin.site.urls),
     path('api/schema/', SpectacularAPIView.as_view(), name='schema'),

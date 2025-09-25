@@ -138,6 +138,8 @@ TIME_ZONE = "Asia/Almaty"
 
 LOCALE_PATHS = [BASE_DIR / "locale"]  # папка для переводов проекта (пока не нужна для админки)
 
+LANGUAGE_COOKIE_NAME = "django_language"
+
 PARLER_LANGUAGES = {
     None: (
         {"code": "ru"},

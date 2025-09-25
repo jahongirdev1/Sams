@@ -1,0 +1,958 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Samruks\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-25 12:46+0500\n"
+"PO-Revision-Date: 2025-09-24 10:31+0000\n"
+"Last-Translator: Auto Generated <noreply@example.com>\n"
+"Language-Team: Russian\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
+"(n%100>=11 && n%100<=14)? 2 : 3);\n"
+
+#: .\Samruks\settings.py:130
+msgid "Russian"
+msgstr "Русский"
+
+#: .\Samruks\settings.py:131
+msgid "English"
+msgstr "Английский"
+
+#: .\main\admin.py:10
+msgid "Samruks — Панель управления"
+msgstr "Samruks — Панель управления"
+
+#: .\main\admin.py:11
+msgid "Админка Samruks"
+msgstr "Админка Samruks"
+
+#: .\main\admin.py:12
+msgid "Управление сайтом"
+msgstr "Управление сайтом"
+
+#: .\main\admin.py:15
+msgid "Включить выбранные"
+msgstr "Включить выбранные"
+
+#: .\main\admin.py:20
+msgid "Выключить выбранные"
+msgstr "Выключить выбранные"
+
+#: .\main\admin.py:36
+msgid "Превью"
+msgstr "Превью"
+
+#: .\main\apps.py:8
+msgid "Контент сайта"
+msgstr "Контент сайта"
+
+#: .\main\models.py:17 .\main\models.py:38 .\main\models.py:174
+#: .\main\models.py:230 .\main\models.py:252
+msgid "Заголовок"
+msgstr "Заголовок"
+
+#: .\main\models.py:18
+msgid "Подзаголовок"
+msgstr "Подзаголовок"
+
+#: .\main\models.py:20 .\main\models.py:146
+msgid "Изображение"
+msgstr "Изображение"
+
+#: .\main\models.py:21
+msgid "Ссылка"
+msgstr "Ссылка"
+
+#: .\main\models.py:22 .\main\models.py:53 .\main\models.py:99
+#: .\main\models.py:217 .\main\models.py:348 .\main\models.py:369
+#: .\main\models.py:387 .\main\models.py:406
+msgid "Активен"
+msgstr "Активен"
+
+#: .\main\models.py:23 .\main\models.py:147 .\main\models.py:178
+#: .\main\models.py:196 .\main\models.py:216 .\main\models.py:234
+#: .\main\models.py:258 .\main\models.py:347 .\main\models.py:368
+#: .\main\models.py:386
+msgid "Порядок"
+msgstr "Порядок"
+
+#: .\main\models.py:24 .\main\models.py:107 .\main\models.py:466
+msgid "Создано"
+msgstr "Создано"
+
+#: .\main\models.py:25 .\main\models.py:108 .\main\models.py:298
+#: .\main\models.py:326
+msgid "Обновлено"
+msgstr "Обновлено"
+
+#: .\main\models.py:28
+msgid "Слайд"
+msgstr "Слайд"
+
+#: .\main\models.py:29
+msgid "Слайды"
+msgstr "Слайды"
+
+#: .\main\models.py:39 .\main\models.py:67 .\main\models.py:95
+#: .\main\models.py:175 .\main\models.py:231
+#: .\templates\product-dining-classic.html:28
+#: .\templates\product-sofa-elegance.html:191
+#: .\templates\product_detail.html:48
+msgid "Описание"
+msgstr "Описание"
+
+#: .\main\models.py:42 .\main\models.py:214
+msgid "Фото"
+msgstr "Фото"
+
+#: .\main\models.py:46
+msgid "Фон для блока, можно не добавлять"
+msgstr "Фон для блока, можно не добавлять"
+
+#: .\main\models.py:49 .\main\models.py:69 .\main\models.py:97
+#: .\main\models.py:429
+msgid "Слаг"
+msgstr "Слаг"
+
+#: .\main\models.py:51
+msgid "Ключ страницы: catalog, about, contact и т.д."
+msgstr "Ключ страницы: catalog, about, contact и т.д."
+
+#: .\main\models.py:56
+msgid "Заголовок секции"
+msgstr "Заголовок секции"
+
+#: .\main\models.py:57
+msgid "Заголовки секций"
+msgstr "Заголовки секций"
+
+#: .\main\models.py:66 .\main\models.py:94 .\main\models.py:192
+#: .\main\models.py:343 .\main\models.py:427
+msgid "Название"
+msgstr "Название"
+
+#: .\main\models.py:72 .\main\models.py:105
+msgid "Категория"
+msgstr "Категория"
+
+#: .\main\models.py:73 .\templates\catalog.html:24
+msgid "Категории"
+msgstr "Категории"
+
+#: .\main\models.py:98
+msgid "Цена"
+msgstr "Цена"
+
+#: .\main\models.py:100
+msgid "Показывать на главной"
+msgstr "Показывать на главной"
+
+#: .\main\models.py:111 .\main\models.py:141
+msgid "Товар"
+msgstr "Товар"
+
+#: .\main\models.py:112
+msgid "Товары"
+msgstr "Товары"
+
+#: .\main\models.py:144
+msgid "Альтернативный текст"
+msgstr "Альтернативный текст"
+
+#: .\main\models.py:148
+msgid "Основное"
+msgstr "Основное"
+
+#: .\main\models.py:151
+msgid "Изображение товара"
+msgstr "Изображение товара"
+
+#: .\main\models.py:152
+msgid "Изображения товара"
+msgstr "Изображения товара"
+
+#: .\main\models.py:163
+msgid ""
+"У продукта может быть только одно основное изображение (is_primary=True)."
+msgstr ""
+"У продукта может быть только одно основное изображение (is_primary=True)."
+
+#: .\main\models.py:177 .\main\models.py:233
+msgid "Иконка"
+msgstr "Иконка"
+
+#: .\main\models.py:179 .\main\models.py:197 .\main\models.py:235
+#: .\main\models.py:257
+msgid "Активно"
+msgstr "Активно"
+
+#: .\main\models.py:182
+msgid "Преимущество"
+msgstr "Преимущество"
+
+#: .\main\models.py:183
+msgid "Преимущества"
+msgstr "Преимущества"
+
+#: .\main\models.py:193
+msgid "Значение"
+msgstr "Значение"
+
+#: .\main\models.py:194
+msgid "Суффикс"
+msgstr "Суффикс"
+
+#: .\main\models.py:200
+msgid "Показатель"
+msgstr "Показатель"
+
+#: .\main\models.py:201
+msgid "Показатели"
+msgstr "Показатели"
+
+#: .\main\models.py:210
+msgid "ФИО"
+msgstr "ФИО"
+
+#: .\main\models.py:211
+msgid "Роль"
+msgstr "Роль"
+
+#: .\main\models.py:212
+msgid "Краткая биография"
+msgstr "Краткая биография"
+
+#: .\main\models.py:215
+msgid "Соцсети"
+msgstr "Соцсети"
+
+#: .\main\models.py:220
+msgid "Член команды"
+msgstr "Член команды"
+
+#: .\main\models.py:221
+msgid "Команда"
+msgstr "Команда"
+
+#: .\main\models.py:238
+msgid "Ценность"
+msgstr "Ценность"
+
+#: .\main\models.py:239
+msgid "Ценности"
+msgstr "Ценности"
+
+#: .\main\models.py:248 .\templates\base.html:34 .\templates\base.html:62
+#: .\templates\base.html:127 .\templates\product-sofa-elegance.html:8
+#: .\templates\product-sofa-elegance.html:46 .\templates\product_detail.html:11
+msgid "Главная"
+msgstr "Главная"
+
+#: .\main\models.py:249 .\templates\base.html:36 .\templates\base.html:64
+#: .\templates\base.html:129
+msgid "О нас"
+msgstr "О нас"
+
+#: .\main\models.py:254
+msgid "Страница"
+msgstr "Страница"
+
+#: .\main\models.py:255
+msgid "Видео-файл"
+msgstr "Видео-файл"
+
+#: .\main\models.py:256
+msgid "YouTube ссылка"
+msgstr "YouTube ссылка"
+
+#: .\main\models.py:262 .\main\models.py:263 .\templates\about.html:60
+#: .\templates\index.html:42
+msgid "Видео"
+msgstr "Видео"
+
+#: .\main\models.py:274
+msgid "Заполните видеофайл или ссылку YouTube."
+msgstr "Заполните видеофайл или ссылку YouTube."
+
+#: .\main\models.py:276
+msgid "Поддерживаются только ссылки YouTube."
+msgstr "Поддерживаются только ссылки YouTube."
+
+#: .\main\models.py:294
+msgid "Миссия"
+msgstr "Миссия"
+
+#: .\main\models.py:295
+msgid "О компании"
+msgstr "О компании"
+
+#: .\main\models.py:297 .\templates\base.html:37 .\templates\base.html:65
+#: .\templates\base.html:130 .\templates\base.html:135
+msgid "Контакты"
+msgstr "Контакты"
+
+#: .\main\models.py:302
+msgid "Разрешена только одна запись CompanyInfo (singleton)."
+msgstr "Разрешена только одна запись CompanyInfo (singleton)."
+
+#: .\main\models.py:305 .\main\models.py:306 .\main\models.py:310
+msgid "Информация о компании"
+msgstr "Информация о компании"
+
+#: .\main\models.py:318 .\templates\base.html:94
+msgid "Instagram"
+msgstr "Instagram"
+
+#: .\main\models.py:319 .\templates\base.html:99
+msgid "Facebook"
+msgstr "Facebook"
+
+#: .\main\models.py:320 .\templates\base.html:104
+msgid "YouTube"
+msgstr "YouTube"
+
+#: .\main\models.py:321
+msgid "Whatsapp"
+msgstr "Whatsapp"
+
+#: .\main\models.py:322 .\templates\base.html:109
+msgid "Telegram"
+msgstr "Telegram"
+
+#: .\main\models.py:323
+msgid "Карта (встраиваемый код)"
+msgstr "Карта (встраиваемый код)"
+
+#: .\main\models.py:324
+msgid "Ссылка на карту"
+msgstr "Ссылка на карту"
+
+#: .\main\models.py:325
+msgid "Активна"
+msgstr "Активна"
+
+#: .\main\models.py:329 .\main\models.py:330
+msgid "Соцсети и карта"
+msgstr "Соцсети и карта"
+
+#: .\main\models.py:344
+msgid "Город"
+msgstr "Город"
+
+#: .\main\models.py:345 .\main\models.py:351 .\templates\contact.html:30
+msgid "Адрес"
+msgstr "Адрес"
+
+#: .\main\models.py:352
+msgid "Адреса"
+msgstr "Адреса"
+
+#: .\main\models.py:365 .\main\models.py:383
+msgid "Подпись"
+msgstr "Подпись"
+
+#: .\main\models.py:367 .\main\models.py:372 .\main\models.py:454
+#: .\templates\contact.html:44
+msgid "Телефон"
+msgstr "Телефон"
+
+#: .\main\models.py:373
+msgid "Телефоны"
+msgstr "Телефоны"
+
+#: .\main\models.py:385 .\main\models.py:390 .\main\models.py:391
+#: .\main\models.py:455 .\templates\contact.html:58
+#: .\templates\contact.html:155
+msgid "Email"
+msgstr "Email"
+
+#: .\main\models.py:401
+msgid "Будни"
+msgstr "Будни"
+
+#: .\main\models.py:402
+msgid "Суббота"
+msgstr "Суббота"
+
+#: .\main\models.py:403
+msgid "Воскресенье"
+msgstr "Воскресенье"
+
+#: .\main\models.py:404
+msgid "Примечание"
+msgstr "Примечание"
+
+#: .\main\models.py:409 .\main\models.py:410
+msgid "Режим работы"
+msgstr "Режим работы"
+
+#: .\main\models.py:419
+msgid "Может существовать только одна активная запись времени работы."
+msgstr "Может существовать только одна активная запись времени работы."
+
+#: .\main\models.py:432 .\templates\contact.html:160
+msgid "Тема обращения"
+msgstr "Тема обращения"
+
+#: .\main\models.py:433
+msgid "Темы обращений"
+msgstr "Темы обращений"
+
+#: .\main\models.py:453
+msgid "Имя"
+msgstr "Имя"
+
+#: .\main\models.py:462
+msgid "Тема"
+msgstr "Тема"
+
+#: .\main\models.py:464
+msgid "Сообщение"
+msgstr "Сообщение"
+
+#: .\main\models.py:465
+msgid "Согласие на обработку персональных данных"
+msgstr "Согласие на обработку персональных данных"
+
+#: .\main\models.py:467
+msgid "IP"
+msgstr "IP"
+
+#: .\main\models.py:468
+msgid "User-Agent"
+msgstr "User-Agent"
+
+#: .\main\models.py:471
+msgid "Заявка"
+msgstr "Заявка"
+
+#: .\main\models.py:472
+msgid "Заявки"
+msgstr "Заявки"
+
+#: .\main\views.py:383
+msgid "Укажите имя."
+msgstr "Укажите имя."
+
+#: .\main\views.py:385
+msgid "Укажите телефон."
+msgstr "Укажите телефон."
+
+#: .\main\views.py:387
+msgid "Введите сообщение."
+msgstr "Введите сообщение."
+
+#: .\main\views.py:389
+msgid "Необходимо согласие на обработку данных."
+msgstr "Необходимо согласие на обработку данных."
+
+#: .\main\views.py:419
+msgid "Не выбрана"
+msgstr "Не выбрана"
+
+#: .\main\views.py:424
+msgid "<b>Новая заявка</b>"
+msgstr "<b>Новая заявка</b>"
+
+#: .\main\views.py:425
+#, python-brace-format
+msgid "Имя: {name}"
+msgstr "Имя: {name}"
+
+#: .\main\views.py:426
+#, python-brace-format
+msgid "Телефон: {phone}"
+msgstr "Телефон: {phone}"
+
+#: .\main\views.py:427
+#, python-brace-format
+msgid "Email: {email}"
+msgstr "Email: {email}"
+
+#: .\main\views.py:428
+#, python-brace-format
+msgid "Тема: {topic}"
+msgstr "Тема: {topic}"
+
+#: .\main\views.py:429
+#, python-brace-format
+msgid "Сообщение: {message}"
+msgstr "Сообщение: {message}"
+
+#: .\main\views.py:430
+#, python-brace-format
+msgid "Время: {timestamp}"
+msgstr "Время: {timestamp}"
+
+#: .\templates\about.html:23
+msgid "Наша история"
+msgstr "Наша история"
+
+#: .\templates\about.html:28
+msgid "Наши преимущества"
+msgstr "Наши преимущества"
+
+#: .\templates\about.html:48 .\templates\index.html:55
+msgid "Видео о нашей компании"
+msgstr "Видео о нашей компании"
+
+#: .\templates\about.html:54 .\templates\index.html:36
+msgid "Ваш браузер не поддерживает видео."
+msgstr "Ваш браузер не поддерживает видео."
+
+#: .\templates\about.html:73
+msgid "Производство Samruk Mebel"
+msgstr "Производство Samruk Mebel"
+
+#: .\templates\about.html:74
+msgid "Узнайте о наших технологиях производства и контроле качества"
+msgstr "Узнайте о наших технологиях производства и контроле качества"
+
+#: .\templates\about.html:83
+msgid "Наша команда"
+msgstr "Наша команда"
+
+#: .\templates\about.html:84
+msgid ""
+"Профессиональная команда дизайнеров, производственников и менеджеров "
+"работает для того, чтобы каждый клиент получил именно то, что нужно для "
+"создания уюта в своем доме."
+msgstr ""
+"Профессиональная команда дизайнеров, производственников и менеджеров "
+"работает для того, чтобы каждый клиент получил именно то, что нужно для "
+"создания уюта в своем доме."
+
+#: .\templates\about.html:96
+msgid "Команда будет опубликована позже."
+msgstr "Команда будет опубликована позже."
+
+#: .\templates\base.html:7 .\templates\base.html:12
+msgid "Samruk Mebel — качественная мебель в европейском стиле"
+msgstr "Samruk Mebel — качественная мебель в европейском стиле"
+
+#: .\templates\base.html:8
+msgid ""
+"Samruk Mebel — ведущий производитель качественной мебели в европейском "
+"стиле. Диваны, столы, шкафы, кровати и стулья для вашего дома. Доставка по "
+"Алматы."
+msgstr ""
+"Samruk Mebel — ведущий производитель качественной мебели в европейском "
+"стиле. Диваны, столы, шкафы, кровати и стулья для вашего дома. Доставка по "
+"Алматы."
+
+#: .\templates\base.html:13
+msgid ""
+"Качественная мебель в европейском стиле от Samruk Mebel. Более 14 лет опыта, "
+"индивидуальный подход к каждому клиенту."
+msgstr ""
+"Качественная мебель в европейском стиле от Samruk Mebel. Более 14 лет опыта, "
+"индивидуальный подход к каждому клиенту."
+
+#: .\templates\base.html:23
+msgid "Samruk Mebel — главная"
+msgstr "Samruk Mebel — главная"
+
+#: .\templates\base.html:35 .\templates\base.html:63 .\templates\base.html:128
+#: .\templates\product-sofa-elegance.html:10
+#: .\templates\product-sofa-elegance.html:48 .\templates\product_detail.html:13
+msgid "Каталог"
+msgstr "Каталог"
+
+#: .\templates\base.html:90
+msgid ""
+"Качественная мебель в европейском стиле. Создаем уют и комфорт в вашем доме "
+"с 2010 года. Индивидуальный подход к каждому клиенту."
+msgstr ""
+"Качественная мебель в европейском стиле. Создаем уют и комфорт в вашем доме "
+"с 2010 года. Индивидуальный подход к каждому клиенту."
+
+#: .\templates\base.html:116
+msgid "TikTok"
+msgstr "TikTok"
+
+#: .\templates\base.html:125
+msgid "Навигация"
+msgstr "Навигация"
+
+#: .\templates\base.html:250
+msgid "Все права защищены."
+msgstr "Все права защищены."
+
+#: .\templates\catalog.html:25
+msgid "Все"
+msgstr "Все"
+
+#: .\templates\catalog.html:41
+msgid "Назад"
+msgstr "Назад"
+
+#: .\templates\catalog.html:51
+msgid "Вперед"
+msgstr "Вперед"
+
+#: .\templates\contact.html:24
+msgid "Наши контакты"
+msgstr "Наши контакты"
+
+#: .\templates\contact.html:72
+msgid "Время работы"
+msgstr "Время работы"
+
+#: .\templates\contact.html:85
+msgid "Мы в социальных сетях"
+msgstr "Мы в социальных сетях"
+
+#: .\templates\contact.html:132
+msgid "Оставить заявку"
+msgstr "Оставить заявку"
+
+#: .\templates\contact.html:133
+msgid "Заполните форму, и мы свяжемся с вами в ближайшее время"
+msgstr "Заполните форму, и мы свяжемся с вами в ближайшее время"
+
+#: .\templates\contact.html:145
+msgid "Ваше имя *"
+msgstr "Ваше имя *"
+
+#: .\templates\contact.html:150
+msgid "Телефон *"
+msgstr "Телефон *"
+
+#: .\templates\contact.html:151
+msgid "+7 (___) ___-__-__"
+msgstr "+7 (___) ___-__-__"
+
+#: .\templates\contact.html:156
+msgid "example@email.com"
+msgstr "example@email.com"
+
+#: .\templates\contact.html:169
+msgid "Сообщение *"
+msgstr "Сообщение *"
+
+#: .\templates\contact.html:170
+msgid "Расскажите, что вас интересует…"
+msgstr "Расскажите, что вас интересует…"
+
+#: .\templates\contact.html:177
+msgid "Согласие на обработку персональных данных *"
+msgstr "Согласие на обработку персональных данных *"
+
+#: .\templates\contact.html:181
+msgid "Отправить заявку"
+msgstr "Отправить заявку"
+
+#: .\templates\contact.html:185
+msgid "Спасибо за обращение!"
+msgstr "Спасибо за обращение!"
+
+#: .\templates\contact.html:186
+msgid "Ваша заявка успешно отправлена. Мы свяжемся с вами в ближайшее время."
+msgstr "Ваша заявка успешно отправлена. Мы свяжемся с вами в ближайшее время."
+
+#: .\templates\contact.html:193
+msgid "Как нас найти"
+msgstr "Как нас найти"
+
+#: .\templates\index.html:11
+msgid "Качественные диваны"
+msgstr "Качественные диваны"
+
+#: .\templates\index.html:15
+msgid "Смотреть каталог"
+msgstr "Смотреть каталог"
+
+#: .\templates\index.html:27
+msgid "Samruk Mebel — качество в каждой детали"
+msgstr "Samruk Mebel — качество в каждой детали"
+
+#: .\templates\index.html:28
+msgid "Узнайте больше о нашем производстве и подходе к созданию мебели"
+msgstr "Узнайте больше о нашем производстве и подходе к созданию мебели"
+
+#: .\templates\index.html:56
+msgid "Производство • Качество • Европейский дизайн"
+msgstr "Производство • Качество • Европейский дизайн"
+
+#: .\templates\index.html:68
+msgid "Популярная мебель"
+msgstr "Популярная мебель"
+
+#: .\templates\index.html:69
+msgid ""
+"Откройте для себя нашу коллекцию качественной мебели в европейском стиле. "
+"Каждое изделие создано с вниманием к деталям и комфорту."
+msgstr ""
+"Откройте для себя нашу коллекцию качественной мебели в европейском стиле. "
+"Каждое изделие создано с вниманием к деталям и комфорту."
+
+#: .\templates\index.html:85 .\templates\partials\_products_grid.html:15
+msgid "Подробнее"
+msgstr "Подробнее"
+
+#: .\templates\index.html:89 .\templates\partials\_products_grid.html:19
+msgid "Товары скоро появятся."
+msgstr "Товары скоро появятся."
+
+#: .\templates\index.html:94
+msgid "Смотреть весь каталог"
+msgstr "Смотреть весь каталог"
+
+#: .\templates\index.html:104
+msgid "О компании Samruk Mebel"
+msgstr "О компании Samruk Mebel"
+
+#: .\templates\index.html:109
+msgid "Узнать больше"
+msgstr "Узнать больше"
+
+#: .\templates\product-dining-classic.html:8
+#: .\templates\product-dining-classic.html:11
+msgid "Обеденная группа Classic"
+msgstr "Обеденная группа Classic"
+
+#: .\templates\product-dining-classic.html:14
+msgid "Размеры стола (Д×Ш×В):"
+msgstr "Размеры стола (Д×Ш×В):"
+
+#: .\templates\product-dining-classic.html:15
+msgid "160×90×75 см"
+msgstr "160×90×75 см"
+
+#: .\templates\product-dining-classic.html:19
+msgid "Материал:"
+msgstr "Материал:"
+
+#: .\templates\product-dining-classic.html:20
+msgid "Массив дуба, лак"
+msgstr "Массив дуба, лак"
+
+#: .\templates\product-dining-classic.html:23
+msgid "Комплектация:"
+msgstr "Комплектация:"
+
+#: .\templates\product-dining-classic.html:24
+msgid "Стол + 6 стульев"
+msgstr "Стол + 6 стульев"
+
+#: .\templates\product-dining-classic.html:29
+msgid ""
+"Элегантная обеденная группа Classic создана для семейных ужинов и "
+"торжественных мероприятий."
+msgstr ""
+"Элегантная обеденная группа Classic создана для семейных ужинов и "
+"торжественных мероприятий."
+
+#: .\templates\product-dining-classic.html:32
+#: .\templates\product-sofa-elegance.html:214
+#: .\templates\product_detail.html:53
+msgid "Заказать консультацию"
+msgstr "Заказать консультацию"
+
+#: .\templates\product-sofa-elegance.html:12
+#: .\templates\product-sofa-elegance.html:31
+#: .\templates\product-sofa-elegance.html:50
+#: .\templates\product-sofa-elegance.html:130
+msgid "Диван Elegance"
+msgstr "Диван Elegance"
+
+#: .\templates\product-sofa-elegance.html:18
+#: .\templates\product-sofa-elegance.html:67
+msgid "Диван Elegance — основное фото"
+msgstr "Диван Elegance — основное фото"
+
+#: .\templates\product-sofa-elegance.html:22
+#: .\templates\product-sofa-elegance.html:82
+msgid "Диван Elegance — вид 1"
+msgstr "Диван Elegance — вид 1"
+
+#: .\templates\product-sofa-elegance.html:23
+#: .\templates\product-sofa-elegance.html:83
+msgid "Диван Elegance — вид 2"
+msgstr "Диван Elegance — вид 2"
+
+#: .\templates\product-sofa-elegance.html:24
+#: .\templates\product-sofa-elegance.html:84
+msgid "Диван Elegance — вид 3"
+msgstr "Диван Elegance — вид 3"
+
+#: .\templates\product-sofa-elegance.html:25
+#: .\templates\product-sofa-elegance.html:85
+msgid "Диван Elegance — вид 4"
+msgstr "Диван Elegance — вид 4"
+
+#: .\templates\product-sofa-elegance.html:26
+#: .\templates\product-sofa-elegance.html:86
+msgid "Диван Elegance — вид 5"
+msgstr "Диван Elegance — вид 5"
+
+#: .\templates\product-sofa-elegance.html:35
+#: .\templates\product-sofa-elegance.html:141
+msgid "Модель:"
+msgstr "Модель:"
+
+#: .\templates\product-sofa-elegance.html:36
+#: .\templates\product-sofa-elegance.html:142
+msgid "Elegance Premium"
+msgstr "Elegance Premium"
+
+#: .\templates\product-sofa-elegance.html:159
+msgid "Размеры (Д×Ш×В):"
+msgstr "Размеры (Д×Ш×В):"
+
+#: .\templates\product-sofa-elegance.html:160
+msgid "210×95×85 см"
+msgstr "210×95×85 см"
+
+#: .\templates\product-sofa-elegance.html:163
+msgid "Цвета:"
+msgstr "Цвета:"
+
+#: .\templates\product-sofa-elegance.html:164
+msgid "Серый, Бежевый, Темно-синий, Коричневый"
+msgstr "Серый, Бежевый, Темно-синий, Коричневый"
+
+#: .\templates\product-sofa-elegance.html:167
+msgid "Каркас:"
+msgstr "Каркас:"
+
+#: .\templates\product-sofa-elegance.html:168
+msgid "Массив бука, металлические пружины"
+msgstr "Массив бука, металлические пружины"
+
+#: .\templates\product-sofa-elegance.html:171
+msgid "Обивка:"
+msgstr "Обивка:"
+
+#: .\templates\product-sofa-elegance.html:172
+msgid "Премиум ткань, экокожа (на выбор)"
+msgstr "Премиум ткань, экокожа (на выбор)"
+
+#: .\templates\product-sofa-elegance.html:175
+msgid "Наполнитель:"
+msgstr "Наполнитель:"
+
+#: .\templates\product-sofa-elegance.html:176
+msgid "Пенополиуретан высокой плотности"
+msgstr "Пенополиуретан высокой плотности"
+
+#: .\templates\product-sofa-elegance.html:179
+msgid "Вес:"
+msgstr "Вес:"
+
+#: .\templates\product-sofa-elegance.html:180
+msgid "85 кг"
+msgstr "85 кг"
+
+#: .\templates\product-sofa-elegance.html:183
+msgid "Гарантия:"
+msgstr "Гарантия:"
+
+#: .\templates\product-sofa-elegance.html:184
+msgid "24 месяца"
+msgstr "24 месяца"
+
+#: .\templates\product-sofa-elegance.html:192
+msgid ""
+"Диван Elegance представляет собой идеальное сочетание комфорта и стиля. "
+"Созданный в лучших традициях европейского дизайна, этот диван станет "
+"центральным элементом вашей гостиной."
+msgstr ""
+"Диван Elegance представляет собой идеальное сочетание комфорта и стиля. "
+"Созданный в лучших традициях европейского дизайна, этот диван станет "
+"центральным элементом вашей гостиной."
+
+#: .\templates\product-sofa-elegance.html:194
+msgid ""
+"Прочный каркас из массива бука обеспечивает долговечность, а "
+"высококачественный наполнитель гарантирует комфортный отдых. Элегантная "
+"обивка из премиальных материалов подчеркнет изысканность вашего интерьера."
+msgstr ""
+"Прочный каркас из массива бука обеспечивает долговечность, а "
+"высококачественный наполнитель гарантирует комфортный отдых. Элегантная "
+"обивка из премиальных материалов подчеркнет изысканность вашего интерьера."
+
+#: .\templates\product-sofa-elegance.html:196
+msgid ""
+"Диван рассчитан на 3 посадочных места и идеально подходит как для семейного "
+"отдыха, так и для приема гостей. Классический дизайн позволяет легко вписать "
+"его в любой интерьер."
+msgstr ""
+"Диван рассчитан на 3 посадочных места и идеально подходит как для семейного "
+"отдыха, так и для приема гостей. Классический дизайн позволяет легко вписать "
+"его в любой интерьер."
+
+#: .\templates\product-sofa-elegance.html:201
+msgid "Информация по уходу:"
+msgstr "Информация по уходу:"
+
+#: .\templates\product-sofa-elegance.html:202
+msgid "Регулярная чистка пылесосом, профессиональная химчистка раз в год"
+msgstr "Регулярная чистка пылесосом, профессиональная химчистка раз в год"
+
+#: .\templates\product-sofa-elegance.html:205
+msgid "Сборка:"
+msgstr "Сборка:"
+
+#: .\templates\product-sofa-elegance.html:206
+msgid "Требуется частичная сборка (ножки), инструкция прилагается"
+msgstr "Требуется частичная сборка (ножки), инструкция прилагается"
+
+#: .\templates\product-sofa-elegance.html:209
+msgid "Дополнительные опции:"
+msgstr "Дополнительные опции:"
+
+#: .\templates\product-sofa-elegance.html:210
+msgid "Декоративные подушки, плед в комплекте, защитный чехол"
+msgstr "Декоративные подушки, плед в комплекте, защитный чехол"
+
+#: .\templates\product-sofa-elegance.html:215
+#: .\templates\product_detail.html:54
+msgid "Вернуться в каталог"
+msgstr "Вернуться в каталог"
+
+#: .\templates\product-sofa-elegance.html:221
+#: .\templates\product_detail.html:62
+msgid "Дополнительные фотографии"
+msgstr "Дополнительные фотографии"
+
+#: .\templates\product-sofa-elegance.html:223
+msgid "Фото детали 1"
+msgstr "Фото детали 1"
+
+#: .\templates\product-sofa-elegance.html:224
+msgid "Фото детали 2"
+msgstr "Фото детали 2"
+
+#: .\templates\product-sofa-elegance.html:225
+msgid "Фото детали 3"
+msgstr "Фото детали 3"
+
+#: .\templates\product-sofa-elegance.html:226
+msgid "Фото в интерьере"
+msgstr "Фото в интерьере"
+
+#: .\templates\product-sofa-elegance.html:227
+msgid "Варианты цветов"
+msgstr "Варианты цветов"
+
+#: .\templates\product-sofa-elegance.html:228
+msgid "Фото комплектации"
+msgstr "Фото комплектации"
+
+#: .\templates\product_detail.html:38
+msgid "Категория:"
+msgstr "Категория:"
+
+#: .\templates\product_detail.html:42
+msgid "Цена:"
+msgstr "Цена:"

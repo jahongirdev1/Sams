@@ -1,4 +1,54 @@
+{% load i18n %}
 
+<main>
+    <section class="product-detail">
+        <div class="container">
+            <!-- Breadcrumb -->
+            <nav class="breadcrumb" style="margin-bottom: 24px;">
+                <a href="{% url 'main:index' %}" style="color: hsl(25, 6%, 45%); text-decoration: none;">{% trans 'Главная' %}</a>
+                <span style="margin: 0 8px; color: hsl(25, 6%, 45%);">→</span>
+                <a href="{% url 'main:catalog' %}" style="color: hsl(25, 6%, 45%); text-decoration: none;">{% trans 'Каталог' %}</a>
+                <span style="margin: 0 8px; color: hsl(25, 6%, 45%);">→</span>
+                <span style="color: hsl(25, 25%, 35%);">{% trans 'Диван Elegance' %}</span>
+            </nav>
+
+                <div class="product-content">
+                <!-- Product Gallery -->
+                    <div class="product-gallery">
+                        <img src="src/assets/hero-sofa.jpg" alt="{% trans 'Диван Elegance — основное фото' %}" class="main-image" id="mainImage">
+                    </div>
+
+                    <div class="thumbnail-grid">
+                        <img src="src/assets/hero-sofa.jpg" alt="{% trans 'Диван Elegance — вид 1' %}" class="thumbnail active" onclick="changeMainImage(this.src)">
+                        <img src="src/assets/hero-sofa.jpg" alt="{% trans 'Диван Elegance — вид 2' %}" class="thumbnail" onclick="changeMainImage(this.src)">
+                        <img src="src/assets/hero-sofa.jpg" alt="{% trans 'Диван Elegance — вид 3' %}" class="thumbnail" onclick="changeMainImage(this.src)">
+                        <img src="src/assets/hero-sofa.jpg" alt="{% trans 'Диван Elegance — вид 4' %}" class="thumbnail" onclick="changeMainImage(this.src)">
+                        <img src="src/assets/hero-sofa.jpg" alt="{% trans 'Диван Elegance — вид 5' %}" class="thumbnail" onclick="changeMainImage(this.src)">
+                    </div>
+                </div>
+
+                <div class="product-info">
+                    <h1>{% trans 'Диван Elegance' %}</h1>
+
+                        <div class="spec-grid">
+                            <div class="spec-item">
+                                <span class="spec-label">{% trans 'Модель:' %}</span>
+                                <span class="spec-value">{% trans 'Elegance Premium' %}</span>
+                            </div>
+
+                        {% load i18n %}
+
+<main>
+    <section class="product-detail">
+        <div class="container">
+            <!-- Breadcrumb -->
+            <nav class="breadcrumb" style="margin-bottom: 24px;">
+                <a href="{% url 'main:index' %}" style="color: hsl(25, 6%, 45%); text-decoration: none;">{% trans 'Главная' %}</a>
+                <span style="margin: 0 8px; color: hsl(25, 6%, 45%);">→</span>
+                <a href="{% url 'main:catalog' %}" style="color: hsl(25, 6%, 45%); text-decoration: none;">{% trans 'Каталог' %}</a>
+                <span style="margin: 0 8px; color: hsl(25, 6%, 45%);">→</span>
+                <span style="color: hsl(25, 25%, 35%);">{% trans 'Диван Elegance' %}</span>
+            </nav>
 
     <main>
         <section class="product-detail">
@@ -11,12 +61,16 @@
                     <span style="margin: 0 8px; color: hsl(25, 6%, 45%);">→</span>
                     <span style="color: hsl(25, 25%, 35%);">Диван Elegance</span>
                 </nav>
+            <div class="product-content">
+                <!-- Product Gallery -->
+                <div class="product-gallery">
+                    <img src="src/assets/hero-sofa.jpg" alt="{% trans 'Диван Elegance — основное фото' %}" class="main-image" id="mainImage">
 
                 <div class="product-content">
                     <!-- Product Gallery -->
                     <div class="product-gallery">
                         <img src="src/assets/hero-sofa.jpg" alt="Диван Elegance - основное фото" class="main-image" id="mainImage">
-                        
+
                         <div class="thumbnail-grid">
                             <img src="src/assets/hero-sofa.jpg" alt="Диван Elegance - вид 1" class="thumbnail active" onclick="changeMainImage(this.src)">
                             <img src="src/assets/hero-sofa.jpg" alt="Диван Elegance - вид 2" class="thumbnail" onclick="changeMainImage(this.src)">
@@ -24,12 +78,19 @@
                             <img src="src/assets/hero-sofa.jpg" alt="Диван Elegance - вид 4" class="thumbnail" onclick="changeMainImage(this.src)">
                             <img src="src/assets/hero-sofa.jpg" alt="Диван Elegance - вид 5" class="thumbnail" onclick="changeMainImage(this.src)">
                         </div>
+                    <div class="thumbnail-grid">
+                        <img src="src/assets/hero-sofa.jpg" alt="{% trans 'Диван Elegance — вид 1' %}" class="thumbnail active" onclick="changeMainImage(this.src)">
+                        <img src="src/assets/hero-sofa.jpg" alt="{% trans 'Диван Elegance — вид 2' %}" class="thumbnail" onclick="changeMainImage(this.src)">
+                        <img src="src/assets/hero-sofa.jpg" alt="{% trans 'Диван Elegance — вид 3' %}" class="thumbnail" onclick="changeMainImage(this.src)">
+                        <img src="src/assets/hero-sofa.jpg" alt="{% trans 'Диван Elegance — вид 4' %}" class="thumbnail" onclick="changeMainImage(this.src)">
+                        <img src="src/assets/hero-sofa.jpg" alt="{% trans 'Диван Elegance — вид 5' %}" class="thumbnail" onclick="changeMainImage(this.src)">
                     </div>
+                </div>
 
                     <!-- Product Info -->
                     <div class="product-info">
                         <h1>Диван Elegance</h1>
-                        
+
                         <div class="spec-grid">
                             <div class="spec-item">
                                 <span class="spec-label">Модель:</span>
@@ -64,14 +125,21 @@
                                 <span class="spec-value">24 месяца</span>
                             </div>
                         </div>
+                <!-- Product Info -->
+                <div class="product-info">
+                    <h1>{% trans 'Диван Elegance' %}</h1>
 
                         <div class="product-description">
                             <h3>Описание</h3>
                             <p>Диван Elegance представляет собой идеальное сочетание комфорта и стиля. Созданный в лучших традициях европейского дизайна, этот диван станет центральным элементом вашей гостиной.</p>
-                            
+
                             <p>Прочный каркас из массива бука обеспечивает долговечность, а высококачественный наполнитель гарантирует комфортный отдых. Элегантная обивка из премиальных материалов подчеркнет изысканность вашего интерьера.</p>
-                            
+
                             <p>Диван рассчитан на 3 посадочных места и идеально подходит как для семейного отдыха, так и для приема гостей. Классический дизайн позволяет легко вписать его в любой интерьер.</p>
+                    <div class="spec-grid">
+                        <div class="spec-item">
+                            <span class="spec-label">{% trans 'Модель:' %}</span>
+                            <span class="spec-value">{% trans 'Elegance Premium' %}</span>
                         </div>
 
                         <div class="spec-grid">
@@ -87,28 +155,79 @@
                                 <span class="spec-label">Дополнительные опции:</span>
                                 <span class="spec-value">Декоративные подушки, плед в комплекте, защитный чехол</span>
                             </div>
+                                <div class="spec-item">
+                                    <span class="spec-label">{% trans 'Размеры (Д×Ш×В):' %}</span>
+                                    <span class="spec-value">{% trans '210×95×85 см' %}</span>
+                                </div>
+                                <div class="spec-item">
+                                    <span class="spec-label">{% trans 'Цвета:' %}</span>
+                                    <span class="spec-value">{% trans 'Серый, Бежевый, Темно-синий, Коричневый' %}</span>
+                                </div>
+                                <div class="spec-item">
+                                    <span class="spec-label">{% trans 'Каркас:' %}</span>
+                                    <span class="spec-value">{% trans 'Массив бука, металлические пружины' %}</span>
+                                </div>
+                                <div class="spec-item">
+                                    <span class="spec-label">{% trans 'Обивка:' %}</span>
+                                    <span class="spec-value">{% trans 'Премиум ткань, экокожа (на выбор)' %}</span>
+                                </div>
+                                <div class="spec-item">
+                                    <span class="spec-label">{% trans 'Наполнитель:' %}</span>
+                                    <span class="spec-value">{% trans 'Пенополиуретан высокой плотности' %}</span>
+                                </div>
+                                <div class="spec-item">
+                                    <span class="spec-label">{% trans 'Вес:' %}</span>
+                                    <span class="spec-value">{% trans '85 кг' %}</span>
+                                </div>
+                                <div class="spec-item">
+                                    <span class="spec-label">{% trans 'Гарантия:' %}</span>
+                                    <span class="spec-value">{% trans '24 месяца' %}</span>
+                                </div>
+                            </div>
+
                         </div>
 
-                        <div style="margin-top: 32px;">
-                            <a href="{% url 'contact' %}" class="btn btn-primary" style="margin-right: 16px;">Заказать консультацию</a>
-                            <a href="catalog.html" class="btn btn-outline">Вернуться в каталог</a>
+                        <div class="product-description">
+                        <h3>{% trans 'Описание' %}</h3>
+                        <p>{% blocktrans %}Диван Elegance представляет собой идеальное сочетание комфорта и стиля. Созданный в лучших традициях европейского дизайна, этот диван станет центральным элементом вашей гостиной.{% endblocktrans %}</p>
+
+                        <p>{% blocktrans %}Прочный каркас из массива бука обеспечивает долговечность, а высококачественный наполнитель гарантирует комфортный отдых. Элегантная обивка из премиальных материалов подчеркнет изысканность вашего интерьера.{% endblocktrans %}</p>
+
+                        <p>{% blocktrans %}Диван рассчитан на 3 посадочных места и идеально подходит как для семейного отдыха, так и для приема гостей. Классический дизайн позволяет легко вписать его в любой интерьер.{% endblocktrans %}</p>
+                    </div>
+
+                    <div class="spec-grid">
+                        <div class="spec-item">
+                            <span class="spec-label">{% trans 'Информация по уходу:' %}</span>
+                            <span class="spec-value">{% trans 'Регулярная чистка пылесосом, профессиональная химчистка раз в год' %}</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">{% trans 'Сборка:' %}</span>
+                            <span class="spec-value">{% trans 'Требуется частичная сборка (ножки), инструкция прилагается' %}</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">{% trans 'Дополнительные опции:' %}</span>
+                            <span class="spec-value">{% trans 'Декоративные подушки, плед в комплекте, защитный чехол' %}</span>
                         </div>
                     </div>
-                </div>
-
-                <!-- Additional Gallery -->
-                <div class="additional-gallery">
-                    <h3>Дополнительные фотографии</h3>
-                    <div class="gallery-grid">
-                        <div class="gallery-item">Фото детали 1</div>
-                        <div class="gallery-item">Фото детали 2</div>
-                        <div class="gallery-item">Фото детали 3</div>
-                        <div class="gallery-item">Фото в интерьере</div>
-                        <div class="gallery-item">Варианты цветов</div>
-                        <div class="gallery-item">Фото комплектации</div>
+                    <div style="margin-top: 32px;">
+                        <a href="{% url 'main:contact' %}" class="btn btn-primary" style="margin-right: 16px;">{% trans 'Заказать консультацию' %}</a>
+                        <a href="{% url 'main:catalog' %}" class="btn btn-outline">{% trans 'Вернуться в каталог' %}</a>
                     </div>
                 </div>
             </div>
-        </section>
-    </main>
-
+        <!-- Additional Gallery -->
+            <div class="additional-gallery">
+                <h3>{% trans 'Дополнительные фотографии' %}</h3>
+                <div class="gallery-grid">
+                    <div class="gallery-item">{% trans 'Фото детали 1' %}</div>
+                    <div class="gallery-item">{% trans 'Фото детали 2' %}</div>
+                    <div class="gallery-item">{% trans 'Фото детали 3' %}</div>
+                    <div class="gallery-item">{% trans 'Фото в интерьере' %}</div>
+                    <div class="gallery-item">{% trans 'Варианты цветов' %}</div>
+                    <div class="gallery-item">{% trans 'Фото комплектации' %}</div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
